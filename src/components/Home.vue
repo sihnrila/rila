@@ -388,6 +388,14 @@
 
                         <div @click="url03()" class="card w_50 pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                           <div class="card_img"><i class="fas fa-code"></i> WED</div>
+                          <a href="https://sihnrila.github.io/suudog/">
+                               스누독 케어 센터
+                              <p><i class="fas fa-code"></i> HTML5 / CSS3 / Bootstrap / JS</p>
+                          </a> 
+                        </div>
+
+                        <div @click="url04()" class="card w_50 pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                          <div class="card_img"><i class="fas fa-code"></i> WED</div>
                             <a href="https://sihnrila.github.io/rilaa/">
                                 신리라 포트폴리오
                                 <p><i class="fas fa-code"></i>HTML5 / SCSS / Bootstrap / VUE.JS</p>
@@ -456,6 +464,9 @@ export default {
       location.href="https://shipme.kr/";
     },
     url03:function(){
+      location.href="https://sihnrila.github.io/suudog/";
+    },
+    url04:function(){
       location.href="https://sihnrila.github.io/rilaa/";
     },
   }
