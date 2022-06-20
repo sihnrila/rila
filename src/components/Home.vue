@@ -111,7 +111,7 @@
                   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="card_cont">
                         <div class="card pdr_1 w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <div type="button" class="card_img" data-bs-toggle="modal" data-bs-target="#cardmodal01"><i class="fab fa-instagram"></i> SNS</div>
+                          <button class="card_img" data-bs-toggle="modal" data-bs-target="#cardmodal01"><i class="fab fa-instagram"></i> SNS</button>
                           <button data-bs-toggle="modal" data-bs-target="#cardmodal01">SNS 콘텐츠 디자인 <p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p></button>
                         </div>  
 
@@ -241,7 +241,7 @@
                         </div>
                         
                         <div class="card w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <div type="button"  class="card_img" data-bs-toggle="modal" data-bs-target="#cardmodal02"><i class="fas fa-code"></i> WED</div>
+                          <button class="card_img" data-bs-toggle="modal" data-bs-target="#cardmodal02"><i class="fas fa-code"></i> WED</button>
                           <button data-bs-toggle="modal" data-bs-target="#cardmodal02">웹 디자인 <p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p></button>
                         </div>
                         
@@ -318,7 +318,7 @@
                         </div>
 
                         <div class="card pdr_1 w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <div type="button" class="card_img" data-bs-toggle="modal" data-bs-target="#cardmodal03"><i class="fas fa-pen-nib"></i> package</div>
+                          <button class="card_img" data-bs-toggle="modal" data-bs-target="#cardmodal03"><i class="fas fa-pen-nib"></i> package</button>
                           <button data-bs-toggle="modal" data-bs-target="#cardmodal03">패키지 디자인<p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p></button>
                         </div>
 
@@ -447,7 +447,7 @@ export default {
 
   methods:{
     none:function(){
-      alert("해당 프로젝트는 저작권등의 사유로 자세한 정보는 공개가 어려우니 양해부탁드립니다")
+      alert("해당 프로젝트는 저작권등의 사유로 자세한 정보는 공개가 어려우니 문의 부탁드립니다.")
     },
     url:function(){
       location.href="https://jigoorang.com/#";
