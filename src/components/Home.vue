@@ -370,65 +370,96 @@
                   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="card_cont">
                       
-                      <a href="https://jigoorang.com/#">
-                        <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo01.jpeg" alt="">
+                       <a href="https://jigoorang.com/#">
+                         <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                          <div class="card_img"><i class="fas fa-code"></i> WED</div>
                           <a href="https://jigoorang.com/#">
                               지구랭 친환경 랭킹 쇼핑몰 
                               <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
                           </a> 
                         </div>
                         </a>
-                        
-                        <a href="https://sihnrila.github.io/SeoulDemo/">
-                          <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                            <img src="../assets/img/demo03.jpeg" alt="">
-                            <a href="https://sihnrila.github.io/SeoulDemo/">
-                              2021 서울 빛초롱 축제
-                              <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
-                            </a>
-                          </div>       
-                        </a> 
-
-                        <a href="https://sihnrila.github.io/PickUpDemo/">        
-                          <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                            <img src="../assets/img/demo04.jpeg" alt="">
-                            <a href="https://sihnrila.github.io/PickUpDemo/">
-                              같이줍깅
-                              <p><i class="fas fa-code"></i> HTML5 / CSS3 / VUE.JS</p>
-                            </a>
-                          </div>
-                        </a>
-
+                
                         <a href="https://sihnrila.github.io/suudog/">
-                          <div class="card bg" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                            <img src="../assets/img/demo06.jpeg" alt="" class="snudog">
-                            <a href="https://sihnrila.github.io/suudog/">
+                         <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                          <div class="card_img"><i class="fas fa-code"></i> WED</div>
+                          <a href="https://sihnrila.github.io/suudog/">
                               스누독 케어센터
                               <p><i class="fas fa-code"></i> HTML5 / Bootstrap / CSS3 / JS</p>
-                            </a>
-                          </div>
+                          </a> 
+                        </div>
                         </a>
 
-                        <a href="https://shipme.kr/">
-                          <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                            <img src="../assets/img/demo05.gif" alt="">
-                            <a href="https://shipme.kr/">
-                              쉽미 역직구 쇼핑몰 리뉴얼
-                              <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
-                            </a>
+
+                        <div class="card pdr_1 w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                          <div class="card_img"><i class="fas fa-code"></i> WED</div>
+                          <button data-bs-toggle="modal" data-bs-target="#cardmodal04">서울 *초* 축제<p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p></button>
+                        </div>
+
+                         <!-- Modal -->
+                        <div class="modal fade" id="cardmodal04" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">서울 *초* 축제</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <h2>Geolocation<span><i class="fas fa-pencil-ruler"></i> 실시간 위치 추적 이벤트 페이지</span></h2>
+                                <img src="../assets/img/Mobile_03.png" class="d-block w-100" alt="...">
+                                <p style="font-size: 0.8rem;">지정 좌표 진입시 AR모달이 켜지는 동시에, 이미지부분이 스크롤 되고 하단 다각형 모양에 엑티브 효과가 나타납니다.</p><br>
+                                <span style ="color: red; font-size: 0.7rem;">* 해당 프로젝트는 저작권등의 사유로 자세한 정보는 <br>공개가 어려우니 양해부탁드립니다 *</span>
+
+                              </div>
+                            </div>
                           </div>
+                        </div>
+
+                        <div class="card pdr_1 w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                          <div class="card_img"><i class="fas fa-code"></i> WED</div>
+                          <button data-bs-toggle="modal" data-bs-target="#cardmodal05">같이**<p><i class="fas fa-code"></i>HTML5 / CSS3 / VUE.JS</p></button>
+                        </div>
+
+                         <!-- Modal -->
+                        <div class="modal fade" id="cardmodal05" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">같이**</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <h2>같이** <span><i class="fas fa-pencil-ruler"></i> 쓰레기 줍기 커뮤니티</span></h2>
+                                  <img src="../assets/img/Mobile_01.png" class="d-block w-100" alt="...">
+                                  <br>
+                                  <img src="../assets/img/Mobile_02.png" class="d-block w-100" alt="...">
+                                  <p style="font-size: 0.8rem;">카카오 지도에 JSON 데이터로 마커를 찍고,마커클릭시 모달 안의 정보를 볼수있습니다.</p><br>
+                                  <span style ="color: red; font-size: 0.7rem;">* 해당 프로젝트는 저작권등의 사유로 자세한 정보는 <br>공개가 어려우니 양해부탁드립니다 *</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <a href="https://shipme.kr/">
+                         <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                          <div class="card_img"><i class="fas fa-code"></i> WED</div>
+                          <a href="https://shipme.kr/">
+                               쉽미 역직구 쇼핑몰 리뉴얼
+                              <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
+                          </a> 
+                        </div>
                         </a>
 
                         <a href="https://sihnrila.github.io/rilaa/">
-                          <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                            <img src="../assets/img/demo08.jpeg" alt="" class="rila">
-                            <a href="https://sihnrila.github.io/rilaa/">
-                              신리라 포트폴리오
-                              <p><i class="fas fa-code"></i> HTML5 / SCSS / Bootstrap / VUE.JS</p>
-                            </a>
-                          </div>
+                         <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                          <div class="card_img"><i class="fas fa-code"></i> WED</div>
+                          <a href="https://sihnrila.github.io/rilaa/">
+                               신리라 포트폴리오
+                              <p><i class="fas fa-code"></i>HTML5 / SCSS / Bootstrap / VUE.JSS</p>
+                          </a> 
+                        </div>
                         </a>
+
                     </div>
                   </div>
                 </div>
