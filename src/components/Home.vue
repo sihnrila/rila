@@ -16,24 +16,35 @@
            <!-- content01 end -->
 
             <!-- content02 start -->
-            <section class="section02" id="aboutMe">
+            <section class="section02 container860" id="aboutMe">
                  <h2 class="title">ABOUT ME</h2>
-                 <img src="../assets/img/img02.jpeg" alt="" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                 <h2 class="left">열정으로 무장한 신리라입니다:)</h2>
-                 <p>숭실사이버대학교 재학중이며, 퍼블리셔로 4년가량 일을 하며 HTML,CSS,JS를 배웠습니다
-                    프론트앤드가 된건 1년 이지만, 다른 누구보다 열정적이게 "중고신입" 이란 말이 부끄럽지 않도록 노력 중입니다.
-                    숭실사이버대학교 재학중이며, 퍼블리셔로 4년가량 일을 하며 HTML,CSS,JS를 배웠습니다
-                    프론트앤드가 된건 1년 이지만, 다른 누구보다 열정적이게 "중고신입" 이란 말이 부끄럽지 않도록 노력 중입니다.
-                    숭실사이버대학교 재학중이며, 퍼블리셔로 4년가량 일을 하며 HTML,CSS,JS를 배웠습니다
-                    프론트앤드가 된건 1년 이지만, 다른 누구보다 열정적이게 "중고신입" 이란 말이 부끄럽지 않도록 노력 중입니다.
-                    숭실사이버대학교 재학중이며, 퍼블리셔로 4년가량 일을 하며 HTML,CSS,JS를 배웠습니다
-                    프론트앤드가 된건 1년 이지만, 다른 누구보다 열정적이게 "중고신입" 이란 말이 부끄럽지 않도록 노력 중입니다.
-                 </p>
+                 <div class="about">
+                  <img src="../assets/img/img02.jpeg" alt="" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                  <h2 class="left">열정으로 무장한 신리라입니다 😁</h2>
+                  <p>
+                       🙋‍♀️ 숭실사이버대학교 ICT 공학부에 재학중이며, 웹 아카데미에서 웹퍼블리셔 전문가 과정을 통해 HTML,CSS,JS 등을 이수하였습니다.
+                       이후 스타트업과 웹에이전시 프리랜서 일을 하며 독학해 VUE.JS,SCSS,PYTHON 배웠습니다. 
+
+                     <br><br>🧑‍🦰 프론트앤드 개발자로 일을 하며, "하고 싶은 것"과 "잘 하는 일"은 다르다는것을 깨달았습니다.
+                       다양한 언어를 배움으로써 WEB에대한 이해도를 많이 쌓아가는중입니다. 열심히 하는것도 좋지만, 일을 할때 만큼은 "잘하자"라는 마인드로 임하고 있습니다.
+
+                     <br><br>👂 기획과 디자인 기반으로 개발하는 것을 좋아합니다. 
+                       또한, 빠르게 개발하고 배포하여 사용자들의 의견을 적극 수용하여 유저를 기반으로 이해하는 역량을 쌓고자 노력하였으며, 
+                       혼자 하는것이 팀원들과 협업하고 의견을 나누는 것을 좋아해 구성원들과 적극적으로 커뮤니케이션을 하며 개발하는 것을 좋아합니다.
+
+                     <br><br>👀 웹 트렌드에 민감합니다. 빠르게 변화되는 트렌드인 만큼 꼼꼼히 보고 또봅니다.
+
+                     <br><br>👊 반복되는 일을 자동화하고 비효율적인 프로세스를 개선하는 일을 좋아합니다. 
+                       팀 구성원들의 단순/루틴 업무 시간을 줄여주기 위해 지속해서 의견 공유 및 버그 리포팅 하는 방법들을 지속적으로 구상하고 개선하려 노력하고 있습니다.
+
+                     <br><br>비록 아직 많이 부족하지만 꾸준히 노력하며 앞으로의 발전을 위해 부족한 점은 더 채우면서 잘하는 인재가 되겠습니다!  
+                  </p>
+                 </div>
             </section>
             <!-- content02 end -->
 
             <!-- content03 start -->
-            <section class="section03" id="skill">
+            <section class="section03 container860" id="skill">
                 <h2 class="title">SKILLS</h2>
                 <div class="flex_container">
                     <ul>
@@ -84,7 +95,7 @@
 
     
             <!-- content04 start -->
-            <section class="section04" id="work">
+            <section class="section04 container860" id="work">
                 <h2 class="title">WORK</h2>
 
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -99,9 +110,9 @@
                 <div class="tab-content" id="pills-tabContent">
                   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="card_cont">
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                        <div class="card pdr_1 w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                           <div class="card_img"><i class="fab fa-instagram"></i> SNS</div>
-                          <a type="button" data-bs-toggle="modal" data-bs-target="#cardmodal01">SNS 콘텐츠 디자인 <p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / 일러스트레이터</p></a>
+                          <button data-bs-toggle="modal" data-bs-target="#cardmodal01">SNS 콘텐츠 디자인 <p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p></button>
                         </div>  
 
                         <!-- Modal -->
@@ -229,9 +240,9 @@
                           </div>
                         </div>
                         
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                        <div class="card w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                           <div class="card_img"><i class="fas fa-code"></i> WED</div>
-                          <a type="button" data-bs-toggle="modal" data-bs-target="#cardmodal02">웹 디자인 <p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / 일러스트레이터</p></a>
+                          <button data-bs-toggle="modal" data-bs-target="#cardmodal02">웹 디자인 <p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p></button>
                         </div>
                         
                         <!-- Modal -->
@@ -306,9 +317,9 @@
                           </div>
                         </div>
 
-                        <div class="card bg" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                        <div class="card pdr_1 w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                           <div class="card_img"><i class="fas fa-pen-nib"></i> package</div>
-                          <a type="button" data-bs-toggle="modal" data-bs-target="#cardmodal03">패키지 디자인<p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / 일러스트레이터</p></a>
+                          <button data-bs-toggle="modal" data-bs-target="#cardmodal03">패키지 디자인<p><i class="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p></button>
                         </div>
 
                          <!-- Modal -->
@@ -358,73 +369,66 @@
                   </div>
                   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="card_cont">
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                      
+                      <a href="https://jigoorang.com/#">
+                        <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                           <img src="../assets/img/demo01.jpeg" alt="">
                           <a href="https://jigoorang.com/#">
                               지구랭 친환경 랭킹 쇼핑몰 
                               <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
                           </a> 
                         </div>
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo03.jpeg" alt="">
-                          <a href="#">
-                            2021 서울 빛초롱 축제
-                            <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
-                          </a>
-                        </div>                
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo04.jpeg" alt="">
-                          <a href="#">
-                            같이줍깅
-                            <p><i class="fas fa-code"></i> HTML5 / CSS3 / VUE.JS</p>
-                          </a>
-                        </div>
-                        <div class="card bg" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo06.jpeg" alt="" class="snudog">
-                          <a href="#">
-                            스누독 케어센터
-                            <p><i class="fas fa-code"></i> HTML5 / Bootstrap / CSS3 / JS</p>
-                          </a>
-                        </div>
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo05.gif" alt="">
-                          <a href="https://shipme.kr/">
-                            쉽미 역직구 쇼핑몰 리뉴얼
-                            <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
-                          </a>
-                        </div>
+                        </a>
+                        
+                        <a href="https://sihnrila.github.io/SeoulDemo/">
+                          <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                            <img src="../assets/img/demo03.jpeg" alt="">
+                            <a href="https://sihnrila.github.io/SeoulDemo/">
+                              2021 서울 빛초롱 축제
+                              <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
+                            </a>
+                          </div>       
+                        </a> 
 
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo08.jpeg" alt="" class="rila">
-                          <a href="https://shipme.kr/">
-                            신리라 포트폴리오
-                            <p><i class="fas fa-code"></i> HTML5 / SCSS / Bootstrap / VUE.JS</p>
-                          </a>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                    <div class="card_cont">
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo01.jpeg" alt="">
-                          <a href="https://jigoorang.com/#">Demo</a> 
-                        </div>
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo03.jpeg" alt="">
-                          <a href="#">Demo</a>
-                        </div>                
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo04.jpeg" alt="">
-                          <a href="#">Demo</a>
-                        </div>
-                        <div class="card bg" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo06.jpeg" alt="" class="snudog">
-                          <a href="#">Demo</a>
-                        </div>
-                        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                          <img src="../assets/img/demo08.jpeg" alt="">
-                          <a href="https://shipme.kr/">Demo</a>
-                        </div>
+                        <a href="https://sihnrila.github.io/PickUpDemo/">        
+                          <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                            <img src="../assets/img/demo04.jpeg" alt="">
+                            <a href="https://sihnrila.github.io/PickUpDemo/">
+                              같이줍깅
+                              <p><i class="fas fa-code"></i> HTML5 / CSS3 / VUE.JS</p>
+                            </a>
+                          </div>
+                        </a>
+
+                        <a href="https://sihnrila.github.io/suudog/">
+                          <div class="card bg" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                            <img src="../assets/img/demo06.jpeg" alt="" class="snudog">
+                            <a href="https://sihnrila.github.io/suudog/">
+                              스누독 케어센터
+                              <p><i class="fas fa-code"></i> HTML5 / Bootstrap / CSS3 / JS</p>
+                            </a>
+                          </div>
+                        </a>
+
+                        <a href="https://shipme.kr/">
+                          <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                            <img src="../assets/img/demo05.gif" alt="">
+                            <a href="https://shipme.kr/">
+                              쉽미 역직구 쇼핑몰 리뉴얼
+                              <p><i class="fas fa-code"></i> HTML5 / CSS3 / JS</p>
+                            </a>
+                          </div>
+                        </a>
+
+                        <a href="https://sihnrila.github.io/rilaa/">
+                          <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                            <img src="../assets/img/demo08.jpeg" alt="" class="rila">
+                            <a href="https://sihnrila.github.io/rilaa/">
+                              신리라 포트폴리오
+                              <p><i class="fas fa-code"></i> HTML5 / SCSS / Bootstrap / VUE.JS</p>
+                            </a>
+                          </div>
+                        </a>
                     </div>
                   </div>
                 </div>
@@ -445,7 +449,7 @@
 
             <footer>
                 <a href="#"><i class="fas fa-angle-up"></i></a><br>
-              code by rila<br>
+              code by rila❤️‍🔥<br>
               you can see this code
             </footer>
             </div>

@@ -23,14 +23,24 @@ $height:100%;
     max-width: 100%;
     height: 100%;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     //padding: 80px 20px;
+}
+
+.container860{
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
 }
 
 .title{
     font-size: $title_size;
     font-weight: bold;
-    margin-bottom: $margin_buttom;
+    margin-bottom: 4rem;
+}
+
+.pdr_1{
+    padding-right: 1rem;
 }
 
 // 메뉴 
@@ -38,13 +48,21 @@ nav {
     position: fixed;
     margin:  0 auto;
     text-align: left;
+    li{
+        font-weight: bold;
+        color: #707070;
+    }
     a{
         font-weight: bold;
         color: #000;
         text-decoration: none;
     }
     a.router-link-exact-active{
-        color: #42b983;
+        color: #000;
+    }
+
+    li:last-child{
+        float: right;
     }
     
 }
@@ -53,7 +71,7 @@ nav {
 
 .section01{
     width: 100%;
-    padding: 13rem 0;
+    padding: 10rem 0;
     background-color: #f8f8f8;
         
         .waving {
@@ -101,7 +119,7 @@ nav {
         padding-top: 2rem;
     }
     img{
-        width: 50%;
+        width: 20%;
         height: 100%;
         border-radius: 100%;
         margin: 0 auto;
@@ -114,27 +132,31 @@ nav {
 .section02{
     width: 100%;
     line-height: 1.5rem;
-    padding: 10rem 1rem;
-    h2{
-        font-size: $title_size;
-        padding: 0.8rem 0;
-        margin-top: 0.2rem;
-        line-height: 3rem;
-    }
-    .left{
-        text-align: left;
-    }
-    p{
-        text-align: left !important;
-        font-size: 0.9rem;
-    }
+    padding: 10rem 6rem;
 
-    img{
-        width: 100%;
-        height: 100%;
-        border-radius: 0.3rem;
-        margin: 0 auto;
+    .about{
+        h2{
+            font-size: $title_size;
+            padding: 0.8rem 0;
+            margin-top: 0.2rem;
+            line-height: 3rem;
+        }
+        .left{
+            text-align: left;
+        }
+        p{
+            text-align: left !important;
+            font-size: 0.9rem;
+        }
+    
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 0.3rem;
+            margin: 0 auto;
+        }
     }
+    
 }
 
 
@@ -202,14 +224,14 @@ nav {
     ul{
         margin-bottom: $margin_buttom;
         border-bottom: solid 1px #ddd;
-        
         li{
             display: inline-block;
             padding: 1rem 0 1rem;
             margin: 0 auto;
             color: #ddd;
 
-            a{
+            a{  
+                width: 100%;
                 font-weight: 200;
                 text-decoration: none;
                 line-height: 40px;
@@ -228,7 +250,7 @@ nav {
                 }
         }
     }
-      
+
     .active {
         color:#000;
     }
@@ -237,13 +259,18 @@ nav {
         margin-top: 2rem;
     }
 
+    a{
+        text-decoration: none;
+        width: 50%;
+    }
+
     .card_cont{
         display: flex;
         flex-wrap: wrap;
+        
         .card{
-            width: 50%;
-            height: 100%;
-            border-radius: 0px;
+            width: 100%;
+            height: 25rem;
             margin-bottom: $margin_buttom;
             border: none;
 
@@ -259,18 +286,34 @@ nav {
 
             img{
                 width: 100%;
-                height: 20rem;
+                height: 22rem;
             }
             .snudog{
                 width: 65%;
-                height: 100%;
+                height: 60%;
                 margin: 0 auto;
                 padding: 2rem 0;
+                margin: 2.5rem auto;
             }
-            .rila{
-                padding-top: 1rem;
-                height: 30rem;
+
+            button{
+                width: 100%;
+                height: 5em;
+                padding: 1em;
+                border: none;
+                color: #000;
+                background-color: #f8f8f8;
+                text-decoration: none;
+                p{
+                    font-size: 0.7rem;
+                    color: #707070;
+
+                    i{
+                        color: #000;
+                    }
+                }
             }
+            
             a{
                 width: 100%;
                 height: 5em;
@@ -291,6 +334,9 @@ nav {
         }
         .bg{
             background: #c4d3e2;
+        }
+        .card.w_50{
+            width: 50%;
         }
 
         .modal-body{
@@ -356,7 +402,6 @@ footer{
 // 반응형 미디어 쿼리 
 @media screen and (min-width : 1025px){
     body {
-        background-color: lightcoral;
 
         .header {display: none;}
 
@@ -375,8 +420,6 @@ footer{
 
 @media screen and (min-width : 768px) and (max-width : 1024px){
     body {
-        background-color: lightblue;
-
         .monav.responsive {
             position: relative;
 
@@ -392,6 +435,12 @@ footer{
                 top: 0;
             }
         }
+
+        .container860{
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+        }
     }
 }
 
@@ -400,8 +449,34 @@ footer{
        max-width: 100%;
    }
 
+   .title{
+        font-size: $title_size;
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
+
+    .pdr_1{
+        padding-right: 0;
+    }
+
+
+   .section01{
+        padding: 13rem 0;
+        img{
+            width: 50%;
+        }
+   }
+
+   .section02{
+        padding: 10rem 1rem;
+   }
+
    .section04{
     .card_cont{
+            a{
+                text-decoration: none;
+                width: 100%;
+            }
             flex-direction: column;
             flex-wrap: wrap;
             .card{
@@ -411,6 +486,10 @@ footer{
             img{
                 height: 17rem;
             }
+            .card.w_50{
+                width: 100%;
+            }
+    
         }
     }
 }

@@ -67,13 +67,23 @@ table {
   max-width: 100%;
   height: 100%;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+}
+
+.container860 {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .title {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
+}
+
+.pdr_1 {
+  padding-right: 1rem;
 }
 
 nav {
@@ -94,7 +104,7 @@ nav a.router-link-exact-active {
 
 .section01 {
   width: 100%;
-  padding: 13rem 0;
+  padding: 10rem 0;
   background-color: #f8f8f8;
 }
 
@@ -192,7 +202,7 @@ nav a.router-link-exact-active {
 }
 
 .section01 img {
-  width: 50%;
+  width: 20%;
   height: 100%;
   border-radius: 100%;
   margin: 0 auto;
@@ -201,26 +211,26 @@ nav a.router-link-exact-active {
 .section02 {
   width: 100%;
   line-height: 1.5rem;
-  padding: 10rem 1rem;
+  padding: 10rem 6rem;
 }
 
-.section02 h2 {
+.section02 .about h2 {
   font-size: 1.5rem;
   padding: 0.8rem 0;
   margin-top: 0.2rem;
   line-height: 3rem;
 }
 
-.section02 .left {
+.section02 .about .left {
   text-align: left;
 }
 
-.section02 p {
+.section02 .about p {
   text-align: left !important;
   font-size: 0.9rem;
 }
 
-.section02 img {
+.section02 .about img {
   width: 100%;
   height: 100%;
   border-radius: 0.3rem;
@@ -354,8 +364,7 @@ nav a.router-link-exact-active {
 
 .section04 .card_cont .card {
   width: 50%;
-  height: 100%;
-  border-radius: 0px;
+  height: 25rem;
   margin-bottom: 2rem;
   border: none;
 }
@@ -372,19 +381,15 @@ nav a.router-link-exact-active {
 
 .section04 .card_cont .card img {
   width: 100%;
-  height: 20rem;
+  height: 22rem;
 }
 
 .section04 .card_cont .card .snudog {
   width: 65%;
-  height: 100%;
+  height: 60%;
   margin: 0 auto;
   padding: 2rem 0;
-}
-
-.section04 .card_cont .card .rila {
-  padding-top: 1rem;
-  height: 30rem;
+  margin: 2.5rem auto;
 }
 
 .section04 .card_cont .card a {
@@ -463,9 +468,6 @@ footer a i {
 }
 
 @media screen and (min-width: 1025px) {
-  body {
-    background-color: lightcoral;
-  }
   body .header {
     display: none;
   }
@@ -479,9 +481,6 @@ footer a i {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  body {
-    background-color: lightblue;
-  }
   body .monav.responsive {
     position: relative;
   }
@@ -495,11 +494,30 @@ footer a i {
     right: 0;
     top: 0;
   }
+  body .container860 {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (max-width: 767px) {
   .container {
     max-width: 100%;
+  }
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  .section01 {
+    padding: 13rem 0;
+  }
+  .section01 img {
+    width: 50%;
+  }
+  .section02 {
+    padding: 10rem 1rem;
   }
   .section04 .card_cont {
     -webkit-box-orient: vertical;
