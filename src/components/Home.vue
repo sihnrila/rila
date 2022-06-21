@@ -25,12 +25,12 @@
                        🙋‍♀️ 숭실사이버대학교 ICT 공학부에 재학중이며, 웹 아카데미에서 웹퍼블리셔 전문가 과정을 통해 HTML,CSS,JS 등을 이수하였습니다.
                        이후 스타트업과 웹에이전시 프리랜서 일을 하며 독학해 VUE.JS,SCSS,PYTHON 배웠습니다. 
 
-                     <br><br>🧑‍🦰 프론트앤드 개발자로 일을 하며, "하고 싶은 것"과 "잘 하는 일"은 다르다는것을 깨달았습니다.
-                       다양한 언어를 배움으로써 WEB에대한 이해도를 많이 쌓아가는중입니다. 열심히 하는것도 좋지만, 일을 할때 만큼은 "잘하자"라는 마인드로 임하고 있습니다.
+                     <br><br>🧑‍🦰 프론트앤드 개발자로 일을 하며, 다양한 언어를 배움으로써 WEB에대한 이해도를 많이 쌓아가는중입니다. <br>
+                     열심히 하는것도 좋지만, 일을 할때 만큼은 "잘하자"라는 마인드로 임하고 있습니다.
 
-                     <br><br>👂 기획과 디자인 기반으로 개발하는 것을 좋아합니다. 
-                       또한, 빠르게 개발하고 배포하여 사용자들의 의견을 적극 수용하여 유저를 기반으로 이해하는 역량을 쌓고자 노력하였으며, 
-                       혼자 하는것이 팀원들과 협업하고 의견을 나누는 것을 좋아해 구성원들과 적극적으로 커뮤니케이션을 하며 개발하는 것을 좋아합니다.
+                     <br><br>👂 
+                       빠르게 개발하고 배포하여 사용자들의 의견을 적극 수용하여 유저를 기반으로 이해하는 역량을 쌓고자 노력합니다. 
+                       또한, 혼자 하는것이 아니라 팀원들과 협업하고 의견을 나누는 것을 좋아해 구성원들과 적극적으로 커뮤니케이션을 하며 개발하는 것을 좋아합니다.
 
                      <br><br>👀 웹 트렌드에 민감합니다. 빠르게 변화되는 트렌드인 만큼 꼼꼼히 보고 또봅니다.
 
@@ -402,21 +402,21 @@
                             </a> 
                          </div>
 
-                        <a @click="none()">
+                        <a @click="url05()">
                          <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                           <div class="card_img"><i class="fas fa-code"></i> WED</div>
                           <a href="#work">
-                              같이줍깅 (현재 폐쇠됨)
+                              같이줍깅 (현재 폐쇠)
                               <p><i class="fas fa-code"></i>HTML5 / CSS3 / VUE.JS</p>
                           </a> 
                         </div>
                         </a>
 
-                        <a @click="none()">
+                        <a @click="url06()">
                          <div class="card pdr_1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                           <div class="card_img"><i class="fas fa-code"></i> WED</div>
                           <a href="#work">
-                              2021 서울 빛초롱 축제 (현재 폐쇠됨)
+                              2021 서울 빛초롱 축제 (현재 폐쇠)
                               <p><i class="fas fa-code"></i>HTML5 / CSS3 / VUE.JS</p>
                           </a> 
                         </div>
@@ -468,6 +468,12 @@ export default {
     },
     url04:function(){
       location.href="https://sihnrila.github.io/rilaa/";
+    },
+    url05:function(){
+      location.href="https://sihnrila.github.io/PickUpDemo/";
+    },
+    url06:function(){
+      location.href="https://sihnrila.github.io/SeoulDemo/";
     },
   }
 }
