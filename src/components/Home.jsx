@@ -211,38 +211,53 @@ const Home = () => {
                       <p>프로젝트를 불러오는 중...</p>
                     </div>
                   ) : (
-                    repos.map((repo) => (
-                      <div 
-                        key={repo.id} 
-                        className="card w_50 pdr_1" 
-                        data-aos="fade-up" 
-                        data-aos-anchor-placement="top-bottom"
-                      >
-                        <Link 
-                          to={`/repos/${repo.name}`}
-                          style={{ textDecoration: 'none', color: 'inherit' }}
+                    repos
+                      .filter(repo => repo.homepage) // homepage가 있는 레포만 표시
+                      .map((repo) => (
+                        <div 
+                          key={repo.id} 
+                          className="card w_50 pdr_1" 
+                          data-aos="fade-up" 
+                          data-aos-anchor-placement="top-bottom"
                         >
-                          <div 
-                            className="card_img"
-                            style={{ backgroundColor: getLanguageColor(repo.language) }}
+                          <Link 
+                            to={`/repos/${repo.name}`}
+                            style={{ textDecoration: 'none', color: 'inherit' }}
                           >
-                            <i className="fas fa-code"></i> {repo.language || 'CODE'}
-                          </div>
-                          <div style={{ padding: '1em', backgroundColor: '#f8f8f8' }}>
-                            <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                              {repo.name}
+                            <div 
+                              className="card_img"
+                              style={{ backgroundColor: getLanguageColor(repo.language) }}
+                            >
+                              <i className="fas fa-code"></i> {repo.language || 'CODE'}
                             </div>
-                            <p style={{ fontSize: '0.7rem', color: '#707070', marginBottom: '0.5rem' }}>
-                              <i className="fas fa-code"></i> {repo.language || 'Other'} 
-                              {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
-                            </p>
-                            <p style={{ fontSize: '0.6rem', color: '#707070' }}>
-                              ⭐ {repo.stars} | 🍴 {repo.forks}
-                            </p>
-                          </div>
-                        </Link>
-                      </div>
-                    ))
+                            <div style={{ padding: '1em', backgroundColor: '#f8f8f8' }}>
+                              <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>
+                                {repo.name}
+                              </div>
+                              <p style={{ fontSize: '0.7rem', color: '#707070', marginBottom: '0.5rem' }}>
+                                <i className="fas fa-code"></i> {repo.language || 'Other'} 
+                                {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
+                              </p>
+                              <p style={{ fontSize: '0.6rem', color: '#707070', marginBottom: '0.5rem' }}>
+                                ⭐ {repo.stars} | 🍴 {repo.forks}
+                              </p>
+                              {repo.homepage && (
+                                <div style={{ 
+                                  marginTop: '0.5rem',
+                                  padding: '0.3rem 0.6rem',
+                                  backgroundColor: '#2c3e50',
+                                  color: '#fff',
+                                  borderRadius: '4px',
+                                  fontSize: '0.7rem',
+                                  display: 'inline-block'
+                                }}>
+                                  <i className="fas fa-external-link-alt"></i> Live Demo
+                                </div>
+                              )}
+                            </div>
+                          </Link>
+                        </div>
+                      ))
                   )}
                 </div>
               </div>

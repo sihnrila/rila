@@ -43,15 +43,10 @@ const RepoDetail = () => {
           license: response.data.license?.name || 'None'
         })
 
-        // 데모 URL 설정
-        // 1. homepage가 있으면 우선 사용
-        // 2. 없으면 GitHub Pages URL 시도
-        let demo = response.data.homepage
-        if (!demo) {
-          // GitHub Pages URL 생성 (일반적인 패턴)
-          demo = `https://${GITHUB_USERNAME}.github.io/${repoName}/`
+        // 데모 URL 설정 (homepage가 있을 때만)
+        if (response.data.homepage) {
+          setDemoUrl(response.data.homepage)
         }
-        setDemoUrl(demo)
 
         // README 가져오기 시도
         try {
