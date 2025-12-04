@@ -41,7 +41,10 @@ export const fetchGitHubRepos = async () => {
     
     // 응답 데이터 확인
     if (response.data && Array.isArray(response.data)) {
-      return transformRepos(response.data)
+      const transformed = transformRepos(response.data)
+      console.log('GitHub API 응답:', response.data.length, '개 레포지토리')
+      console.log('레포지토리 이름 목록:', transformed.map(r => r.name))
+      return transformed
     } else {
       console.warn('GitHub API 응답 형식이 예상과 다릅니다:', response.data)
       return []

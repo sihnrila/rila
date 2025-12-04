@@ -14,6 +14,8 @@ const Home = () => {
     const loadRepos = async () => {
       setLoading(true)
       const data = await fetchGitHubRepos()
+      console.log('로드된 레포지토리:', data)
+      console.log('wedding-editor 포함 여부:', data.some(repo => repo.name.includes('wedding')))
       setRepos(data)
       setLoading(false)
     }
