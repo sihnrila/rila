@@ -41,9 +41,37 @@ export const fetchGitHubRepos = async () => {
     
     // 응답 데이터 확인
     if (response.data && Array.isArray(response.data)) {
-      const transformed = transformRepos(response.data)
-      console.log('GitHub API 응답:', response.data.length, '개 레포지토리')
+      // 각 레포지토리의 GitHub Pages 상태 확인
+      const reposWithPages = await Promise.all(
+        response.data.map(async (repo) => {
+          try {
+            // GitHub Pages 정보 확인
+            const pagesResponse = await axios.get(
+              `${GITHUB_API_BASE}/repos/${GITHUB_USERNAME}/${repo.name}/pages`,
+              {
+                headers: {
+                  'Accept': 'application/vnd.github.v3+json'
+                }
+              }
+            )
+            
+            // GitHub Pages가 활성화되어 있으면 homepage URL 생성
+            if (pagesResponse.data && pagesResponse.data.html_url) {
+              repo.homepage = pagesResponse.data.html_url
+            }
+          } catch (pagesError) {
+            // GitHub Pages가 없거나 접근 불가능한 경우 무시
+            console.log(`${repo.name}: GitHub Pages 없음 또는 접근 불가`)
+          }
+          
+          return repo
+        })
+      )
+      
+      const transformed = transformRepos(reposWithPages)
+      console.log('GitHub API 응답:', reposWithPages.length, '개 레포지토리')
       console.log('레포지토리 이름 목록:', transformed.map(r => r.name))
+      console.log('homepage가 있는 레포:', transformed.filter(r => r.homepage).map(r => r.name))
       return transformed
     } else {
       console.warn('GitHub API 응답 형식이 예상과 다릅니다:', response.data)
