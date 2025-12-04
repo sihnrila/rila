@@ -11,18 +11,26 @@ const transformRepos = (data) => {
     return []
   }
   
-  return data.map(repo => ({
-    id: repo.id,
-    name: repo.name,
-    description: repo.description || '',
-    url: repo.html_url,
-    homepage: repo.homepage,
-    language: repo.language || 'Other',
-    stars: repo.stargazers_count,
-    forks: repo.forks_count,
-    updated: repo.updated_at,
-    topics: repo.topics || []
-  }))
+  return data.map(repo => {
+    // homepage가 없으면 Cloudflare Pages URL 자동 생성
+    let homepage = repo.homepage
+    if (!homepage) {
+      homepage = `https://${repo.name}.pages.dev`
+    }
+    
+    return {
+      id: repo.id,
+      name: repo.name,
+      description: repo.description || '',
+      url: repo.html_url,
+      homepage: homepage,
+      language: repo.language || 'Other',
+      stars: repo.stargazers_count,
+      forks: repo.forks_count,
+      updated: repo.updated_at,
+      topics: repo.topics || []
+    }
+  })
 }
 
 export const fetchGitHubRepos = async () => {
