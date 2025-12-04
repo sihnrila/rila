@@ -45,7 +45,15 @@ const RepoDetail = () => {
 
         // 데모 URL 설정 (homepage가 있을 때만)
         if (response.data.homepage) {
-          setDemoUrl(response.data.homepage)
+          let demo = response.data.homepage
+          // wedding-editor의 경우 /start 경로 추가
+          if (repoName === 'wedding-editor-scaffold' || repoName === 'wedding-editor') {
+            // 이미 /start가 포함되어 있지 않으면 추가
+            if (!demo.includes('/start')) {
+              demo = demo.endsWith('/') ? `${demo}start` : `${demo}/start`
+            }
+          }
+          setDemoUrl(demo)
         }
 
         // README 가져오기 시도
