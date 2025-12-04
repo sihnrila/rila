@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { fetchGitHubRepos, getLanguageColor } from '../services/github'
 import DesignModals from './DesignModals'
 import img01 from '../assets/img/img01.jpeg'
@@ -217,22 +218,29 @@ const Home = () => {
                         data-aos="fade-up" 
                         data-aos-anchor-placement="top-bottom"
                       >
-                        <div 
-                          className="card_img"
-                          style={{ backgroundColor: getLanguageColor(repo.language) }}
+                        <Link 
+                          to={`/repos/${repo.name}`}
+                          style={{ textDecoration: 'none', color: 'inherit' }}
                         >
-                          <i className="fas fa-code"></i> {repo.language || 'CODE'}
-                        </div>
-                        <a href={repo.homepage || repo.url} target="_blank" rel="noopener noreferrer">
-                          {repo.name}
-                          <p>
-                            <i className="fas fa-code"></i> {repo.language || 'Other'} 
-                            {repo.description && ` - ${repo.description}`}
-                          </p>
-                          <p style={{ fontSize: '0.6rem', color: '#707070' }}>
-                            ⭐ {repo.stars} | 🍴 {repo.forks}
-                          </p>
-                        </a>
+                          <div 
+                            className="card_img"
+                            style={{ backgroundColor: getLanguageColor(repo.language) }}
+                          >
+                            <i className="fas fa-code"></i> {repo.language || 'CODE'}
+                          </div>
+                          <div style={{ padding: '1em', backgroundColor: '#f8f8f8' }}>
+                            <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>
+                              {repo.name}
+                            </div>
+                            <p style={{ fontSize: '0.7rem', color: '#707070', marginBottom: '0.5rem' }}>
+                              <i className="fas fa-code"></i> {repo.language || 'Other'} 
+                              {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
+                            </p>
+                            <p style={{ fontSize: '0.6rem', color: '#707070' }}>
+                              ⭐ {repo.stars} | 🍴 {repo.forks}
+                            </p>
+                          </div>
+                        </Link>
                       </div>
                     ))
                   )}
