@@ -32,7 +32,7 @@ export const fetchGitHubRepos = async () => {
       params: {
         sort: 'updated',
         per_page: 100,
-        type: 'all'
+        type: 'public' // public 레포지토리만 가져오기
       },
       headers: {
         'Accept': 'application/vnd.github.v3+json'
