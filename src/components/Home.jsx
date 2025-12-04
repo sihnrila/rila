@@ -217,7 +217,9 @@ const Home = () => {
                       <p>표시할 프로젝트가 없습니다.</p>
                     </div>
                   ) : (
-                    repos.map((repo) => (
+                    repos
+                      .filter(repo => repo.homepage) // homepage가 있는 레포만 표시
+                      .map((repo) => (
                         <div 
                           key={repo.id} 
                           className="card w_50 pdr_1" 
