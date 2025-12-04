@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react({
     jsxRuntime: 'automatic'
   })],
-  base: process.env.NODE_ENV === 'production' ? '/rilaa' : '/',
+  base: '/',
   css: {
     preprocessorOptions: {
       scss: {
