@@ -210,10 +210,12 @@ const Home = () => {
                     <div className="text-center p-5">
                       <p>프로젝트를 불러오는 중...</p>
                     </div>
+                  ) : repos.length === 0 ? (
+                    <div className="text-center p-5">
+                      <p>표시할 프로젝트가 없습니다.</p>
+                    </div>
                   ) : (
-                    repos
-                      .filter(repo => repo.homepage) // homepage가 있는 레포만 표시
-                      .map((repo) => (
+                    repos.map((repo) => (
                         <div 
                           key={repo.id} 
                           className="card w_50 pdr_1" 
