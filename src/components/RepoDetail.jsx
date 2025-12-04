@@ -12,9 +12,7 @@ const RepoDetail = () => {
   const [repo, setRepo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [readme, setReadme] = useState('')
-  const [files, setFiles] = useState([])
-  const [selectedFile, setSelectedFile] = useState(null)
-  const [fileContent, setFileContent] = useState('')
+  const [demoUrl, setDemoUrl] = useState('')
 
   useEffect(() => {
     const loadRepo = async () => {
@@ -45,6 +43,16 @@ const RepoDetail = () => {
           license: response.data.license?.name || 'None'
         })
 
+        // 데모 URL 설정
+        // 1. homepage가 있으면 우선 사용
+        // 2. 없으면 GitHub Pages URL 시도
+        let demo = response.data.homepage
+        if (!demo) {
+          // GitHub Pages URL 생성 (일반적인 패턴)
+          demo = `https://${GITHUB_USERNAME}.github.io/${repoName}/`
+        }
+        setDemoUrl(demo)
+
         // README 가져오기 시도
         try {
           const readmeResponse = await axios.get(
@@ -58,32 +66,6 @@ const RepoDetail = () => {
           setReadme(readmeResponse.data)
         } catch (readmeError) {
           console.log('README를 가져올 수 없습니다:', readmeError)
-        }
-
-        // 저장소 파일 트리 가져오기
-        try {
-          const treeResponse = await axios.get(
-            `${GITHUB_API_BASE}/repos/${GITHUB_USERNAME}/${repoName}/git/trees/${response.data.default_branch}?recursive=1`,
-            {
-              headers: {
-                'Accept': 'application/vnd.github.v3+json'
-              }
-            }
-          )
-          
-          // 파일만 필터링 (폴더 제외)
-          const fileList = treeResponse.data.tree
-            .filter(item => item.type === 'blob')
-            .map(item => ({
-              path: item.path,
-              size: item.size,
-              sha: item.sha
-            }))
-            .sort((a, b) => a.path.localeCompare(b.path))
-          
-          setFiles(fileList)
-        } catch (treeError) {
-          console.log('파일 트리를 가져올 수 없습니다:', treeError)
         }
       } catch (error) {
         console.error('저장소 정보를 가져오는데 실패했습니다:', error)
@@ -236,99 +218,57 @@ const RepoDetail = () => {
             <p>라이선스: {repo.license}</p>
           </div>
 
-          {/* 파일 목록 */}
-          {files.length > 0 && (
+          {/* 데모 페이지 */}
+          {demoUrl && (
             <div style={{ marginTop: '3rem' }}>
-              <h3 style={{ marginBottom: '1rem' }}>파일 목록</h3>
-              <div style={{ 
-                maxHeight: '400px', 
-                overflowY: 'auto', 
-                border: '1px solid #ddd', 
-                borderRadius: '8px',
-                padding: '1rem'
-              }}>
-                {files.map((file) => (
-                  <div
-                    key={file.path}
-                    onClick={async () => {
-                      try {
-                        const contentResponse = await axios.get(
-                          `${GITHUB_API_BASE}/repos/${GITHUB_USERNAME}/${repoName}/contents/${file.path}`,
-                          {
-                            headers: {
-                              'Accept': 'application/vnd.github.v3.raw'
-                            }
-                          }
-                        )
-                        setFileContent(contentResponse.data)
-                        setSelectedFile(file.path)
-                      } catch (error) {
-                        console.error('파일 내용을 가져오는데 실패했습니다:', error)
-                      }
-                    }}
-                    style={{
-                      padding: '0.5rem',
-                      cursor: 'pointer',
-                      borderBottom: '1px solid #eee',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      transition: 'background-color 0.2s'
-                    }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f0f0'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-                  >
-                    <span style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>
-                      📄 {file.path}
-                    </span>
-                    <span style={{ fontSize: '0.8rem', color: '#666' }}>
-                      {(file.size / 1024).toFixed(2)} KB
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* 선택된 파일 내용 */}
-          {selectedFile && fileContent && (
-            <div style={{ 
-              marginTop: '2rem', 
-              padding: '2rem', 
-              backgroundColor: '#f8f8f8', 
-              borderRadius: '8px'
-            }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <h3>{selectedFile}</h3>
-                <button
-                  onClick={() => {
-                    setSelectedFile(null)
-                    setFileContent('')
-                  }}
+                <h3>데모 페이지</h3>
+                <a 
+                  href={demoUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   style={{
                     padding: '0.5rem 1rem',
-                    backgroundColor: '#000',
+                    backgroundColor: '#2c3e50',
                     color: '#fff',
-                    border: 'none',
+                    textDecoration: 'none',
                     borderRadius: '4px',
-                    cursor: 'pointer'
+                    fontSize: '0.9rem'
                   }}
                 >
-                  닫기
-                </button>
+                  <i className="fas fa-external-link-alt"></i> 새 창에서 열기
+                </a>
               </div>
-              <pre style={{ 
-                whiteSpace: 'pre-wrap',
-                fontFamily: 'monospace',
-                fontSize: '0.9rem',
-                overflow: 'auto',
-                maxHeight: '500px',
-                padding: '1rem',
+              <div style={{
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                overflow: 'hidden',
                 backgroundColor: '#fff',
-                borderRadius: '4px'
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
               }}>
-                {fileContent}
-              </pre>
+                <iframe
+                  src={demoUrl}
+                  style={{
+                    width: '100%',
+                    height: '800px',
+                    border: 'none',
+                    display: 'block'
+                  }}
+                  title={`${repo.name} 데모`}
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                  onError={() => {
+                    console.error('데모 페이지를 로드할 수 없습니다')
+                  }}
+                />
+              </div>
+              <p style={{ 
+                marginTop: '1rem', 
+                fontSize: '0.9rem', 
+                color: '#666',
+                textAlign: 'center'
+              }}>
+                데모 페이지가 로드되지 않으면 <a href={demoUrl} target="_blank" rel="noopener noreferrer">여기</a>를 클릭하여 직접 확인하세요.
+              </p>
             </div>
           )}
 
