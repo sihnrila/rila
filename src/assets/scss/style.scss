@@ -53,6 +53,12 @@ nav.navbar {
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     
+    .container-fluid {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
     .navbar-brand {
         font-weight: bold;
         color: #000;
@@ -64,35 +70,32 @@ nav.navbar {
 
 // 사이드바 토글 버튼
 .sidebar-toggle {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
+    position: relative;
     z-index: 1001;
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border: none;
-    border-radius: 8px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
     cursor: pointer;
-    padding: 0.75rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
     transition: all 0.3s ease;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     justify-content: center;
     align-items: center;
+    margin-left: auto;
     
     &:hover {
-        background: rgba(255, 255, 255, 1);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.2);
     }
     
     span {
-        width: 25px;
-        height: 3px;
+        width: 20px;
+        height: 2px;
         background-color: #000;
-        margin: 3px 0;
+        margin: 2px 0;
         transition: 0.3s;
         border-radius: 2px;
         display: block;
