@@ -39,15 +39,22 @@ export default defineConfig({
         secure: true,
         rewrite: (path) => {
           // /api/tistory/rss -> /rss
-          return path.replace(/^\/api\/tistory/, '')
+          const newPath = path.replace(/^\/api\/tistory/, '')
+          console.log('프록시 경로 변환:', path, '->', newPath)
+          return newPath
         },
         configure: (proxy, _options) => {
           proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('프록시 요청:', req.url, '->', proxyReq.path)
             proxyReq.setHeader('User-Agent', 'Rila-Portfolio')
             proxyReq.setHeader('Accept', 'application/rss+xml, application/xml, text/xml')
+            proxyReq.setHeader('Origin', 'http://localhost:5173')
+          })
+          proxy.on('proxyRes', (proxyRes, req, res) => {
+            console.log('프록시 응답 상태:', proxyRes.statusCode)
           })
           proxy.on('error', (err, req, res) => {
-            console.error('Proxy error:', err)
+            console.error('프록시 에러:', err.message)
           })
         },
       },

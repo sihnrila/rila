@@ -126,15 +126,22 @@ export const fetchTistoryPosts = async () => {
     })
     
     // CORS 에러인 경우 프록시를 통해 재시도
-    try {
-      console.log('프록시를 통한 요청 시도:', `/api/tistory/rss`)
-      
-      // Vite 프록시를 통한 요청
-      const proxyResponse = await axios.get(`/api/tistory/rss`, {
-        headers: {
-          'Accept': 'application/xml, text/xml'
-        }
-      })
+    if (error.message?.includes('CORS') || error.code === 'ERR_NETWORK' || !error.response) {
+      try {
+        console.log('프록시를 통한 요청 시도:', `/api/tistory/rss`)
+        
+        // Vite 프록시를 통한 요청 (개발 환경)
+        // 프로덕션에서는 Cloudflare Worker를 통해 처리
+        const proxyUrl = import.meta.env.DEV 
+          ? `/api/tistory/rss`
+          : `https://rila-5dl.pages.dev/api/tistory/rss`
+        
+        const proxyResponse = await axios.get(proxyUrl, {
+          headers: {
+            'Accept': 'application/xml, text/xml'
+          },
+          timeout: 10000
+        })
       
       console.log('프록시 응답 받음, 데이터 타입:', typeof proxyResponse.data)
       
@@ -147,17 +154,24 @@ export const fetchTistoryPosts = async () => {
         throw new Error('프록시 XML 파싱 실패')
       }
       
-      const posts = extractPostsFromRSS(xmlDoc)
-      
-      console.log('티스토리 포스트 로드 완료 (프록시):', posts.length, '개')
-      return posts
-    } catch (proxyError) {
-      console.error('프록시를 통한 요청도 실패:', proxyError)
-      console.error('프록시 에러 상세:', {
-        message: proxyError.message,
-        code: proxyError.code,
-        response: proxyError.response?.status
-      })
+        const posts = extractPostsFromRSS(xmlDoc)
+        
+        console.log('티스토리 포스트 로드 완료 (프록시):', posts.length, '개')
+        return posts
+      } catch (proxyError) {
+        console.error('프록시를 통한 요청도 실패:', proxyError)
+        console.error('프록시 에러 상세:', {
+          message: proxyError.message,
+          code: proxyError.code,
+          response: proxyError.response?.status,
+          statusText: proxyError.response?.statusText
+        })
+        // 프록시도 실패하면 빈 배열 반환
+        return []
+      }
+    } else {
+      // CORS가 아닌 다른 에러인 경우
+      console.error('CORS가 아닌 다른 에러:', error)
       return []
     }
   }
