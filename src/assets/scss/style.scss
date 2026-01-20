@@ -683,7 +683,7 @@ nav.navbar {
                 gap: 4rem 6rem;
                 
                 .desc-item {
-                    display: flex;
+        display: flex;
                     gap: 2rem;
                     padding: 2rem 0;
                     border-top: 1px solid $border-color;
@@ -757,7 +757,7 @@ nav.navbar {
             
             .resume-button {
                 display: inline-flex;
-                align-items: center;
+        align-items: center;
                 gap: 0.75rem;
                 padding: 1rem 2rem;
                 background: $bg-dark;
@@ -769,7 +769,7 @@ nav.navbar {
                 letter-spacing: 0.1em;
                 border: 1px solid $bg-dark;
                 transition: all 0.3s ease;
-                width: 100%;
+        width: 100%;
                 justify-content: center;
                 
                 i {
@@ -843,7 +843,7 @@ nav.navbar {
     }
     
     .skills-content {
-        width: 100%;
+            width: 100%;
         overflow: hidden;
     }
     
@@ -852,6 +852,9 @@ nav.navbar {
         overflow: hidden;
         position: relative;
         padding: 2rem 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         
         &::before,
         &::after {
@@ -859,8 +862,8 @@ nav.navbar {
             position: absolute;
             top: 0;
             width: 200px;
-        height: 100%;
-            z-index: 10;
+            height: 100%;
+            z-index: 5;
             pointer-events: none;
         }
         
@@ -873,6 +876,45 @@ nav.navbar {
             right: 0;
             background: linear-gradient(to left, $bg-white, transparent);
         }
+        
+        .skills-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: $bg-white;
+            border: 1px solid $border-color;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: $text-dark;
+            font-size: 1.2rem;
+            
+            &:hover {
+                background: $bg-dark;
+                color: $bg-white;
+                border-color: $text-dark;
+                transform: translateY(-50%) scale(1.1);
+            }
+            
+            &.skills-nav-prev {
+                left: 1rem;
+            }
+            
+            &.skills-nav-next {
+                right: 1rem;
+            }
+        }
+    }
+    
+    .skills-track-wrapper {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
     }
     
     .skills-track {
@@ -880,8 +922,26 @@ nav.navbar {
         gap: 4rem;
         animation: slide 30s linear infinite;
         will-change: transform;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        overflow-x: auto;
+        cursor: grab;
+        
+        &:active {
+            cursor: grabbing;
+        }
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
         
         &:hover {
+            animation-play-state: paused;
+        }
+        
+        // 수동 스크롤 시 애니메이션 일시 정지
+        &.manual-scroll {
             animation-play-state: paused;
         }
     }
@@ -1750,22 +1810,42 @@ footer{
         }
         
         .skills-slider {
+            padding: 1.5rem 0;
+            
             &::before,
             &::after {
-                width: 100px;
+                width: 80px;
+            }
+            
+            .skills-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                
+                &.skills-nav-prev {
+                    left: 0.5rem;
+                }
+                
+                &.skills-nav-next {
+                    right: 0.5rem;
+                }
             }
         }
         
+        .skills-track {
+            gap: 2rem;
+        }
+        
         .skill-item {
-            min-width: 150px;
-            padding: 1.5rem 2rem;
+            min-width: 120px;
+            padding: 1.25rem 1.5rem;
             
             i {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
             
             span {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
             }
         }
    }

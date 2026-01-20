@@ -204,81 +204,221 @@ const Home = () => {
             </div>
             <div className="skills-content">
               <div className="skills-slider">
-                <div className="skills-track">
-              <div className="skill-item">
-                <i className="fab fa-html5"></i>
-                <span>HTML5</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-css3-alt"></i>
-                <span>CSS3</span>
-              </div>
-              <div className="skill-item">
+                <button 
+                  className="skills-nav-btn skills-nav-prev" 
+                  onClick={() => {
+                    const track = document.querySelector('.skills-track')
+                    if (track) {
+                      track.classList.add('manual-scroll')
+                      track.scrollBy({ left: -300, behavior: 'smooth' })
+                      setTimeout(() => {
+                        track.classList.remove('manual-scroll')
+                      }, 1000)
+                    }
+                  }}
+                  aria-label="Previous skills"
+                >
+                  <i className="fas fa-chevron-left"></i>
+                </button>
+                <div className="skills-track-wrapper">
+                  <div 
+                    className="skills-track"
+                    onMouseEnter={() => {
+                      const track = document.querySelector('.skills-track')
+                      if (track) track.classList.add('manual-scroll')
+                    }}
+                    onMouseLeave={() => {
+                      const track = document.querySelector('.skills-track')
+                      if (track) track.classList.remove('manual-scroll')
+                    }}
+                  >
+                    <div className="skill-item">
+                      <i className="fab fa-html5"></i>
+                      <span>HTML5</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-css3-alt"></i>
+                      <span>CSS3</span>
+                    </div>
+                    <div className="skill-item">
                 <i className="fab fa-sass"></i>
-                <span>SCSS</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-js-square"></i>
-                <span>Javascript</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-bootstrap"></i>
-                <span>Bootstrap</span>
-              </div>
-              <div className="skill-item">
+                      <span>SCSS</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-js-square"></i>
+                      <span>Javascript</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-vuejs"></i>
+                      <span>Vue.js</span>
+                    </div>
+                    <div className="skill-item">
                 <i className="fab fa-react"></i>
-                <span>React</span>
-              </div>
-              <div className="skill-item">
+                      <span>React</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-bootstrap"></i>
+                      <span>Bootstrap</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-node-js"></i>
+                      <span>Node.js</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-python"></i>
+                      <span>Python</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-git-alt"></i>
+                      <span>Git</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-github"></i>
+                      <span>GitHub</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-code"></i>
+                      <span>jQuery</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-exchange-alt"></i>
+                      <span>Ajax</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-plug"></i>
+                      <span>API</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-exchange-alt"></i>
+                      <span>RestAPI</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-database"></i>
+                      <span>MySQL</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-aws"></i>
+                      <span>AWS</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-slack"></i>
+                      <span>Slack</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-code"></i>
+                      <span>VSCode</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-jira"></i>
+                      <span>Jira</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-adobe"></i>
+                      <span>Photoshop</span>
+                    </div>
+                    {/* Duplicate for seamless loop */}
+                    <div className="skill-item">
+                      <i className="fab fa-html5"></i>
+                      <span>HTML5</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-css3-alt"></i>
+                      <span>CSS3</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-sass"></i>
+                      <span>SCSS</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-js-square"></i>
+                      <span>Javascript</span>
+                    </div>
+                    <div className="skill-item">
                 <i className="fab fa-vuejs"></i>
-                <span>Vue.js</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-python"></i>
-                <span>Python</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-git"></i>
-                <span>Git</span>
-              </div>
-              {/* Duplicate for seamless loop */}
-              <div className="skill-item">
-                <i className="fab fa-html5"></i>
-                <span>HTML5</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-css3-alt"></i>
-                <span>CSS3</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-sass"></i>
-                <span>SCSS</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-js-square"></i>
-                <span>Javascript</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-bootstrap"></i>
-                <span>Bootstrap</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-react"></i>
-                <span>React</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-vuejs"></i>
-                <span>Vue.js</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-python"></i>
-                <span>Python</span>
-              </div>
-              <div className="skill-item">
-                <i className="fab fa-git"></i>
-                <span>Git</span>
-              </div>
-            </div>
+                      <span>Vue.js</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-react"></i>
+                      <span>React</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-bootstrap"></i>
+                      <span>Bootstrap</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-node-js"></i>
+                      <span>Node.js</span>
+                    </div>
+                    <div className="skill-item">
+                <i className="fab fa-python"></i>                      
+                      <span>Python</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-git-alt"></i>
+                      <span>Git</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-github"></i>
+                      <span>GitHub</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-code"></i>
+                      <span>jQuery</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-exchange-alt"></i>
+                      <span>Ajax</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-plug"></i>
+                      <span>API</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-exchange-alt"></i>
+                      <span>RestAPI</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-database"></i>
+                      <span>MySQL</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-aws"></i>
+                      <span>AWS</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-slack"></i>
+                      <span>Slack</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fas fa-code"></i>
+                      <span>VSCode</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-jira"></i>
+                      <span>Jira</span>
+                    </div>
+                    <div className="skill-item">
+                      <i className="fab fa-adobe"></i>
+                      <span>Photoshop</span>
+                    </div>
+                  </div>
+                </div>
+                <button 
+                  className="skills-nav-btn skills-nav-next" 
+                  onClick={() => {
+                    const track = document.querySelector('.skills-track')
+                    if (track) {
+                      track.classList.add('manual-scroll')
+                      track.scrollBy({ left: 300, behavior: 'smooth' })
+                      setTimeout(() => {
+                        track.classList.remove('manual-scroll')
+                      }, 1000)
+                    }
+                  }}
+                  aria-label="Next skills"
+                >
+                  <i className="fas fa-chevron-right"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -288,10 +428,10 @@ const Home = () => {
         <section className="section04" id="work">
           <div className="work-container">
             <div className="work-header">
-              <h2 className="title">WORK</h2>
+          <h2 className="title">WORK</h2>
             </div>
             <div className="work-content">
-              <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li 
               className={`nav-item ${activeTab === 'design' ? 'active' : ''}`} 
               role="presentation"
@@ -316,9 +456,9 @@ const Home = () => {
                 Markup / Frontend
               </button>
             </li>
-              </ul>
+          </ul>
 
-              <div className="tab-content" id="pills-tabContent">
+          <div className="tab-content" id="pills-tabContent">
             {/* Design Tab */}
             {activeTab === 'design' && (
               <div className="tab-pane fade show active">
@@ -338,7 +478,7 @@ const Home = () => {
                       <div className="card-content">
                         <h3 className="card-title">{project.title}</h3>
                         <p className="card-tools"><i className="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p>
-                      </div>
+                    </div>
                     </Link>
                   ))}
                 </div>
@@ -367,20 +507,20 @@ const Home = () => {
                           className="card w_50 pdr_1" 
                           data-aos="fade-up" 
                           data-aos-anchor-placement="top-bottom"
-                          style={{ textDecoration: 'none', color: 'inherit' }}
-                        >
-                          <div 
-                            className="card_img"
-                            style={{ backgroundColor: getLanguageColor(repo.language) }}
+                            style={{ textDecoration: 'none', color: 'inherit' }}
                           >
-                            <i className="fas fa-code"></i> {repo.language || 'CODE'}
-                          </div>
+                            <div 
+                              className="card_img"
+                              style={{ backgroundColor: getLanguageColor(repo.language) }}
+                            >
+                              <i className="fas fa-code"></i> {repo.language || 'CODE'}
+                            </div>
                           <div className="card-content">
                             <h3 className="card-title">{repo.name}</h3>
                             <p className="card-tools">
-                              <i className="fas fa-code"></i> {repo.language || 'Other'}
-                              {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
-                            </p>
+                                <i className="fas fa-code"></i> {repo.language || 'Other'} 
+                                {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
+                              </p>
                             <div className="card-meta">
                               <span className="meta-item">
                                 <i className="fas fa-star"></i> {repo.stars}
@@ -394,8 +534,8 @@ const Home = () => {
                                 </span>
                               )}
                             </div>
-                          </div>
-                        </Link>
+                            </div>
+                          </Link>
                       ))
                   )}
                 </div>
@@ -488,25 +628,25 @@ const Home = () => {
         <section className="section05" id="contact">
           <div className="contact-container">
             <div className="contact-header">
-              <h2 className="title">CONTACT</h2>
+          <h2 className="title">CONTACT</h2>
             </div>
             <div className="contact-content">
               <ul className="contact-list" data-aos="zoom-in">
                 <li>
                   <span className="contact-label">Contact me on..</span>
                 </li>
-                <li>
-                  <a href="mailto:oo8923@gmail.com">
-                    <i className="fas fa-envelope"></i> oo8923@gmail.com
-                  </a>
-                </li>
-                <li>
+            <li>
+              <a href="mailto:oo8923@gmail.com">
+                <i className="fas fa-envelope"></i> oo8923@gmail.com
+              </a>
+            </li>
+            <li>
                   <span>@Shinrila</span>
-                  <a href="https://github.com/sihnrila?tab=repositories" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-github"></i> Github
-                  </a>
-                </li>
-              </ul>
+              <a href="https://github.com/sihnrila?tab=repositories" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-github"></i> Github
+              </a>
+            </li>
+          </ul>
             </div>
           </div>
         </section>
