@@ -11,7 +11,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./src/assets/scss/reset.scss";`
+        additionalData: `@use "./src/assets/scss/reset.scss" as *;`
       }
     }
   },
@@ -30,6 +30,24 @@ export default defineConfig({
           proxy.on('proxyReq', (proxyReq, req, _res) => {
             proxyReq.setHeader('User-Agent', 'Rila-Portfolio')
             proxyReq.setHeader('Accept', 'application/vnd.github.v3+json')
+          })
+        },
+      },
+      '/api/tistory': {
+        target: 'https://rilaa.tistory.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => {
+          // /api/tistory/rss -> /rss
+          return path.replace(/^\/api\/tistory/, '')
+        },
+        configure: (proxy, _options) => {
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            proxyReq.setHeader('User-Agent', 'Rila-Portfolio')
+            proxyReq.setHeader('Accept', 'application/rss+xml, application/xml, text/xml')
+          })
+          proxy.on('error', (err, req, res) => {
+            console.error('Proxy error:', err)
           })
         },
       },

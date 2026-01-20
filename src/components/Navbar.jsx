@@ -1,12 +1,39 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isDetailPage = location.pathname !== '/'
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+    if (isDetailPage) {
+      // 상세 페이지에서는 홈으로 이동 후 스크롤
+      navigate('/')
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    } else {
+      // 홈 페이지에서는 바로 스크롤
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    setIsSidebarOpen(false)
+  }
+
+  const handleBrandClick = (e) => {
+    e.preventDefault()
+    if (isDetailPage) {
+      navigate('/')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
     setIsSidebarOpen(false)
   }
@@ -30,11 +57,7 @@ const Navbar = () => {
           <a 
             href="#" 
             className="navbar-brand" 
-            onClick={(e) => { 
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-              setIsSidebarOpen(false)
-            }}
+            onClick={handleBrandClick}
           >
             RILA
           </a>
@@ -81,6 +104,15 @@ const Navbar = () => {
               <li className="nav-item">
                 <a 
                   className="nav-link" 
+                  href="#blog"
+                  onClick={(e) => { e.preventDefault(); scrollToSection('blog') }}
+                >
+                  BLOG
+                </a>
+              </li>
+              <li className="nav-item">
+                <a 
+                  className="nav-link" 
                   href="#contact"
                   onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}
                 >
@@ -106,11 +138,7 @@ const Navbar = () => {
           <a 
             href="#" 
             className="sidebar-brand"
-            onClick={(e) => { 
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-              setIsSidebarOpen(false)
-            }}
+            onClick={handleBrandClick}
           >
             RILA
           </a>
@@ -141,6 +169,15 @@ const Navbar = () => {
               onClick={(e) => { e.preventDefault(); scrollToSection('work') }}
             >
               <span className="nav-text">WORKS</span>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a 
+              className="nav-link" 
+              href="#blog"
+              onClick={(e) => { e.preventDefault(); scrollToSection('blog') }}
+            >
+              <span className="nav-text">BLOG</span>
             </a>
           </li>
           <li className="nav-item">

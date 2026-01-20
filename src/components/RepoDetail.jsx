@@ -101,113 +101,88 @@ const RepoDetail = () => {
   }
 
   return (
-    <div className="container" style={{ paddingTop: '100px' }}>
-      <div className="container860" style={{ padding: '2rem' }}>
-        <Link to="/" style={{ color: '#000', textDecoration: 'none', marginBottom: '2rem', display: 'inline-block' }}>
-          ← 홈으로 돌아가기
-        </Link>
-        
-        <div style={{ marginBottom: '2rem' }}>
+    <div className="project-detail">
+      <div className="container">
+        <div className="project-header">
+          <button className="back-button" onClick={() => navigate('/')}>
+            <i className="fas fa-arrow-left"></i> BACK
+          </button>
           <div 
-            className="card_img"
+            className="project-hero-image"
             style={{ 
               backgroundColor: getLanguageColor(repo.language),
               width: '100%',
-              height: '200px',
+              height: '20rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#fff',
-              fontSize: '2rem',
-              fontWeight: 'bold',
-              marginBottom: '2rem'
+              fontSize: 'clamp(2rem, 5vw, 4rem)',
+              fontWeight: 900,
+              marginBottom: '3rem',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase'
             }}
           >
             <i className="fas fa-code"></i> {repo.language || 'CODE'}
           </div>
-          
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{repo.name}</h1>
-          
+          <h1 className="project-title">{repo.name}</h1>
           {repo.description && (
-            <p style={{ fontSize: '1.2rem', color: '#666', marginBottom: '2rem' }}>
-              {repo.description}
-            </p>
+            <p className="project-subtitle">{repo.description}</p>
           )}
+          <p className="project-tools">
+            <i className="fas fa-code"></i> {repo.language || 'Other'} 
+            {repo.topics.length > 0 && ` • ${repo.topics.slice(0, 3).join(', ')}`}
+          </p>
+        </div>
 
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+        <div className="project-info">
+          <div className="project-stats">
+            <div className="stat-item">
+              <div className="stat-label">STARS</div>
+              <div className="stat-value">{repo.stars}</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-label">FORKS</div>
+              <div className="stat-value">{repo.forks}</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-label">SIZE</div>
+              <div className="stat-value">{repo.size} KB</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-label">ISSUES</div>
+              <div className="stat-value">{repo.open_issues}</div>
+            </div>
+          </div>
+
+          <div className="project-links">
             <a 
               href={repo.url} 
               target="_blank" 
               rel="noopener noreferrer"
-              style={{
-                padding: '0.75rem 1.5rem',
-                backgroundColor: '#000',
-                color: '#fff',
-                textDecoration: 'none',
-                borderRadius: '4px',
-                fontWeight: 'bold'
-              }}
+              className="project-link-button"
             >
-              <i className="fab fa-github"></i> GitHub에서 보기
+              <i className="fab fa-github"></i> GITHUB
             </a>
             {repo.homepage && (
               <a 
                 href={repo.homepage} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: '#2c3e50',
-                  color: '#fff',
-                  textDecoration: 'none',
-                  borderRadius: '4px',
-                  fontWeight: 'bold'
-                }}
+                className="project-link-button"
               >
-                <i className="fas fa-external-link-alt"></i> 라이브 사이트
+                <i className="fas fa-external-link-alt"></i> LIVE DEMO
               </a>
             )}
           </div>
 
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-            gap: '1rem',
-            marginBottom: '2rem'
-          }}>
-            <div style={{ padding: '1rem', backgroundColor: '#f8f8f8', borderRadius: '8px' }}>
-              <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '0.5rem' }}>⭐ Stars</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{repo.stars}</div>
-            </div>
-            <div style={{ padding: '1rem', backgroundColor: '#f8f8f8', borderRadius: '8px' }}>
-              <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '0.5rem' }}>🍴 Forks</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{repo.forks}</div>
-            </div>
-            <div style={{ padding: '1rem', backgroundColor: '#f8f8f8', borderRadius: '8px' }}>
-              <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '0.5rem' }}>📦 Size</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{repo.size} KB</div>
-            </div>
-            <div style={{ padding: '1rem', backgroundColor: '#f8f8f8', borderRadius: '8px' }}>
-              <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '0.5rem' }}>🔧 Issues</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{repo.open_issues}</div>
-            </div>
-          </div>
-
           {repo.topics.length > 0 && (
-            <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ marginBottom: '1rem' }}>Topics</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+            <div className="project-topics">
+              <h3 className="topics-title">TOPICS</h3>
+              <div className="topics-list">
                 {repo.topics.map((topic) => (
-                  <span
-                    key={topic}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      backgroundColor: '#e3f2fd',
-                      borderRadius: '20px',
-                      fontSize: '0.9rem',
-                      color: '#1976d2'
-                    }}
-                  >
+                  <span key={topic} className="topic-tag">
                     {topic}
                   </span>
                 ))}
@@ -215,81 +190,59 @@ const RepoDetail = () => {
             </div>
           )}
 
-          <div style={{ marginBottom: '2rem', color: '#666', fontSize: '0.9rem' }}>
-            <p>생성일: {new Date(repo.created).toLocaleDateString('ko-KR')}</p>
-            <p>최종 업데이트: {new Date(repo.updated).toLocaleDateString('ko-KR')}</p>
-            <p>라이선스: {repo.license}</p>
+          <div className="project-meta">
+            <div className="meta-item">
+              <span className="meta-label">CREATED</span>
+              <span className="meta-value">{new Date(repo.created).toLocaleDateString('ko-KR')}</span>
+            </div>
+            <div className="meta-item">
+              <span className="meta-label">UPDATED</span>
+              <span className="meta-value">{new Date(repo.updated).toLocaleDateString('ko-KR')}</span>
+            </div>
+            <div className="meta-item">
+              <span className="meta-label">LICENSE</span>
+              <span className="meta-value">{repo.license}</span>
+            </div>
           </div>
-
-          {/* 데모 페이지 */}
-          {demoUrl && (
-            <div style={{ marginTop: '3rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <h3>데모 페이지</h3>
-                <a 
-                  href={demoUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{
-                    padding: '0.5rem 1rem',
-                    backgroundColor: '#2c3e50',
-                    color: '#fff',
-                    textDecoration: 'none',
-                    borderRadius: '4px',
-                    fontSize: '0.9rem'
-                  }}
-                >
-                  <i className="fas fa-external-link-alt"></i> 새 창에서 열기
-                </a>
-              </div>
-              <div style={{
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                backgroundColor: '#fff',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-              }}>
-                <iframe
-                  src={demoUrl}
-                  style={{
-                    width: '100%',
-                    height: '800px',
-                    border: 'none',
-                    display: 'block'
-                  }}
-                  title={`${repo.name} 데모`}
-                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                  onError={() => {
-                    console.error('데모 페이지를 로드할 수 없습니다')
-                  }}
-                />
-              </div>
-              <p style={{ 
-                marginTop: '1rem', 
-                fontSize: '0.9rem', 
-                color: '#666',
-                textAlign: 'center'
-              }}>
-                데모 페이지가 로드되지 않으면 <a href={demoUrl} target="_blank" rel="noopener noreferrer">여기</a>를 클릭하여 직접 확인하세요.
-              </p>
-            </div>
-          )}
-
-          {readme && (
-            <div style={{ 
-              marginTop: '3rem', 
-              padding: '2rem', 
-              backgroundColor: '#f8f8f8', 
-              borderRadius: '8px',
-              whiteSpace: 'pre-wrap',
-              fontFamily: 'monospace',
-              fontSize: '0.9rem'
-            }}>
-              <h3 style={{ marginBottom: '1rem' }}>README</h3>
-              <div dangerouslySetInnerHTML={{ __html: readme.replace(/\n/g, '<br/>') }} />
-            </div>
-          )}
         </div>
+
+        {/* 데모 페이지 */}
+        {demoUrl && (
+          <div className="project-demo">
+            <div className="demo-header">
+              <h3 className="demo-title">DEMO</h3>
+              <a 
+                href={demoUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="demo-link"
+              >
+                <i className="fas fa-external-link-alt"></i> OPEN IN NEW TAB
+              </a>
+            </div>
+            <div className="demo-container">
+              <iframe
+                src={demoUrl}
+                className="demo-iframe"
+                title={`${repo.name} 데모`}
+                sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                onError={() => {
+                  console.error('데모 페이지를 로드할 수 없습니다')
+                }}
+              />
+            </div>
+            <p className="demo-note">
+              데모 페이지가 로드되지 않으면 <a href={demoUrl} target="_blank" rel="noopener noreferrer">여기</a>를 클릭하여 직접 확인하세요.
+            </p>
+          </div>
+        )}
+
+        {readme && (
+          <div className="project-readme">
+            <h3 className="readme-title">README</h3>
+            <div className="readme-content" dangerouslySetInnerHTML={{ __html: readme.replace(/\n/g, '<br/>') }} />
+          </div>
+        )}
       </div>
     </div>
   )

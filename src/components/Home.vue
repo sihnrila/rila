@@ -435,7 +435,8 @@
                   <ul data-aos="zoom-in">
                     <li>Contact me on..</li>
                     <li><a href="malito:oo8923@gmail.com"><i class="fas fa-envelope"></i> oo8923@gmail.com</a></li>
-                    <li>@Shinrila<a href="https://github.com/sihnrila?tab=repositories"><i class="fab fa-github"></i> Github</a></li>
+                    <li>@Shinrila<a href="https://github.com/sihnrila?tab=repositories">
+                    <i class="fab fa-github"></i> Github</a></li>
                   </ul>
             </section>
             <!-- content05 end -->

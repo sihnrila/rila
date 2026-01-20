@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchGitHubRepos, getLanguageColor } from '../services/github'
+import { fetchTistoryPosts, getTistoryBlogUrl } from '../services/tistory'
 import DesignModals from './DesignModals'
 import img01 from '../assets/img/img01.jpeg'
 import img02 from '../assets/img/img02.jpeg'
@@ -9,6 +10,8 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState('design')
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(true)
+  const [tistoryPosts, setTistoryPosts] = useState([])
+  const [tistoryLoading, setTistoryLoading] = useState(true)
 
   useEffect(() => {
     const loadRepos = async () => {
@@ -22,9 +25,63 @@ const Home = () => {
     loadRepos()
   }, [])
 
+  useEffect(() => {
+    const loadTistoryPosts = async () => {
+      setTistoryLoading(true)
+      const data = await fetchTistoryPosts()
+      console.log('로드된 티스토리 포스트:', data)
+      setTistoryPosts(data)
+      setTistoryLoading(false)
+    }
+    loadTistoryPosts()
+  }, [])
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  // 마우스 움직임에 따른 타이포그래피 인터랙션
+  useEffect(() => {
+    const heroTitle = document.querySelector('.hero-title')
+    if (!heroTitle) return
+
+    const handleMouseMove = (e) => {
+      const rect = heroTitle.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      
+      const centerX = rect.width / 2
+      const centerY = rect.height / 2
+      
+      const moveX = (x - centerX) / centerX
+      const moveY = (y - centerY) / centerY
+      
+      const lines = heroTitle.querySelectorAll('.line')
+      lines.forEach((line, index) => {
+        const intensity = (index + 1) * 0.3
+        const translateX = moveX * 20 * intensity
+        const translateY = moveY * 10 * intensity
+        const rotate = moveX * 2 * intensity
+        
+        line.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg)`
+      })
+    }
+
+    const handleMouseLeave = () => {
+      const lines = heroTitle.querySelectorAll('.line')
+      lines.forEach((line) => {
+        line.style.transform = ''
+      })
+    }
+
+    heroTitle.addEventListener('mousemove', handleMouseMove)
+    heroTitle.addEventListener('mouseleave', handleMouseLeave)
+
+    return () => {
+      heroTitle.removeEventListener('mousemove', handleMouseMove)
+      heroTitle.removeEventListener('mouseleave', handleMouseLeave)
+    }
+  }, [])
 
   const designProjects = [
     {
@@ -54,95 +111,162 @@ const Home = () => {
     <div className="container">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" data-bs-smooth-scroll="true" className="scrollspy-example" tabIndex="0">
         
-        {/* Section 01 - Introduction */}
+        {/* Section 01 - Hero Typography */}
         <section className="section01" id="myName">
-          <h2 className="title">RILA SIN'S PORTFOLIO</h2>
-          <div data-aos="fade-up">
-            <img src={img01} alt="Rila" />
-            <p>
-              안녕하세요 <label className="waving">👋</label> Markup and Developer 신리라입니다.<br />
-              제 포트폴리오 페이지에 오신걸 환영합니다.
+          <div className="hero-content">
+            <h1 className="hero-title">
+              <span className="line line-1">RILA</span>
+              <span className="line line-2">SIN</span>
+              <span className="line line-3">Markup & Developer</span>
+            </h1>
+            <p className="hero-subtitle">
+              Creative Developer & Designer
             </p>
+          </div>
+          <div className="scroll-indicator">
+            <span>Scroll</span>
+            <div className="scroll-line"></div>
           </div>
         </section>
 
         {/* Section 02 - About Me */}
-        <section className="section02 container860" id="aboutMe">
-          <h2 className="title">ABOUT ME</h2>
-          <div className="about">
-            <img src={img02} alt="About" data-aos="fade-up" data-aos-anchor-placement="top-bottom" />
-            <h2 className="left">열정으로 무장한 신리라입니다 😁</h2>
-            <p>
-              🙋‍♀️ 숭실사이버대학교 ICT 공학부에 재학 중이며, 웹 아카데미에서 웹퍼블리셔 전문가 과정을 통해 HTML, CSS, JavaScript 등을 이수하였습니다.
-              이후 스타트업과 웹 에이전시에서 프리랜서로 일하며 독학으로 Vue.js, SCSS, Python을 배웠습니다.
-
-              <br /><br />🧑‍🦰 프론트엔드 개발자로 일하며, 다양한 언어를 배움으로써 웹에 대한 이해도를 지속적으로 쌓아가고 있습니다.
-              열심히 하는 것도 좋지만, 일을 할 때만큼은 "잘하자"는 마인드로 임하고 있습니다.
-
-              <br /><br />👂 빠르게 개발하고 배포하여 사용자들의 의견을 적극 수용하며, 사용자 중심의 사고를 기르기 위해 노력합니다.
-              또한 혼자 하는 것이 아니라 팀원들과 협업하고 의견을 나누는 것을 좋아하여, 구성원들과 적극적으로 커뮤니케이션하며 개발하는 것을 즐깁니다.
-
-              <br /><br />👀 웹 트렌드에 민감합니다. 빠르게 변화하는 트렌드인 만큼 꼼꼼히 관찰하고 학습합니다.
-
-              <br /><br />👊 반복되는 일을 자동화하고 비효율적인 프로세스를 개선하는 일을 좋아합니다.
-              팀 구성원들의 단순하고 루틴한 업무 시간을 줄여주기 위해 지속적으로 의견을 공유하고, 버그 리포팅 방법 등을 구상하며 개선하려 노력하고 있습니다.
-
-              <br /><br />비록 아직 많이 부족하지만, 꾸준히 노력하며 앞으로의 발전을 위해 부족한 점을 채워 나가며 성장하는 개발자가 되겠습니다!
-            </p>
+        <section className="section02" id="aboutMe">
+          <div className="about-container">
+            <div className="about-header">
+              <h2 className="about-title">
+                <span className="title-line">ABOUT</span>
+                <span className="title-line">ME</span>
+              </h2>
+            </div>
+            
+            <div className="about-content">
+              <div className="about-text">
+                <div className="about-intro">
+                  <p className="intro-large">열정으로 무장한</p>
+                  <p className="intro-large">신리라입니다</p>
+                </div>
+                
+                <div className="about-description">
+                  <div className="desc-item">
+                    <span className="desc-number">01</span>
+                    <div className="desc-text">
+                      <h3 className="desc-title">Education</h3>
+                      <p>숭실사이버대학교 ICT 공학부 재학 중<br />
+                      웹퍼블리셔 전문가 과정 이수 (HTML, CSS, JavaScript)</p>
+                    </div>
+                  </div>
+                  
+                  <div className="desc-item">
+                    <span className="desc-number">02</span>
+                    <div className="desc-text">
+                      <h3 className="desc-title">Experience</h3>
+                      <p>스타트업 및 웹 에이전시 프리랜서 경험<br />
+                      독학으로 Vue.js, SCSS, Python 습득</p>
+                    </div>
+                  </div>
+                  
+                  <div className="desc-item">
+                    <span className="desc-number">03</span>
+                    <div className="desc-text">
+                      <h3 className="desc-title">Philosophy</h3>
+                      <p>열심히 하는 것도 좋지만, 일을 할 때만큼은 "잘하자"는 마인드<br />
+                      사용자 중심의 사고와 빠른 피드백 수용</p>
+                    </div>
+                  </div>
+                  
+                  <div className="desc-item">
+                    <span className="desc-number">04</span>
+                    <div className="desc-text">
+                      <h3 className="desc-title">Approach</h3>
+                      <p>팀원들과의 적극적인 커뮤니케이션<br />
+                      반복 업무 자동화 및 프로세스 개선에 관심</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Section 03 - Skills */}
-        <section className="section03 container860" id="skill">
+        <section className="section03" id="skill">
           <h2 className="title">SKILLS</h2>
-          <div className="flex_container">
-            <ul>
-              <li data-aos="zoom-in">
-                <i className="fab fa-html5 fa-7x"></i>
-                <p>HTML5</p>
-                <p>마크업,페이지 콘텐츠 구조화,폼요소,테이블 등 사용</p>
-              </li>
-              <li data-aos="zoom-in">
-                <i className="fab fa-css3-alt fa-7x"></i>
-                <p>CSS3</p>
-                <p>콘텐츠 요소 스타일링</p>
-              </li>
-              <li data-aos="zoom-in">
+          <div className="skills-slider">
+            <div className="skills-track">
+              <div className="skill-item">
+                <i className="fab fa-html5"></i>
+                <span>HTML5</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-css3-alt"></i>
+                <span>CSS3</span>
+              </div>
+              <div className="skill-item">
                 <i className="fab fa-sass"></i>
-                <p>SCSS</p>
-                <p>콘텐츠 요소 스타일링</p>
-              </li>
-              <li data-aos="zoom-in">
-                <i className="fab fa-js-square fa-7x"></i>
-                <p>Javascript</p>
-                <p>사이트의 동적요소 구현</p>
-              </li>
-              <li data-aos="zoom-in">
-                <i className="fab fa-bootstrap fa-7x"></i>
-                <p>Bootstrap</p>
-                <p>html 프레임 워크</p>
-              </li>
-              <li data-aos="zoom-in">
+                <span>SCSS</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-js-square"></i>
+                <span>Javascript</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-bootstrap"></i>
+                <span>Bootstrap</span>
+              </div>
+              <div className="skill-item">
                 <i className="fab fa-react"></i>
-                <p>React</p>
-                <p>Javascript 프레임 워크</p>
-              </li>
-              <li data-aos="zoom-in">
+                <span>React</span>
+              </div>
+              <div className="skill-item">
                 <i className="fab fa-vuejs"></i>
-                <p>vue.js</p>
-                <p>Javascript 프레임 워크</p>
-              </li>
-              <li data-aos="zoom-in">
-                <i className="fab fa-python"></i>                      
-                <p>Python</p>
-                <p>서버간 원활한 소통</p>
-              </li>
-              <li data-aos="zoom-in">
-                <i className="fab fa-git fa-7x"></i>
-                <p>Git</p>
-                <p>프로젝트 코드관리 , add,commit,pull,branch 사용</p>
-              </li>
-            </ul>
+                <span>Vue.js</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-python"></i>
+                <span>Python</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-git"></i>
+                <span>Git</span>
+              </div>
+              {/* Duplicate for seamless loop */}
+              <div className="skill-item">
+                <i className="fab fa-html5"></i>
+                <span>HTML5</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-css3-alt"></i>
+                <span>CSS3</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-sass"></i>
+                <span>SCSS</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-js-square"></i>
+                <span>Javascript</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-bootstrap"></i>
+                <span>Bootstrap</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-react"></i>
+                <span>React</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-vuejs"></i>
+                <span>Vue.js</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-python"></i>
+                <span>Python</span>
+              </div>
+              <div className="skill-item">
+                <i className="fab fa-git"></i>
+                <span>Git</span>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -183,22 +307,22 @@ const Home = () => {
               <div className="tab-pane fade show active">
                 <div className="card_cont">
                   {designProjects.map((project) => (
-                    <div key={project.id} className="card pdr_1 w_50" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                      <button 
-                        className="card_img" 
-                        data-bs-toggle="modal" 
-                        data-bs-target={`#${project.modalId}`}
-                      >
+                    <Link 
+                      key={project.id} 
+                      to={`/projects/${project.id}`}
+                      className="card pdr_1 w_50" 
+                      data-aos="fade-up" 
+                      data-aos-anchor-placement="top-bottom"
+                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
+                      <div className="card_img">
                         <i className={project.icon}></i> {project.title.split(' ')[0]}
-                      </button>
-                      <button 
-                        data-bs-toggle="modal" 
-                        data-bs-target={`#${project.modalId}`}
-                      >
-                        {project.title} 
-                        <p><i className="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p>
-                      </button>
-                    </div>
+                      </div>
+                      <div className="card-content">
+                        <h3 className="card-title">{project.title}</h3>
+                        <p className="card-tools"><i className="fas fa-pencil-ruler"></i> PHOTOSHOP / ILLUSTRATOR</p>
+                      </div>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -220,49 +344,41 @@ const Home = () => {
                     repos
                       .filter(repo => repo.homepage) // homepage가 있는 레포만 표시
                       .map((repo) => (
-                        <div 
+                        <Link 
                           key={repo.id} 
+                          to={`/repos/${repo.name}`}
                           className="card w_50 pdr_1" 
                           data-aos="fade-up" 
                           data-aos-anchor-placement="top-bottom"
+                          style={{ textDecoration: 'none', color: 'inherit' }}
                         >
-                          <Link 
-                            to={`/repos/${repo.name}`}
-                            style={{ textDecoration: 'none', color: 'inherit' }}
+                          <div 
+                            className="card_img"
+                            style={{ backgroundColor: getLanguageColor(repo.language) }}
                           >
-                            <div 
-                              className="card_img"
-                              style={{ backgroundColor: getLanguageColor(repo.language) }}
-                            >
-                              <i className="fas fa-code"></i> {repo.language || 'CODE'}
-                            </div>
-                            <div style={{ padding: '1em', backgroundColor: '#f8f8f8' }}>
-                              <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                                {repo.name}
-                              </div>
-                              <p style={{ fontSize: '0.7rem', color: '#707070', marginBottom: '0.5rem' }}>
-                                <i className="fas fa-code"></i> {repo.language || 'Other'} 
-                                {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
-                              </p>
-                              <p style={{ fontSize: '0.6rem', color: '#707070', marginBottom: '0.5rem' }}>
-                                ⭐ {repo.stars} | 🍴 {repo.forks}
-                              </p>
+                            <i className="fas fa-code"></i> {repo.language || 'CODE'}
+                          </div>
+                          <div className="card-content">
+                            <h3 className="card-title">{repo.name}</h3>
+                            <p className="card-tools">
+                              <i className="fas fa-code"></i> {repo.language || 'Other'}
+                              {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
+                            </p>
+                            <div className="card-meta">
+                              <span className="meta-item">
+                                <i className="fas fa-star"></i> {repo.stars}
+                              </span>
+                              <span className="meta-item">
+                                <i className="fas fa-code-branch"></i> {repo.forks}
+                              </span>
                               {repo.homepage && (
-                                <div style={{ 
-                                  marginTop: '0.5rem',
-                                  padding: '0.3rem 0.6rem',
-                                  backgroundColor: '#2c3e50',
-                                  color: '#fff',
-                                  borderRadius: '4px',
-                                  fontSize: '0.7rem',
-                                  display: 'inline-block'
-                                }}>
+                                <span className="meta-item">
                                   <i className="fas fa-external-link-alt"></i> Live Demo
-                                </div>
+                                </span>
                               )}
                             </div>
-                          </Link>
-                        </div>
+                          </div>
+                        </Link>
                       ))
                   )}
                 </div>
@@ -271,7 +387,79 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Section 05 - Contact */}
+        {/* Section 05 - Blog */}
+        <section className="section05 container860" id="blog">
+          <h2 className="title">BLOG</h2>
+          {tistoryLoading ? (
+            <div className="text-center p-5">
+              <p>블로그 포스트를 불러오는 중...</p>
+            </div>
+          ) : tistoryPosts.length === 0 ? (
+            <div className="text-center p-5">
+              <p>표시할 블로그 포스트가 없습니다.</p>
+              <a 
+                href={getTistoryBlogUrl()} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ color: '#2c3e50', textDecoration: 'underline' }}
+              >
+                티스토리 블로그 바로가기
+              </a>
+            </div>
+          ) : (
+            <div className="card_cont">
+              {tistoryPosts.map((post, index) => (
+                <a
+                  key={index}
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card w_50 pdr_1 blog-card"
+                  data-aos="fade-up"
+                  data-aos-anchor-placement="top-bottom"
+                >
+                  {post.thumbnail && !post.thumbnail.includes('no-image') && (
+                    <div 
+                      className="card_img blog-img"
+                      style={{
+                        backgroundImage: `url(${post.thumbnail})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                      }}
+                    >
+                      <div className="blog-overlay">
+                        <i className="fas fa-blog"></i>
+                        <span>BLOG</span>
+                      </div>
+                    </div>
+                  )}
+                  <div className="card-content">
+                    <h3 className="card-title">{post.title}</h3>
+                    <p className="card-description">{post.description}</p>
+                    <div className="card-meta">
+                      {post.date && (
+                        <span className="meta-item">
+                          <i className="far fa-calendar"></i> {post.date}
+                        </span>
+                      )}
+                      {post.category && (
+                        <span className="meta-item">
+                          <i className="fas fa-tag"></i> {post.category}
+                        </span>
+                      )}
+                    </div>
+                    <div className="card-link">
+                      <span>VIEW POST</span>
+                      <i className="fas fa-arrow-right"></i>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* Section 06 - Contact */}
         <section className="section05" id="contact">
           <h2 className="title">CONTACT</h2>
           <ul data-aos="zoom-in">
