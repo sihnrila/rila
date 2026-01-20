@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { fetchGitHubRepos, getLanguageColor } from '../services/github'
 import { fetchTistoryPosts, getTistoryBlogUrl } from '../services/tistory'
 import DesignModals from './DesignModals'
-import img01 from '../assets/img/img01.jpeg'
+import profile01 from '../assets/img/profile01.jpeg'
 import img02 from '../assets/img/img02.jpeg'
 
 const Home = () => {
@@ -117,10 +117,10 @@ const Home = () => {
             <h1 className="hero-title">
               <span className="line line-1">RILA</span>
               <span className="line line-2">SIN</span>
-              <span className="line line-3">Markup & Developer</span>
+              <span className="line line-3">PORTFOLIO</span>
             </h1>
             <p className="hero-subtitle">
-              Creative Developer & Designer
+              FRONTEND DEVELOPER & DESIGNER
             </p>
           </div>
           <div className="scroll-indicator">
@@ -134,8 +134,7 @@ const Home = () => {
           <div className="about-container">
             <div className="about-header">
               <h2 className="about-title">
-                <span className="title-line">ABOUT</span>
-                <span className="title-line">ME</span>
+                <span className="title-line">ABOUT ME</span>
               </h2>
             </div>
             
@@ -184,15 +183,28 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+              <div className="about-image">
+                <img src={profile01} alt="Rila" />
+                <Link to="/resume" className="resume-button">
+                  <span>VIEW RESUME</span>
+                  <i className="fas fa-arrow-right"></i>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Section 03 - Skills */}
         <section className="section03" id="skill">
-          <h2 className="title">SKILLS</h2>
-          <div className="skills-slider">
-            <div className="skills-track">
+          <div className="skills-container">
+            <div className="skills-header">
+              <h2 className="skills-title">
+                <span className="title-line">SKILLS</span>
+              </h2>
+            </div>
+            <div className="skills-content">
+              <div className="skills-slider">
+                <div className="skills-track">
               <div className="skill-item">
                 <i className="fab fa-html5"></i>
                 <span>HTML5</span>
@@ -267,14 +279,19 @@ const Home = () => {
                 <span>Git</span>
               </div>
             </div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Section 04 - Works */}
-        <section className="section04 container860" id="work">
-          <h2 className="title">WORK</h2>
-
-          <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <section className="section04" id="work">
+          <div className="work-container">
+            <div className="work-header">
+              <h2 className="title">WORK</h2>
+            </div>
+            <div className="work-content">
+              <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li 
               className={`nav-item ${activeTab === 'design' ? 'active' : ''}`} 
               role="presentation"
@@ -299,9 +316,9 @@ const Home = () => {
                 Markup / Frontend
               </button>
             </li>
-          </ul>
+              </ul>
 
-          <div className="tab-content" id="pills-tabContent">
+              <div className="tab-content" id="pills-tabContent">
             {/* Design Tab */}
             {activeTab === 'design' && (
               <div className="tab-pane fade show active">
@@ -384,12 +401,18 @@ const Home = () => {
                 </div>
               </div>
             )}
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Section 05 - Blog */}
-        <section className="section05 container860" id="blog">
-          <h2 className="title">BLOG</h2>
+        <section className="section05" id="blog">
+          <div className="blog-container">
+            <div className="blog-header">
+              <h2 className="title">BLOG</h2>
+            </div>
+            <div className="blog-content">
           {tistoryLoading ? (
             <div className="text-center p-5">
               <p>블로그 포스트를 불러오는 중...</p>
@@ -457,25 +480,35 @@ const Home = () => {
               ))}
             </div>
           )}
+            </div>
+          </div>
         </section>
 
         {/* Section 06 - Contact */}
         <section className="section05" id="contact">
-          <h2 className="title">CONTACT</h2>
-          <ul data-aos="zoom-in">
-            <li>Contact me on..</li>
-            <li>
-              <a href="mailto:oo8923@gmail.com">
-                <i className="fas fa-envelope"></i> oo8923@gmail.com
-              </a>
-            </li>
-            <li>
-              @Shinrila
-              <a href="https://github.com/sihnrila?tab=repositories" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-github"></i> Github
-              </a>
-            </li>
-          </ul>
+          <div className="contact-container">
+            <div className="contact-header">
+              <h2 className="title">CONTACT</h2>
+            </div>
+            <div className="contact-content">
+              <ul className="contact-list" data-aos="zoom-in">
+                <li>
+                  <span className="contact-label">Contact me on..</span>
+                </li>
+                <li>
+                  <a href="mailto:oo8923@gmail.com">
+                    <i className="fas fa-envelope"></i> oo8923@gmail.com
+                  </a>
+                </li>
+                <li>
+                  <span>@Shinrila</span>
+                  <a href="https://github.com/sihnrila?tab=repositories" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-github"></i> Github
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </section>
 
         {/* Footer */}

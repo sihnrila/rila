@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import RepoDetail from './components/RepoDetail'
 import ProjectDetail from './components/ProjectDetail'
+import Resume from './components/Resume'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/repos/:repoName" element={<RepoDetail />} />
         <Route path="/projects/:projectId" element={<ProjectDetail />} />
+        <Route path="/resume" element={<Resume />} />
       </Routes>
     </BrowserRouter>
   )
