@@ -601,16 +601,16 @@ const Home = () => {
                     <p className="card-description">{post.description}</p>
                     <div className="card-meta">
                       {post.date && (
-                        <span className="meta-item">
-                          <i className="far fa-calendar"></i> {post.date}
-                        </span>
-                      )}
-                      {post.category && (
-                        <span className="meta-item">
-                          <i className="fas fa-tag"></i> {post.category}
+                        <span className="meta-item meta-date">
+                          {post.date}
                         </span>
                       )}
                     </div>
+                    {post.category && (
+                      <span className="meta-item meta-tags">
+                        {post.category}
+                      </span>
+                    )}
                     <div className="card-link">
                       <span>VIEW POST</span>
                       <i className="fas fa-arrow-right"></i>

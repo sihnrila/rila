@@ -12,7 +12,7 @@ const Resume = () => {
             <i className="fas fa-arrow-left"></i> BACK
           </button>
           <h1 className="project-title">RESUME</h1>
-          <p className="project-subtitle">프론트엔드 개발자 및 디자이너</p>
+          <p className="project-subtitle">Creative Technologist</p>
           <p className="project-tools">
             <i className="fas fa-user"></i> 신리라 (Rila Shin)
           </p>
@@ -58,7 +58,7 @@ const Resume = () => {
                 <h4 className="resume-item-title">숭실사이버대학교 (숭실) ICT공학과</h4>
                 <span className="resume-item-date">2021. 03 ~ 2023. 12</span>
               </div>
-              <p className="resume-item-description">대학교(4년) · 휴학</p>
+              <p className="resume-item-description">대학교(4년)</p>
             </div>
           </div>
 
