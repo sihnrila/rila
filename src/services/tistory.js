@@ -130,11 +130,9 @@ export const fetchTistoryPosts = async () => {
       try {
         console.log('프록시를 통한 요청 시도:', `/api/tistory/rss`)
         
-        // Vite 프록시를 통한 요청 (개발 환경)
-        // 프로덕션에서는 Cloudflare Worker를 통해 처리
-        const proxyUrl = import.meta.env.DEV 
-          ? `/api/tistory/rss`
-          : `https://rila-5dl.pages.dev/api/tistory/rss`
+        // Vite dev: vite.config.js 프록시 → tistory.com/rss
+        // 프로덕션: Cloudflare Pages Function (functions/api/tistory/rss.js) → 동일 출처
+        const proxyUrl = '/api/tistory/rss'
         
         const proxyResponse = await axios.get(proxyUrl, {
           headers: {
