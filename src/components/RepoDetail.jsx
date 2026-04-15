@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { fetchGitHubRepos, getLanguageColor } from '../services/github'
+import { getLanguageColor, resolveRepoDemoUrl } from '../services/github'
 import axios from 'axios'
 
 const GITHUB_USERNAME = 'sihnrila'
@@ -25,12 +25,14 @@ const RepoDetail = () => {
           }
         })
         
+        const resolvedDemo = resolveRepoDemoUrl(repoName, response.data.homepage)
+
         setRepo({
           id: response.data.id,
           name: response.data.name,
           description: response.data.description || '',
           url: response.data.html_url,
-          homepage: response.data.homepage,
+          homepage: resolvedDemo,
           language: response.data.language || 'Other',
           stars: response.data.stargazers_count,
           forks: response.data.forks_count,
@@ -43,18 +45,7 @@ const RepoDetail = () => {
           license: response.data.license?.name || 'None'
         })
 
-        // 데모 URL 설정 (homepage가 있을 때만)
-        if (response.data.homepage) {
-          let demo = response.data.homepage
-          // wedding-editor의 경우 /start 경로 추가
-          if (repoName === 'wedding-editor-scaffold' || repoName === 'wedding-editor') {
-            // 이미 /start가 포함되어 있지 않으면 추가
-            if (!demo.includes('/start')) {
-              demo = demo.endsWith('/') ? `${demo}start` : `${demo}/start`
-            }
-          }
-          setDemoUrl(demo)
-        }
+        setDemoUrl(resolvedDemo)
 
         // README 가져오기 시도
         try {
@@ -165,16 +156,14 @@ const RepoDetail = () => {
             >
               <i className="fab fa-github"></i> GITHUB
             </a>
-            {repo.homepage && (
-              <a 
-                href={repo.homepage} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="project-link-button"
-              >
-                <i className="fas fa-external-link-alt"></i> LIVE DEMO
-              </a>
-            )}
+            <a
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link-button"
+            >
+              <i className="fas fa-external-link-alt"></i> LIVE DEMO
+            </a>
           </div>
 
           {repo.topics.length > 0 && (
@@ -206,8 +195,8 @@ const RepoDetail = () => {
           </div>
         </div>
 
-        {/* 데모 페이지 */}
-        {demoUrl && (
+        {/* 데모 페이지 (URL은 항상 추정·homepage·수동매핑으로 설정) */}
+        {demoUrl ? (
           <div className="project-demo">
             <div className="demo-header">
               <h3 className="demo-title">DEMO</h3>
@@ -235,7 +224,7 @@ const RepoDetail = () => {
               데모 페이지가 로드되지 않으면 <a href={demoUrl} target="_blank" rel="noopener noreferrer">여기</a>를 클릭하여 직접 확인하세요.
             </p>
           </div>
-        )}
+        ) : null}
 
         {readme && (
           <div className="project-readme">

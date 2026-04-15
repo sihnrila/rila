@@ -36,7 +36,7 @@ const Resume = () => {
                 저는 일을 할때 항상 더 나은 방법을 찾습니다. 배워야 할점은 배우고, 고쳐야할점은 빠르게 개선해 나아갑니다. 웹 에이전시 회사를 다니며 반응형 쇼핑몰 프로젝트를 만든 경험이 있습니다. 기간이 촉박해, 디자이너와 프론트 백 앤드 개발자가 동시에 작업을 진행하는 프로젝트였습니다. 백 앤드 개발자와 협업을 하며 API를 통한 비동기 방식으로 데이터를 주고받아 사용자단 에서의 새로고침을 하지 않아 편한 Ul를 제공 하였습니다. 이후의 작업은 더 빠르고 안정적으로 진행할 수 있었습니다.
               </p>
               <p className="resume-intro-text">
-                또한, 현재 재직 중인 회사에서는 전자책 뷰어를 만들며, b2b와 b2c 를 제작한 경험이 있습니다. b2c를 제작하며 webpack 작업과 자바스크립트를 이용한 프레임 워크화를 하며 코드의 가독성을 줄이는 작업을 하였습니다. 이때의 경험을 바탕으로 코드는 항상 유지보수를 고려하여 작업하고 있습니다. 빠르고 안정적인 작업을 위해 지금도 다양한 기술과 툴을 공부하며 더 좋은 방향을 찾고 있습니다.
+                또한, 주식회사 북틀 재직 시 전자책 뷰어를 만들며, b2b와 b2c 를 제작한 경험이 있습니다. b2c를 제작하며 webpack 작업과 자바스크립트를 이용한 프레임 워크화를 하며 코드의 가독성을 줄이는 작업을 하였습니다. 이때의 경험을 바탕으로 코드는 항상 유지보수를 고려하여 작업하고 있습니다. 빠르고 안정적인 작업을 위해 지금도 다양한 기술과 툴을 공부하며 더 좋은 방향을 찾고 있습니다.
               </p>
               <p className="resume-intro-text">
                 또한, 항상 원활한 협업을 끌어내려고 노력합니다. 기획자, 디자이너, 마크업 개발자, 백앤드 개발자와 가깝게 일하며, 그들의 의도를 존중하면서 개발 성능을 높이고자 했습니다. 예를 들면, 용량 문제로 웹 폰트의 수를 줄이고 싶을 때는 우선 기획 의도를 들은 뒤, 폰트의 두께 종류를 줄이거나 경량화 폰트를 사용하는 식의 대안을 찾아 제안했습니다. 디자인 단에서 요청한 움직임을 구현하는 데 시간이 오래 걸릴 것으로 생각되면, 비슷한 효과를 낼 수 있는 라이브러리를 개발단에 제안하는 식으로 절충안을 통해 완성도를 높였습니다. 이외에도 기존의 소통의 불편함을 해소하고 싶어, 자료를 준비해 새로운 툴 도입을 제안해 더 높은 생산성을 끌어낸 경험도 있습니다.
@@ -66,7 +66,7 @@ const Resume = () => {
           <div className="resume-section">
             <h3 className="resume-section-title">경력</h3>
             <div className="resume-career-summary">
-              <p className="career-total">총 5년 10개월</p>
+              <p className="career-total">총 7년 9개월</p>
             </div>
             
             <div className="resume-item">
@@ -81,54 +81,45 @@ const Resume = () => {
             <div className="resume-item">
               <div className="resume-item-header">
                 <h4 className="resume-item-title">주식회사북틀</h4>
-                <span className="resume-item-date">2022. 10 ~ 재직중</span>
+                <span className="resume-item-date">2022. 10 ~ 2024. 10</span>
               </div>
-              <p className="resume-item-role">개발팀</p>
+              <p className="resume-item-role">대리 · 팀원</p>
               <p className="resume-item-description">주요직무: 프론트엔드개발자</p>
             </div>
 
             <div className="resume-item">
               <div className="resume-item-header">
                 <h4 className="resume-item-title">주식회사 용산집</h4>
-                <span className="resume-item-date">2022. 02 ~ 2022. 07</span>
+                <span className="resume-item-date">2021. 06 ~ 2022. 07</span>
               </div>
-              <p className="resume-item-role">대리 · 팀원 · 6개월</p>
-              <p className="resume-item-description">주요직무: 프론트엔드개발자</p>
-            </div>
-
-            <div className="resume-item">
-              <div className="resume-item-header">
-                <h4 className="resume-item-title">용산집</h4>
-                <span className="resume-item-date">2021. 06 ~ 2022. 02</span>
-              </div>
-              <p className="resume-item-role">대리 · 팀원 · 9개월</p>
+              <p className="resume-item-role">사원 · 팀원 · 1년 2개월</p>
               <p className="resume-item-description">주요직무: 프론트엔드개발자</p>
             </div>
 
             <div className="resume-item">
               <div className="resume-item-header">
                 <h4 className="resume-item-title">아부하킴 주식회사</h4>
-                <span className="resume-item-date">2020. 12 ~ 2021. 05</span>
+                <span className="resume-item-date">2020. 06 ~ 2021. 05</span>
               </div>
-              <p className="resume-item-role">과장 · 팀장 · 6개월</p>
+              <p className="resume-item-role">과장 · 팀장 · 1년</p>
               <p className="resume-item-description">주요직무: 웹디자이너</p>
             </div>
 
             <div className="resume-item">
               <div className="resume-item-header">
                 <h4 className="resume-item-title">주식회사에이투제이</h4>
-                <span className="resume-item-date">2020. 02 ~ 2020. 07</span>
+                <span className="resume-item-date">2019. 06 ~ 2020. 05</span>
               </div>
-              <p className="resume-item-role">사원 · 팀원 · 6개월</p>
+              <p className="resume-item-role">사원 · 팀원 · 1년</p>
               <p className="resume-item-description">주요직무: 웹디자이너</p>
             </div>
 
             <div className="resume-item">
               <div className="resume-item-header">
-                <h4 className="resume-item-title">뚝섬텐트대여 더텐트 뚝섬점</h4>
-                <span className="resume-item-date">2019. 03 ~ 2019. 07</span>
+                <h4 className="resume-item-title">더텐트</h4>
+                <span className="resume-item-date">2018. 06 ~ 2019. 05</span>
               </div>
-              <p className="resume-item-role">사원 · 팀원 · 5개월</p>
+              <p className="resume-item-role">사원 · 팀원 · 1년</p>
               <p className="resume-item-description">주요직무: 웹디자이너</p>
             </div>
           </div>

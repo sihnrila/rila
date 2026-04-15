@@ -499,7 +499,7 @@ const Home = () => {
                     </div>
                   ) : (
                     repos
-                      .filter(repo => repo.homepage) // homepage가 있는 레포만 표시
+                      .filter((repo) => !repo.fork)
                       .map((repo) => (
                         <Link 
                           key={repo.id} 
@@ -528,11 +528,9 @@ const Home = () => {
                               <span className="meta-item">
                                 <i className="fas fa-code-branch"></i> {repo.forks}
                               </span>
-                              {repo.homepage && (
-                                <span className="meta-item">
-                                  <i className="fas fa-external-link-alt"></i> Live Demo
-                                </span>
-                              )}
+                              <span className="meta-item">
+                                <i className="fas fa-external-link-alt"></i> Live Demo
+                              </span>
                             </div>
                             </div>
                           </Link>
