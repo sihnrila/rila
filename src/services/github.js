@@ -65,10 +65,7 @@ export const resolveRepoDemoUrl = (repoName, rawHomepage = '') => {
 }
 
 const transformRepos = (data) => {
-  if (!Array.isArray(data)) {
-    console.error('GitHub API 응답이 배열이 아닙니다:', data)
-    return []
-  }
+  if (!Array.isArray(data)) return []
 
   return data.map((repo) => ({
     id: repo.id,
@@ -99,22 +96,11 @@ export const fetchGitHubRepos = async () => {
     })
 
     if (response.data && Array.isArray(response.data)) {
-      const transformed = transformRepos(response.data)
-      console.log('GitHub API 응답:', transformed.length, '개 레포지토리')
-      return transformed
+      return transformRepos(response.data)
     }
-    console.warn('GitHub API 응답 형식이 예상과 다릅니다:', response.data)
     return []
   } catch (error) {
-    console.error('GitHub API 호출 실패:', error)
-    if (error.response) {
-      console.error('응답 상태:', error.response.status)
-      console.error('응답 데이터:', error.response.data)
-    } else if (error.request) {
-      console.error('요청이 전송되었지만 응답을 받지 못했습니다:', error.request)
-    } else {
-      console.error('요청 설정 중 오류 발생:', error.message)
-    }
+    console.error('GitHub API 호출 실패:', error.message)
     return []
   }
 }

@@ -17,8 +17,6 @@ const Home = () => {
     const loadRepos = async () => {
       setLoading(true)
       const data = await fetchGitHubRepos()
-      console.log('로드된 레포지토리:', data)
-      console.log('wedding-editor 포함 여부:', data.some(repo => repo.name.includes('wedding')))
       setRepos(data)
       setLoading(false)
     }
@@ -29,7 +27,6 @@ const Home = () => {
     const loadTistoryPosts = async () => {
       setTistoryLoading(true)
       const data = await fetchTistoryPosts()
-      console.log('로드된 티스토리 포스트:', data)
       setTistoryPosts(data)
       setTistoryLoading(false)
     }
@@ -117,10 +114,10 @@ const Home = () => {
             <h1 className="hero-title">
               <span className="line line-1">RILA</span>
               <span className="line line-2">SIN</span>
-              <span className="line line-3">PORTFOLIO</span>
+              <span className="line line-3">FRONTEND</span>
             </h1>
             <p className="hero-subtitle">
-              FRONTEND DEVELOPER & DESIGNER
+              웹뷰 서비스의 상태 흐름과 기능 구조를 설계합니다
             </p>
           </div>
           <div className="scroll-indicator">
@@ -141,44 +138,42 @@ const Home = () => {
             <div className="about-content">
               <div className="about-text">
                 <div className="about-intro">
-                  <p className="intro-large">열정으로 무장한</p>
-                  <p className="intro-large">신리라입니다</p>
+                  <p className="intro-large">신리라</p>
+                  <p className="intro-large">Frontend Developer</p>
                 </div>
-                
+
                 <div className="about-description">
                   <div className="desc-item">
                     <span className="desc-number">01</span>
                     <div className="desc-text">
-                      <h3 className="desc-title">Education</h3>
-                      <p>숭실사이버대학교 ICT 공학부 재학 중<br />
-                      웹퍼블리셔 전문가 과정 이수 (HTML, CSS, JavaScript)</p>
+                      <h3 className="desc-title">Career</h3>
+                      <p>약 8년 · 웹 에이전시 → 스타트업 → 전자책 뷰어 전문사<br />
+                      현재 국립장애인도서관 EPUB 웹뷰어 개발 중</p>
                     </div>
                   </div>
-                  
+
                   <div className="desc-item">
                     <span className="desc-number">02</span>
                     <div className="desc-text">
-                      <h3 className="desc-title">Experience</h3>
-                      <p>스타트업 및 웹 에이전시 프리랜서 경험<br />
-                      독학으로 Vue.js, SCSS, Python 습득</p>
+                      <h3 className="desc-title">What I build</h3>
+                      <p>웹뷰 연동, 상태 동기화, SDK 모듈화, 에디터 개발을 다뤘습니다.</p>
                     </div>
                   </div>
-                  
+
                   <div className="desc-item">
                     <span className="desc-number">03</span>
                     <div className="desc-text">
-                      <h3 className="desc-title">Philosophy</h3>
-                      <p>열심히 하는 것도 좋지만, 일을 할 때만큼은 "잘하자"는 마인드<br />
-                      사용자 중심의 사고와 빠른 피드백 수용</p>
+                      <h3 className="desc-title">Focus</h3>
+                      <p>화면 구현보다 실서비스에서 구조가 버티는지를 먼저 봅니다.</p>
                     </div>
                   </div>
-                  
+
                   <div className="desc-item">
                     <span className="desc-number">04</span>
                     <div className="desc-text">
-                      <h3 className="desc-title">Approach</h3>
-                      <p>팀원들과의 적극적인 커뮤니케이션<br />
-                      반복 업무 자동화 및 프로세스 개선에 관심</p>
+                      <h3 className="desc-title">Collaboration</h3>
+                      <p>기획·디자인·백엔드와 직접 조율해 절충안을 도출<br />
+                      Jira / Zeplin / Slack 기반 비동기 협업 경험</p>
                     </div>
                   </div>
                 </div>
