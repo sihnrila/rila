@@ -24,20 +24,15 @@ const Resume = () => {
             <h3 className="resume-section-title">자기소개서</h3>
             <div className="resume-intro">
               <p className="resume-intro-text">
-                약 8년간 웹 에이전시, 스타트업, 전자책 뷰어 전문사에서 프론트엔드 개발을 해왔습니다.
+                서비스의 동작 구조를 프론트엔드 관점에서 설계합니다.
               </p>
               <p className="resume-intro-text">
-                교보문고 EPUB 뷰어의 웹-앱 간 상태 동기화 구조를 설계했고,
-                기존 웹뷰어를 iOS/Android 인앱 WebView 환경에서 동작하도록 연동했습니다.
-                알라딘 B2C 뷰어는 webpack 기반으로 모듈화하여 기능 단위 재사용 구조로 재구성했습니다.
+                약 8년간 웹 에이전시, 스타트업, 전자책 뷰어 전문사에서 일했습니다.<br />
+                웹뷰 연동, 상태 동기화, SDK 모듈화, 에디터 개발을 다뤘습니다.
               </p>
               <p className="resume-intro-text">
-                협업 과정에서는 디자인 의도를 먼저 파악한 후 개발 비용을 고려한 절충안을 제안했습니다.
-                웹폰트 경량화, 애니메이션 라이브러리 교체, Zeplin 도입 제안 등을 통해
-                일정과 품질을 함께 맞춘 경험이 있습니다.
-              </p>
-              <p className="resume-intro-text">
-                현재는 국립장애인도서관 EPUB 웹뷰어 SDK 개발에 참여 중입니다.
+                화면 구현보다 실서비스에서 구조가 버티는지를 먼저 봅니다.<br />
+                현재는 국립장애인도서관 EPUB 웹뷰어 SDK 개발 중입니다.
               </p>
             </div>
           </div>
@@ -139,9 +134,9 @@ const Resume = () => {
                 <span className="project-skills">JS · EJS · Redis · S3 · Webpack</span>
               </div>
               <p className="resume-project-description">
-                웹과 iOS/Android 하이브리드 앱 간 사용자 상태가 불일치하는 문제를 해결.<br />
-                Redis를 이용한 세션 동기화 구조를 설계하여 웹/앱 간 데이터 일관성을 확보.<br />
-                GA 이벤트 트래킹 추가로 사용자 행동 데이터 수집 기반 마련.
+                문제 · 웹과 앱 WebView 간 사용자 상태 불일치<br />
+                해결 · Redis로 상태 저장 구조 설계, 이벤트 기반 동기화 흐름 구현<br />
+                결과 · 웹/앱 데이터 일관성 확보, 세션 단절 없는 흐름 유지
               </p>
             </div>
 
@@ -164,8 +159,9 @@ const Resume = () => {
                 <span className="project-skills">JS · CSS · EJS · Webpack</span>
               </div>
               <p className="resume-project-description">
-                B2C 뷰어를 webpack 기반으로 재구성하여 기능 단위 모듈화.<br />
-                B2B CS 이슈 대응 및 신규 기능 추가 유지보수.
+                문제 · 뷰어 기능 재사용 불가, 콘텐츠 제어 수단 부재<br />
+                해결 · 초기화·이벤트·상태를 SDK 단위로 분리, 에디터 UI와 제어 로직 구현<br />
+                결과 · 기능 단위 재사용 구조 확보, 확장 비용 최소화
               </p>
             </div>
 
@@ -211,8 +207,9 @@ const Resume = () => {
                 <span className="project-skills">JS · CSS · Three.js · Geolocation · model-viewer</span>
               </div>
               <p className="resume-project-description">
-                사용자 위치(Geolocation)를 기반으로 구역 진입 시 3D 모델 뷰어와 모달을 트리거.<br />
-                다국어 지원 및 모바일 우선 반응형 구현.
+                문제 · 위치·3D·실시간이 혼재하는 인터랙션 요구<br />
+                해결 · Geolocation 진입 이벤트 → 모델 뷰어 트리거, 실시간 상태를 단일 흐름으로 처리<br />
+                결과 · 복합 인터랙션을 구조적으로 통합, 참여형 UX 구현
               </p>
             </div>
 

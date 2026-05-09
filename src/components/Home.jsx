@@ -117,7 +117,7 @@ const Home = () => {
               <span className="line line-3">FRONTEND</span>
             </h1>
             <p className="hero-subtitle">
-              웹뷰 · SDK · 에디터 · 인터랙션을 실서비스에서 구현합니다
+              웹뷰 서비스의 상태 흐름과 기능 구조를 설계합니다
             </p>
           </div>
           <div className="scroll-indicator">
@@ -156,8 +156,7 @@ const Home = () => {
                     <span className="desc-number">02</span>
                     <div className="desc-text">
                       <h3 className="desc-title">What I build</h3>
-                      <p>웹뷰 기반 하이브리드 앱 연동<br />
-                      SDK 모듈화 · 에디터 UI · 실시간 인터랙션</p>
+                      <p>웹뷰 연동, 상태 동기화, SDK 모듈화, 에디터 개발을 다뤘습니다.</p>
                     </div>
                   </div>
 
@@ -165,8 +164,7 @@ const Home = () => {
                     <span className="desc-number">03</span>
                     <div className="desc-text">
                       <h3 className="desc-title">Focus</h3>
-                      <p>실서비스 환경에서 동작하는 구조를 우선으로 설계<br />
-                      기능 단위 재사용성과 유지보수 비용을 함께 고려</p>
+                      <p>화면 구현보다 실서비스에서 구조가 버티는지를 먼저 봅니다.</p>
                     </div>
                   </div>
 
