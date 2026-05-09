@@ -24,28 +24,20 @@ const Resume = () => {
             <h3 className="resume-section-title">자기소개서</h3>
             <div className="resume-intro">
               <p className="resume-intro-text">
-                열정으로 무장한 프론트앤드 신리라입니다.
+                약 8년간 웹 에이전시, 스타트업, 전자책 뷰어 전문사에서 프론트엔드 개발을 해왔습니다.
               </p>
               <p className="resume-intro-text">
-                저는 개발사와 초기 스타트업에서 마크업 및 웹 프론트엔드로 일한 경험이 있습니다. 다양한 개발 환경 속에서 튼튼하게 코드를 작성하는 방법을 배우고, 원활한 협업을 바탕으로 주도적으로 업무를 진행하는 방법을 익혔습니다.
+                교보문고 EPUB 뷰어의 웹-앱 간 상태 동기화 구조를 설계했고,
+                기존 웹뷰어를 iOS/Android 인앱 WebView 환경에서 동작하도록 연동했습니다.
+                알라딘 B2C 뷰어는 webpack 기반으로 모듈화하여 기능 단위 재사용 구조로 재구성했습니다.
               </p>
               <p className="resume-intro-text">
-                제가 프론트앤드 직무를 잘 수행할 수 있다고 생각하는 이유는 아래와 같습니다.
+                협업 과정에서는 디자인 의도를 먼저 파악한 후 개발 비용을 고려한 절충안을 제안했습니다.
+                웹폰트 경량화, 애니메이션 라이브러리 교체, Zeplin 도입 제안 등을 통해
+                일정과 품질을 함께 맞춘 경험이 있습니다.
               </p>
               <p className="resume-intro-text">
-                저는 일을 할때 항상 더 나은 방법을 찾습니다. 배워야 할점은 배우고, 고쳐야할점은 빠르게 개선해 나아갑니다. 웹 에이전시 회사를 다니며 반응형 쇼핑몰 프로젝트를 만든 경험이 있습니다. 기간이 촉박해, 디자이너와 프론트 백 앤드 개발자가 동시에 작업을 진행하는 프로젝트였습니다. 백 앤드 개발자와 협업을 하며 API를 통한 비동기 방식으로 데이터를 주고받아 사용자단 에서의 새로고침을 하지 않아 편한 Ul를 제공 하였습니다. 이후의 작업은 더 빠르고 안정적으로 진행할 수 있었습니다.
-              </p>
-              <p className="resume-intro-text">
-                또한, 주식회사 북틀 재직 시 전자책 뷰어를 만들며, b2b와 b2c 를 제작한 경험이 있습니다. b2c를 제작하며 webpack 작업과 자바스크립트를 이용한 프레임 워크화를 하며 코드의 가독성을 줄이는 작업을 하였습니다. 이때의 경험을 바탕으로 코드는 항상 유지보수를 고려하여 작업하고 있습니다. 빠르고 안정적인 작업을 위해 지금도 다양한 기술과 툴을 공부하며 더 좋은 방향을 찾고 있습니다.
-              </p>
-              <p className="resume-intro-text">
-                또한, 항상 원활한 협업을 끌어내려고 노력합니다. 기획자, 디자이너, 마크업 개발자, 백앤드 개발자와 가깝게 일하며, 그들의 의도를 존중하면서 개발 성능을 높이고자 했습니다. 예를 들면, 용량 문제로 웹 폰트의 수를 줄이고 싶을 때는 우선 기획 의도를 들은 뒤, 폰트의 두께 종류를 줄이거나 경량화 폰트를 사용하는 식의 대안을 찾아 제안했습니다. 디자인 단에서 요청한 움직임을 구현하는 데 시간이 오래 걸릴 것으로 생각되면, 비슷한 효과를 낼 수 있는 라이브러리를 개발단에 제안하는 식으로 절충안을 통해 완성도를 높였습니다. 이외에도 기존의 소통의 불편함을 해소하고 싶어, 자료를 준비해 새로운 툴 도입을 제안해 더 높은 생산성을 끌어낸 경험도 있습니다.
-              </p>
-              <p className="resume-intro-text">
-                한편, 디자이너와 개발자 사이에서 파일을 전달할 때 일어나는 문제를 해결하고자, Zeplin과 Git을 익혀 협업 속도를 높이기도 했습니다.
-              </p>
-              <p className="resume-intro-text">
-                이렇게 전문 웹 프론트앤드로 업무를 진행하지만, 저는 동시에 사용자 입장에서 생각하기도 합니다. 이 버튼이 사용자의 동선을 고려해 배치된 건지, 사용된 문구가 우리 브랜드에 어울리는지를 계속 고민하고, 더 나은 방향에 대해 사람들과 얘기 나누곤 합니다. 특히 저는 사용자에게 편하고 즐거운 사용자 경험(UI/UX)을 만드는 데 관심이 많습니다. 그래서 기획부터 디자인, 개발 등 다양한 직무의 관점에서 서비스를 바라보고, 구성원들과 공유하며, 거기서 얻은 것을 활용해 제 업무를 발전시켜 나가고 있습니다.
+                현재는 국립장애인도서관 EPUB 웹뷰어 SDK 개발에 참여 중입니다.
               </p>
             </div>
           </div>
@@ -127,158 +119,122 @@ const Resume = () => {
           {/* 경력기술서 */}
           <div className="resume-section">
             <h3 className="resume-section-title">경력기술서</h3>
-            <p className="resume-philosophy">
-              웹 표준에 맞춰 의미 있는 구조를 가지며, 다양한 환경에 반응하도록 디자인과 UI/UX를 구현하고,(검색엔진을 포함하여) 모두가 접근 가능한 웹사이트를 만들기 위해 노력하고있습니다.
-            </p>
 
             <div className="resume-project">
-              <h4 className="resume-project-title">국립 장애인 도서관 EPUB 웹뷰어</h4>
+              <h4 className="resume-project-title">국립장애인도서관 EPUB 웹뷰어 SDK 개발</h4>
               <div className="resume-project-meta">
-                <span className="project-period">2024년 11월 ~</span>
-                <span className="project-skills">스킬: js, css, ejs, html, sdk</span>
-              </div>
-            </div>
-
-            <div className="resume-project">
-              <h4 className="resume-project-title">yes24 EBOOK 웹뷰어 B2B 유지보수</h4>
-              <div className="resume-project-meta">
-                <span className="project-period">2022년 10월 ~ 2024년 10월</span>
-                <span className="project-skills">스킬: js, css, ejs</span>
-              </div>
-            </div>
-
-            <div className="resume-project">
-              <h4 className="resume-project-title">알라딘 EBOOK 웹뷰어 B2C/ B2B 유지보수</h4>
-              <div className="resume-project-meta">
-                <span className="project-period">2022년 10월 ~ 2024년 10월</span>
-                <span className="project-skills">스킬: js, css, ejs</span>
-              </div>
-            </div>
-
-            <div className="resume-project">
-              <h4 className="resume-project-title">알라딘 EBOOK 웹뷰어 B2C 구축</h4>
-              <div className="resume-project-meta">
-                <span className="project-period">2022년 10월 ~ 2024년 10월</span>
-                <span className="project-skills">스킬: js, css, ejs</span>
-              </div>
-            </div>
-
-            <div className="resume-project">
-              <h4 className="resume-project-title">교보문고 EBOOK 웹뷰어 B2C/ B2B 유지보수</h4>
-              <div className="resume-project-meta">
-                <span className="project-period">2022년 10월 ~ 2024년 10월</span>
-                <span className="project-skills">스킬: js, css, ejs, 배포</span>
-              </div>
-              <p className="resume-project-description">B2C의 CS건 및 신규 기능 추가</p>
-            </div>
-
-            <div className="resume-project">
-              <h4 className="resume-project-title">교보문고 EBOOK 인앱 구축</h4>
-              <div className="resume-project-meta">
-                <span className="project-period">2024년 1월 ~ 2024년 9월</span>
-                <span className="project-skills">스킬: js, css, ejs, 배포</span>
-              </div>
-              <p className="resume-project-description">기존 웹뷰어를 앱의 웹뷰로 띄워 사용 가능 하겠금 구축</p>
-            </div>
-
-            <div className="resume-project">
-              <h4 className="resume-project-title">교보문고 EBOOK 웹뷰어 동기화</h4>
-              <div className="resume-project-meta">
-                <span className="project-period">2024년 1월 ~ 2024년 9월</span>
-                <span className="project-skills">스킬: js, css, ejs, redis, s3, webpack, 배포</span>
-              </div>
-              <p className="resume-project-description">웹 to 하이브리드 앱(ios, ad) 간 동기화</p>
-            </div>
-
-            <div className="resume-project">
-              <h4 className="resume-project-title">교보문고 EBOOK GA 기능 추가</h4>
-              <div className="resume-project-meta">
-                <span className="project-period">2024년 1월 ~ 2024년 9월</span>
-                <span className="project-skills">스킬: js, css, ejs, 배포</span>
-              </div>
-              <p className="resume-project-description">전자책 뷰어로 EPUB뷰어 담당을 하였습니다.</p>
-            </div>
-
-            <div className="resume-project">
-              <h4 className="resume-project-title">지구랭 반응형 랭킹 쇼핑몰</h4>
-              <div className="resume-project-meta">
-                <span className="project-period">2021년 10월 ~ 2022년 4월</span>
-                <span className="project-skills">스킬: html5, css, js, php, 배포</span>
+                <span className="project-period">2024. 11 ~</span>
+                <span className="project-skills">JS · CSS · EJS · SDK</span>
               </div>
               <p className="resume-project-description">
-                지구랭의 반응형 쇼핑몰입니다. 프론트엔드 중 웹 접근성을 갖춘 HTML구조와 반응형 스타일, 사용자 인터렉션 위주의 웹사이트의 프론트엔드를 담당하였습니다.
-                <br />모바일 우선 반응형 / 웹접근성
-                <br /><a href="https://jigoorang.com/" target="_blank" rel="noopener noreferrer">https://jigoorang.com/</a>
+                외부 서비스에서 뷰어 기능을 재사용할 수 있도록 SDK 구조로 모듈화.<br />
+                초기화 / 이벤트 / 상태 관리를 분리하여 기능 확장 비용 최소화.
               </p>
             </div>
 
             <div className="resume-project">
-              <h4 className="resume-project-title">2021 서울 청계천 빛초롱 축제 - AI 전시관 페이지</h4>
+              <h4 className="resume-project-title">교보문고 EPUB 뷰어 — 웹-앱 동기화 구축</h4>
               <div className="resume-project-meta">
-                <span className="project-period">2021년 7월 ~ 2021년 9월</span>
-                <span className="project-skills">스킬: html5, css, js, tree.js</span>
+                <span className="project-period">2024. 01 ~ 2024. 09</span>
+                <span className="project-skills">JS · EJS · Redis · S3 · Webpack</span>
               </div>
               <p className="resume-project-description">
-                웹 모델 뷰어를 이용해 실시간 AI전시관을 구축하였습니다. 반응형 이벤트 페이지로 3d모델을 넣어 일정 구역에 진입 하면 모델뷰어를 실행 시키고, 모달을 띄워 한지등을 모을수 있게 해주는 이벤트 페이지 입니다.
-                <br />모바일 우선 반응형 / 웹 접근성 / 다국어 / geolocation / model_viewer
+                웹과 iOS/Android 하이브리드 앱 간 사용자 상태가 불일치하는 문제를 해결.<br />
+                Redis를 이용한 세션 동기화 구조를 설계하여 웹/앱 간 데이터 일관성을 확보.<br />
+                GA 이벤트 트래킹 추가로 사용자 행동 데이터 수집 기반 마련.
               </p>
             </div>
 
             <div className="resume-project">
-              <h4 className="resume-project-title">같이줍깅</h4>
+              <h4 className="resume-project-title">교보문고 EPUB 뷰어 — 인앱 WebView 연동</h4>
               <div className="resume-project-meta">
-                <span className="project-period">2021년 6월 ~</span>
-                <span className="project-skills">스킬: html5, css3, js, vue.js, aws s3</span>
+                <span className="project-period">2024. 01 ~ 2024. 09</span>
+                <span className="project-skills">JS · EJS · CSS</span>
               </div>
               <p className="resume-project-description">
-                쓰레기를 같이줍는 커뮤니티로 간단한 웹앱을 제작하였습니다.
-                <br />사용자 커뮤니티 / 모바일 웹앱
+                기존 웹뷰어를 앱 WebView에서 동일하게 동작하도록 환경별 분기 처리.<br />
+                iOS / Android 각 네이티브 브릿지와 연동하여 앱 내 UX 흐름 유지.
               </p>
             </div>
 
             <div className="resume-project">
-              <h4 className="resume-project-title">에스원 WAS - 다각형 / 스냅샷 기능 개발</h4>
+              <h4 className="resume-project-title">알라딘 EPUB 뷰어 B2C 구축 · B2B 유지보수</h4>
               <div className="resume-project-meta">
-                <span className="project-period">2022년 5월 ~ 2022년 6월</span>
-                <span className="project-skills">스킬: html5, css, js, azure, python</span>
+                <span className="project-period">2022. 10 ~ 2024. 10</span>
+                <span className="project-skills">JS · CSS · EJS · Webpack</span>
               </div>
               <p className="resume-project-description">
-                실시간 카메라 화면에 그리기 도구 기능을 개발 하였고, 실시간 이벤트가 감지되면 스냅샷을 찍어 주는 기능을 개발 하였습니다.
-                <br />PC / 웹 접근성
+                B2C 뷰어를 webpack 기반으로 재구성하여 기능 단위 모듈화.<br />
+                B2B CS 이슈 대응 및 신규 기능 추가 유지보수.
               </p>
             </div>
 
             <div className="resume-project">
-              <h4 className="resume-project-title">스누독 케어센터</h4>
+              <h4 className="resume-project-title">YES24 EPUB 뷰어 B2B 유지보수</h4>
               <div className="resume-project-meta">
-                <span className="project-period">2019년 5월 ~ 2022년 7월</span>
-                <span className="project-skills">스킬: html5, css, js, bootstrap</span>
+                <span className="project-period">2022. 10 ~ 2024. 10</span>
+                <span className="project-skills">JS · CSS · EJS</span>
               </div>
               <p className="resume-project-description">
-                반응형 강아지 유치원 원페이지 사이트를 구축 하였습니다.
-                <br />모바일 우선 반응형 / 웹 접근성
+                CS 이슈 분석 및 긴급 패치, 기능 개선 대응.
               </p>
             </div>
 
             <div className="resume-project">
-              <h4 className="resume-project-title">십일홍</h4>
+              <h4 className="resume-project-title">에스원 WAS — 실시간 영역 지정 · 스냅샷 기능</h4>
               <div className="resume-project-meta">
-                <span className="project-period">2019년 1월 ~ 2022년 6월</span>
-                <span className="project-skills">스킬: html5, css, js</span>
+                <span className="project-period">2022. 05 ~ 2022. 06</span>
+                <span className="project-skills">JS · CSS · Azure · Python</span>
               </div>
               <p className="resume-project-description">
-                카페24 솔루션을 사용해 PC와 모바일이 따로 있는 사이트를 구축하였습니다.
+                실시간 카메라 화면 위에 Canvas 기반 다각형 그리기 도구 구현.<br />
+                이벤트 감지 시 자동 스냅샷 캡처 기능 개발.
               </p>
             </div>
 
             <div className="resume-project">
-              <h4 className="resume-project-title">비에프랩</h4>
+              <h4 className="resume-project-title">지구랭 반응형 쇼핑몰</h4>
               <div className="resume-project-meta">
-                <span className="project-period">2019년 1월 ~ 2022년 6월</span>
-                <span className="project-skills">스킬: html5, css, js</span>
+                <span className="project-period">2021. 10 ~ 2022. 04</span>
+                <span className="project-skills">HTML · CSS · JS · PHP</span>
               </div>
               <p className="resume-project-description">
-                카페24 솔루션을 사용해 PC와 모바일이 따로 있는 사이트를 구축하였습니다.
+                디자이너·백엔드와 동시 작업 환경에서 비동기 API 연동으로 페이지 리로드 없는 UI 구현.<br />
+                <a href="https://jigoorang.com/" target="_blank" rel="noopener noreferrer">jigoorang.com</a>
+              </p>
+            </div>
+
+            <div className="resume-project">
+              <h4 className="resume-project-title">서울 빛초롱 축제 — AI 전시관 이벤트 페이지</h4>
+              <div className="resume-project-meta">
+                <span className="project-period">2021. 07 ~ 2021. 09</span>
+                <span className="project-skills">JS · CSS · Three.js · Geolocation · model-viewer</span>
+              </div>
+              <p className="resume-project-description">
+                사용자 위치(Geolocation)를 기반으로 구역 진입 시 3D 모델 뷰어와 모달을 트리거.<br />
+                다국어 지원 및 모바일 우선 반응형 구현.
+              </p>
+            </div>
+
+            <div className="resume-project">
+              <h4 className="resume-project-title">같이줍깅 — 커뮤니티 웹앱</h4>
+              <div className="resume-project-meta">
+                <span className="project-period">2021. 06 ~</span>
+                <span className="project-skills">Vue.js · AWS S3</span>
+              </div>
+              <p className="resume-project-description">
+                Vue.js로 사용자 참여형 커뮤니티 모바일 웹앱 구축. S3에 정적 배포.
+              </p>
+            </div>
+
+            <div className="resume-project">
+              <h4 className="resume-project-title">스누독 케어센터 · 십일홍 · 비에프랩</h4>
+              <div className="resume-project-meta">
+                <span className="project-period">2019 ~ 2022</span>
+                <span className="project-skills">HTML · CSS · JS · Bootstrap · 카페24</span>
+              </div>
+              <p className="resume-project-description">
+                반응형 브랜드 사이트 및 쇼핑몰 구축. 카페24 솔루션 커스터마이징 포함.
               </p>
             </div>
           </div>
@@ -290,36 +246,36 @@ const Resume = () => {
               <div className="skill-category">
                 <h4 className="skill-category-title">Frontend</h4>
                 <div className="skill-tags">
-                  <span className="skill-tag">HTML</span>
                   <span className="skill-tag">HTML5</span>
-                  <span className="skill-tag">CSS</span>
                   <span className="skill-tag">CSS3</span>
                   <span className="skill-tag">SCSS</span>
-                  <span className="skill-tag">Javascript</span>
+                  <span className="skill-tag">JavaScript</span>
                   <span className="skill-tag">Vue.js</span>
-                  <span className="skill-tag">Jquery</span>
-                  <span className="skill-tag">Ajax</span>
+                  <span className="skill-tag">React</span>
+                  <span className="skill-tag">Webpack</span>
+                  <span className="skill-tag">jQuery</span>
                 </div>
               </div>
               <div className="skill-category">
-                <h4 className="skill-category-title">Backend & Tools</h4>
+                <h4 className="skill-category-title">Infrastructure & Backend</h4>
                 <div className="skill-tags">
                   <span className="skill-tag">Node.js</span>
                   <span className="skill-tag">Python</span>
-                  <span className="skill-tag">API</span>
-                  <span className="skill-tag">RestAPI</span>
+                  <span className="skill-tag">REST API</span>
+                  <span className="skill-tag">Redis</span>
+                  <span className="skill-tag">AWS S3</span>
                   <span className="skill-tag">MySQL</span>
                 </div>
               </div>
               <div className="skill-category">
-                <h4 className="skill-category-title">Design & Others</h4>
+                <h4 className="skill-category-title">Tooling & Collaboration</h4>
                 <div className="skill-tags">
-                  <span className="skill-tag">Photoshop</span>
+                  <span className="skill-tag">Git</span>
                   <span className="skill-tag">GitHub</span>
-                  <span className="skill-tag">AWS</span>
-                  <span className="skill-tag">Slack</span>
-                  <span className="skill-tag">VSCode</span>
                   <span className="skill-tag">Jira</span>
+                  <span className="skill-tag">Zeplin</span>
+                  <span className="skill-tag">Slack</span>
+                  <span className="skill-tag">Photoshop</span>
                 </div>
               </div>
             </div>

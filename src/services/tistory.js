@@ -45,18 +45,14 @@ const extractPostsFromRSS = (xmlDoc) => {
   const items = xmlDoc.querySelectorAll('item')
   const posts = []
 
-  console.log('RSS 피드에서 발견된 아이템 수:', items.length)
-
   items.forEach((item, index) => {
-    if (index >= 5) return // 최대 5개만 가져오기
+    if (index >= 5) return
 
     const title = item.querySelector('title')?.textContent || ''
     const link = item.querySelector('link')?.textContent || ''
     const description = item.querySelector('description')?.textContent || ''
     const pubDate = item.querySelector('pubDate')?.textContent || ''
     const category = item.querySelector('category')?.textContent || ''
-
-    console.log(`포스트 ${index + 1}:`, { title, link, hasDescription: !!description })
 
     // 썸네일 이미지 추출 (description에서 첫 번째 이미지 찾기)
     // HTML 엔티티 디코딩 후 이미지 찾기
@@ -85,93 +81,38 @@ const extractPostsFromRSS = (xmlDoc) => {
     })
   })
 
-  console.log('추출된 포스트:', posts)
   return posts
 }
 
 export const fetchTistoryPosts = async () => {
-  console.log('티스토리 RSS 피드 가져오기 시작:', TISTORY_RSS_URL)
-  
   try {
-    // 먼저 직접 요청 시도
     const response = await axios.get(TISTORY_RSS_URL, {
-      headers: {
-        'Accept': 'application/rss+xml, application/xml, text/xml'
-      }
+      headers: { 'Accept': 'application/rss+xml, application/xml, text/xml' }
     })
-
-    console.log('RSS 피드 응답 받음, 데이터 타입:', typeof response.data)
-    console.log('RSS 피드 응답 길이:', response.data?.length)
 
     const xmlDoc = parseXML(response.data)
-    
-    // 파싱 에러 확인
-    const parserError = xmlDoc.querySelector('parsererror')
-    if (parserError) {
-      console.error('XML 파싱 에러:', parserError.textContent)
-      throw new Error('XML 파싱 실패')
-    }
+    if (xmlDoc.querySelector('parsererror')) throw new Error('XML 파싱 실패')
 
-    const posts = extractPostsFromRSS(xmlDoc)
-    
-    console.log('티스토리 포스트 로드 완료:', posts.length, '개')
-    return posts
+    return extractPostsFromRSS(xmlDoc)
   } catch (error) {
-    console.error('티스토리 RSS 피드 직접 요청 실패:', error)
-    console.error('에러 상세:', {
-      message: error.message,
-      code: error.code,
-      response: error.response?.status,
-      isCORS: error.message?.includes('CORS') || error.code === 'ERR_NETWORK'
-    })
-    
-    // CORS 에러인 경우 프록시를 통해 재시도
+    // CORS 또는 네트워크 에러면 프록시로 재시도
     if (error.message?.includes('CORS') || error.code === 'ERR_NETWORK' || !error.response) {
       try {
-        console.log('프록시를 통한 요청 시도:', `/api/tistory/rss`)
-        
-        // Vite dev: vite.config.js 프록시 → tistory.com/rss
-        // 프로덕션: Cloudflare Pages Function (functions/api/tistory/rss.js) → 동일 출처
-        const proxyUrl = '/api/tistory/rss'
-        
-        const proxyResponse = await axios.get(proxyUrl, {
-          headers: {
-            'Accept': 'application/xml, text/xml'
-          },
+        // Vite dev: vite.config.js 프록시, 프로덕션: Cloudflare Pages Function
+        const proxyResponse = await axios.get('/api/tistory/rss', {
+          headers: { 'Accept': 'application/xml, text/xml' },
           timeout: 10000
         })
-      
-      console.log('프록시 응답 받음, 데이터 타입:', typeof proxyResponse.data)
-      
-      const xmlDoc = parseXML(proxyResponse.data)
-      
-      // 파싱 에러 확인
-      const parserError = xmlDoc.querySelector('parsererror')
-      if (parserError) {
-        console.error('프록시 XML 파싱 에러:', parserError.textContent)
-        throw new Error('프록시 XML 파싱 실패')
-      }
-      
-        const posts = extractPostsFromRSS(xmlDoc)
-        
-        console.log('티스토리 포스트 로드 완료 (프록시):', posts.length, '개')
-        return posts
-      } catch (proxyError) {
-        console.error('프록시를 통한 요청도 실패:', proxyError)
-        console.error('프록시 에러 상세:', {
-          message: proxyError.message,
-          code: proxyError.code,
-          response: proxyError.response?.status,
-          statusText: proxyError.response?.statusText
-        })
-        // 프록시도 실패하면 빈 배열 반환
+
+        const xmlDoc = parseXML(proxyResponse.data)
+        if (xmlDoc.querySelector('parsererror')) throw new Error('프록시 XML 파싱 실패')
+
+        return extractPostsFromRSS(xmlDoc)
+      } catch {
         return []
       }
-    } else {
-      // CORS가 아닌 다른 에러인 경우
-      console.error('CORS가 아닌 다른 에러:', error)
-      return []
     }
+    return []
   }
 }
 
