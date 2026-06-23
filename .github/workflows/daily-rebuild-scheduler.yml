@@ -1,0 +1,23 @@
+name: Daily Rebuild Scheduler
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 매일 자정(UTC 0시, KST 9시)에 실행
+  workflow_dispatch: # 수동 실행 기능 제공
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger rebuild via empty commit
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "chore(rebuild): daily auto rebuild to refresh repository & blog feeds"
+          git push origin main
