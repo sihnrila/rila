@@ -3,6 +3,13 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { getLanguageColor, resolveRepoDemoUrl } from '../services/github'
 import axios from 'axios'
 
+// 이미지 에셋 임포트
+import accessibility_dashboard from '../assets/img/accessibility_dashboard.jpg'
+import light_festival_1 from '../assets/img/light_festival_1.png'
+import light_festival_2 from '../assets/img/light_festival_2.png'
+import demo01 from '../assets/img/demo01.jpeg'
+import demo03 from '../assets/img/demo03.jpeg'
+
 const GITHUB_USERNAME = 'sihnrila'
 const GITHUB_API_BASE = 'https://api.github.com'
 
@@ -13,6 +20,26 @@ const RepoDetail = () => {
   const [loading, setLoading] = useState(true)
   const [readme, setReadme] = useState('')
   const [demoUrl, setDemoUrl] = useState('')
+
+  // 프로젝트별 이미지 매핑 데이터 (실제 리포지토리별 정확한 연동)
+  const repoScreenshots = {
+    'Flieupload_FE': {
+      title: '전자문서 접근성 변환 플랫폼 대시보드 UI 캡처',
+      images: [accessibility_dashboard]
+    },
+    'JigooFe': {
+      title: '지구랭 반응형 쇼핑몰 캐릭터 및 로고 캡처',
+      images: [demo01]
+    },
+    'jigoorang-adim': {
+      title: '지구랭 반응형 쇼핑몰 캐릭터 및 로고 캡처',
+      images: [demo01]
+    },
+    'PickUpDemo': {
+      title: '청계천 빛초롱축제 AI 전시관 실제 구동 화면 및 로고 캡처',
+      images: [light_festival_1, light_festival_2, demo03]
+    }
+  }
 
   useEffect(() => {
     const loadRepo = async () => {
@@ -95,7 +122,7 @@ const RepoDetail = () => {
     <div className="project-detail">
       <div className="container">
         <div className="project-header">
-          <button className="back-button" onClick={() => navigate('/')}>
+          <button className="back-button" onClick={() => navigate(-1)}>
             <i className="fas fa-arrow-left"></i> BACK
           </button>
           <div 
@@ -156,14 +183,16 @@ const RepoDetail = () => {
             >
               <i className="fab fa-github"></i> GITHUB
             </a>
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link-button"
-            >
-              <i className="fas fa-external-link-alt"></i> LIVE DEMO
-            </a>
+            {demoUrl && (
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-link-button"
+              >
+                <i className="fas fa-external-link-alt"></i> LIVE DEMO
+              </a>
+            )}
           </div>
 
           {repo.topics.length > 0 && (
@@ -195,9 +224,32 @@ const RepoDetail = () => {
           </div>
         </div>
 
-        {/* 데모 페이지 (URL은 항상 추정·homepage·수동매핑으로 설정) */}
+        {/* 스크린샷 갤러리 섹션 (이력서 캡처 화면 연동) */}
+        {repoScreenshots[repoName] ? (
+          <div className="project-screenshots" style={{ marginTop: '3rem' }}>
+            <h3 className="readme-title" style={{ marginBottom: '1.5rem' }}>SCREENSHOTS</h3>
+            <div className="screenshot-gallery-container" style={{ padding: '1.5rem', background: '#f9f9f9', border: '1px solid #e1e1e1', borderRadius: '6px' }}>
+              <p className="gallery-caption" style={{ fontSize: '0.85rem', color: '#666', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <i className="fas fa-info-circle"></i> {repoScreenshots[repoName].title}
+              </p>
+              <div className="gallery-images" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {repoScreenshots[repoName].images.map((img, idx) => (
+                  <img 
+                    key={idx} 
+                    src={img} 
+                    alt={`${repoName} Screenshot ${idx + 1}`} 
+                    className="screenshot-img" 
+                    style={{ width: '100%', height: 'auto', maxHeight: '500px', objectFit: 'contain', border: '1px solid #e1e1e1', borderRadius: '4px', background: '#fff', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)' }} 
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {/* 데모 페이지 */}
         {demoUrl ? (
-          <div className="project-demo">
+          <div className="project-demo" style={{ marginTop: '3rem' }}>
             <div className="demo-header">
               <h3 className="demo-title">DEMO</h3>
               <a 
@@ -238,4 +290,3 @@ const RepoDetail = () => {
 }
 
 export default RepoDetail
-

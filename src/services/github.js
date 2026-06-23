@@ -1,7 +1,22 @@
 import axios from 'axios'
 
 const GITHUB_USERNAME = 'sihnrila'
-const GITHUB_API_BASE = 'https://api.github.com'
+const WORKER_PROXY_BASE = 'https://rila-github-api-proxy.sihnrila.workers.dev'
+
+const getGithubApiBase = () => {
+  if (import.meta.env.VITE_GITHUB_API_URL) {
+    return import.meta.env.VITE_GITHUB_API_URL
+  }
+  
+  if (typeof window !== 'undefined' && 
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    return '/api/github'
+  }
+  
+  return `${WORKER_PROXY_BASE}/api/github`
+}
+
+const GITHUB_API_BASE = getGithubApiBase()
 
 /**
  * 라이브 데모 URL (레포 이름 → 배포 주소)
@@ -86,7 +101,9 @@ const transformRepos = (data) => {
 }
 
 export const fetchGitHubRepos = async () => {
+  // 1. 프록시를 통해 요청 시도
   try {
+    console.log('프록시를 통해 GitHub API 로드 시도:', `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos`)
     const response = await axios.get(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos`, {
       params: {
         sort: 'updated',
@@ -100,21 +117,37 @@ export const fetchGitHubRepos = async () => {
 
     if (response.data && Array.isArray(response.data)) {
       const transformed = transformRepos(response.data)
-      console.log('GitHub API 응답:', transformed.length, '개 레포지토리')
+      console.log('GitHub API 응답 (프록시):', transformed.length, '개 레포지토리')
+      return transformed
+    }
+  } catch (proxyError) {
+    console.warn('프록시를 통한 GitHub API 호출 실패, 다이렉트 API로 Fallback 시도:', proxyError.message)
+  }
+
+  // 2. 프록시 실패 시 다이렉트 GitHub API로 Fallback 호출
+  try {
+    const fallbackUrl = `https://api.github.com/users/${GITHUB_USERNAME}/repos`
+    console.log('다이렉트 GitHub API 호출 시도:', fallbackUrl)
+    const response = await axios.get(fallbackUrl, {
+      params: {
+        sort: 'updated',
+        per_page: 100,
+        type: 'public',
+      },
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    })
+
+    if (response.data && Array.isArray(response.data)) {
+      const transformed = transformRepos(response.data)
+      console.log('GitHub API 응답 (다이렉트):', transformed.length, '개 레포지토리')
       return transformed
     }
     console.warn('GitHub API 응답 형식이 예상과 다릅니다:', response.data)
     return []
   } catch (error) {
-    console.error('GitHub API 호출 실패:', error)
-    if (error.response) {
-      console.error('응답 상태:', error.response.status)
-      console.error('응답 데이터:', error.response.data)
-    } else if (error.request) {
-      console.error('요청이 전송되었지만 응답을 받지 못했습니다:', error.request)
-    } else {
-      console.error('요청 설정 중 오류 발생:', error.message)
-    }
+    console.error('Fallback GitHub API 호출 실패:', error.message)
     return []
   }
 }

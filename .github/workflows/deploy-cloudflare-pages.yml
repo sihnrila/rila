@@ -9,6 +9,8 @@ name: Deploy Cloudflare Pages
 on:
   push:
     branches: [main, master]
+  schedule:
+    - cron: '0 0 * * *' # 매일 자정(UTC 0시, KST 9시)에 자동으로 최신 블로그 및 깃허브 정보를 갱신하여 자동 빌드/배포
   workflow_dispatch:
 
 jobs:
@@ -34,3 +36,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=rila
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

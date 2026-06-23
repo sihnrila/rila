@@ -6,6 +6,9 @@ const TISTORY_BLOG_ID = 'rilaa' // 여기에 티스토리 블로그 ID 입력
 // RSS 피드 URL
 const TISTORY_RSS_URL = `https://${TISTORY_BLOG_ID}.tistory.com/rss`
 
+// Cloudflare Worker API Proxy URL
+const WORKER_PROXY_BASE = 'https://rila-github-api-proxy.sihnrila.workers.dev'
+
 // XML 파싱 헬퍼 함수
 const parseXML = (xmlString) => {
   const parser = new DOMParser()
@@ -90,87 +93,86 @@ const extractPostsFromRSS = (xmlDoc) => {
 }
 
 export const fetchTistoryPosts = async () => {
-  console.log('티스토리 RSS 피드 가져오기 시작:', TISTORY_RSS_URL)
+  console.log('티스토리 RSS 피드 가져오기 시작...');
   
+  // 1. 1차 로컬 프록시 또는 Pages Function 시도 (CORS 방지 및 로딩 속도 최적화)
   try {
-    // 먼저 직접 요청 시도
-    const response = await axios.get(TISTORY_RSS_URL, {
+    const proxyUrl = '/api/tistory/rss'
+    console.log('1차 프록시 요청 시도:', proxyUrl)
+    const proxyResponse = await axios.get(proxyUrl, {
       headers: {
-        'Accept': 'application/rss+xml, application/xml, text/xml'
-      }
+        'Accept': 'application/xml, text/xml'
+      },
+      timeout: 10000
     })
-
-    console.log('RSS 피드 응답 받음, 데이터 타입:', typeof response.data)
-    console.log('RSS 피드 응답 길이:', response.data?.length)
-
-    const xmlDoc = parseXML(response.data)
     
-    // 파싱 에러 확인
+    console.log('1차 프록시 응답 받음, 데이터 타입:', typeof proxyResponse.data)
+    const xmlDoc = parseXML(proxyResponse.data)
+    
     const parserError = xmlDoc.querySelector('parsererror')
     if (parserError) {
-      console.error('XML 파싱 에러:', parserError.textContent)
-      throw new Error('XML 파싱 실패')
+      console.error('1차 프록시 XML 파싱 에러:', parserError.textContent)
+      throw new Error('1차 프록시 XML 파싱 실패')
     }
-
+    
     const posts = extractPostsFromRSS(xmlDoc)
-    
-    console.log('티스토리 포스트 로드 완료:', posts.length, '개')
+    console.log('티스토리 포스트 로드 완료 (1차 프록시):', posts.length, '개')
     return posts
-  } catch (error) {
-    console.error('티스토리 RSS 피드 직접 요청 실패:', error)
-    console.error('에러 상세:', {
-      message: error.message,
-      code: error.code,
-      response: error.response?.status,
-      isCORS: error.message?.includes('CORS') || error.code === 'ERR_NETWORK'
-    })
+  } catch (proxyError) {
+    console.warn('1차 프록시 요청 실패, 2차 Cloudflare Worker 프록시 시도:', proxyError.message)
     
-    // CORS 에러인 경우 프록시를 통해 재시도
-    if (error.message?.includes('CORS') || error.code === 'ERR_NETWORK' || !error.response) {
-      try {
-        console.log('프록시를 통한 요청 시도:', `/api/tistory/rss`)
-        
-        // Vite dev: vite.config.js 프록시 → tistory.com/rss
-        // 프로덕션: Cloudflare Pages Function (functions/api/tistory/rss.js) → 동일 출처
-        const proxyUrl = '/api/tistory/rss'
-        
-        const proxyResponse = await axios.get(proxyUrl, {
-          headers: {
-            'Accept': 'application/xml, text/xml'
-          },
-          timeout: 10000
-        })
+    // 2. 2차 Cloudflare Worker 프록시 시도
+    try {
+      const workerProxyUrl = `${WORKER_PROXY_BASE}/api/tistory/rss?url=${encodeURIComponent(TISTORY_RSS_URL)}`
+      console.log('2차 프록시 요청 시도 (Worker):', workerProxyUrl)
+      const workerResponse = await axios.get(workerProxyUrl, {
+        headers: {
+          'Accept': 'application/xml, text/xml'
+        },
+        timeout: 10000
+      })
       
-      console.log('프록시 응답 받음, 데이터 타입:', typeof proxyResponse.data)
+      console.log('2차 프록시 응답 받음, 데이터 타입:', typeof workerResponse.data)
+      const xmlDoc = parseXML(workerResponse.data)
       
-      const xmlDoc = parseXML(proxyResponse.data)
-      
-      // 파싱 에러 확인
       const parserError = xmlDoc.querySelector('parsererror')
       if (parserError) {
-        console.error('프록시 XML 파싱 에러:', parserError.textContent)
-        throw new Error('프록시 XML 파싱 실패')
+        console.error('2차 프록시 XML 파싱 에러:', parserError.textContent)
+        throw new Error('2차 프록시 XML 파싱 실패')
       }
       
-        const posts = extractPostsFromRSS(xmlDoc)
-        
-        console.log('티스토리 포스트 로드 완료 (프록시):', posts.length, '개')
-        return posts
-      } catch (proxyError) {
-        console.error('프록시를 통한 요청도 실패:', proxyError)
-        console.error('프록시 에러 상세:', {
-          message: proxyError.message,
-          code: proxyError.code,
-          response: proxyError.response?.status,
-          statusText: proxyError.response?.statusText
+      const posts = extractPostsFromRSS(xmlDoc)
+      console.log('티스토리 포스트 로드 완료 (2차 프록시):', posts.length, '개')
+      return posts
+    } catch (workerError) {
+      console.warn('2차 프록시(Worker) 요청 실패, 다이렉트 RSS 호출(CORS 위험 있음) 시도:', workerError.message)
+      
+      // 3. 3차 직접 RSS 요청 시도 (CORS 위험 있음)
+      try {
+        console.log('다이렉트 RSS 피드 가져오기 시도:', TISTORY_RSS_URL)
+        const response = await axios.get(TISTORY_RSS_URL, {
+          headers: {
+            'Accept': 'application/rss+xml, application/xml, text/xml'
+          },
+          timeout: 5000
         })
-        // 프록시도 실패하면 빈 배열 반환
+
+        console.log('RSS 피드 응답 받음, 데이터 타입:', typeof response.data)
+        const xmlDoc = parseXML(response.data)
+        
+        const parserError = xmlDoc.querySelector('parsererror')
+        if (parserError) {
+          console.error('다이렉트 XML 파싱 에러:', parserError.textContent)
+          throw new Error('XML 파싱 실패')
+        }
+
+        const posts = extractPostsFromRSS(xmlDoc)
+        console.log('티스토리 포스트 로드 완료 (다이렉트):', posts.length, '개')
+        return posts
+      } catch (directError) {
+        console.error('티스토리 RSS 모든 요청 최종 실패:', directError.message)
         return []
       }
-    } else {
-      // CORS가 아닌 다른 에러인 경우
-      console.error('CORS가 아닌 다른 에러:', error)
-      return []
     }
   }
 }
