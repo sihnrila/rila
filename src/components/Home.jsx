@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchGitHubRepos, getLanguageColor } from '../services/github'
+import { fetchGitHubRepos, getLanguageColor, REPO_STATIC_SCREENSHOTS } from '../services/github'
 import { fetchTistoryPosts, getTistoryBlogUrl } from '../services/tistory'
 import DesignModals from './DesignModals'
 import profile01 from '../assets/img/profile01.jpeg'
@@ -511,11 +511,11 @@ const Home = () => {
                           >
                             <div
                               className="card_img"
-                              style={!repo.hasRealDemo ? { backgroundColor: getLanguageColor(repo.language) } : {}}
+                              style={!REPO_STATIC_SCREENSHOTS[repo.name] ? { backgroundColor: getLanguageColor(repo.language) } : {}}
                             >
-                              {repo.hasRealDemo ? (
+                              {REPO_STATIC_SCREENSHOTS[repo.name] ? (
                                 <img
-                                  src={`https://image.thum.io/get/width/1200/crop/800/${repo.homepage}`}
+                                  src={REPO_STATIC_SCREENSHOTS[repo.name]}
                                   alt={repo.name}
                                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
                                   onError={(e) => {

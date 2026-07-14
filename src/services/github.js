@@ -59,6 +59,15 @@ export const resolveRepoDemoUrl = (repoName, rawHomepage = '') => {
   return `https://${repoName}.pages.dev`
 }
 
+// 정적 스크린샷 이미지 (외부 API 불필요)
+export const REPO_STATIC_SCREENSHOTS = {
+  'sns': new URL('../assets/img/demos/sns.png', import.meta.url).href,
+  'detailpage-editor': new URL('../assets/img/demos/detailpage-editor.png', import.meta.url).href,
+  'monaco-editor': new URL('../assets/img/demos/monaco-editor.png', import.meta.url).href,
+  'together': new URL('../assets/img/demos/together.png', import.meta.url).href,
+  'Crossword-puzzle': new URL('../assets/img/demos/Crossword-puzzle.png', import.meta.url).href,
+}
+
 // 스크린샷을 표시할 레포 (확인된 라이브 URL만)
 export const SCREENSHOT_REPOS = new Set([
   'sns',
