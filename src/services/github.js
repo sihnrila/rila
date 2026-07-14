@@ -131,6 +131,17 @@ const transformRepos = (data) => {
   }))
 }
 
+const REPO_ORDER = [
+  'viewer',
+  'monaco-editor',
+  'SoneFe',
+  'jigoorang-adim',
+  'together',
+  'sns',
+  'wedding-editor',
+  'snudog',
+]
+
 export const fetchGitHubRepos = async () => {
   try {
     const response = await axios.get(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos`, {
@@ -150,6 +161,14 @@ export const fetchGitHubRepos = async () => {
       const apiNames = new Set(transformed.map(r => r.name))
       const extras = MANUAL_REPOS.filter(r => !apiNames.has(r.name))
       const all = [...transformed, ...extras]
+      all.sort((a, b) => {
+        const ai = REPO_ORDER.indexOf(a.name)
+        const bi = REPO_ORDER.indexOf(b.name)
+        if (ai !== -1 && bi !== -1) return ai - bi
+        if (ai !== -1) return -1
+        if (bi !== -1) return 1
+        return 0
+      })
       console.log('GitHub API 응답:', transformed.length, '개 + 수동', extras.length, '개')
       return all
     }
