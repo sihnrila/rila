@@ -76,6 +76,8 @@ export const REPO_STATIC_SCREENSHOTS = {
   'jigoorang-adim': new URL('../assets/img/demos/jigoorang-adim.png', import.meta.url).href,
   'PickUpDemo': new URL('../assets/img/demos/PickUpDemo.png', import.meta.url).href,
   'Seoul-private': new URL('../assets/img/demos/Seoul-private.png', import.meta.url).href,
+  'kyobo-web-viewer': new URL('../assets/img/demos/kyobo-web-viewer.png', import.meta.url).href,
+  'aladin-web-viewer': new URL('../assets/img/demos/aladin-web-viewer.png', import.meta.url).href,
 }
 
 // 스크린샷을 표시할 레포 (확인된 라이브 URL만)
@@ -93,10 +95,42 @@ export const SCREENSHOT_REPOS = new Set([
   'jigoorang-adim',
   'PickUpDemo',
   'Seoul-private',
+  'kyobo-web-viewer',
+  'aladin-web-viewer',
 ])
 
 // Private 또는 수동으로 추가할 레포 카드 목록
 export const MANUAL_REPOS = [
+  {
+    id: 'manual-kyobo-web-viewer',
+    name: 'kyobo-web-viewer',
+    description: '교보문고 DRM PDF/EPUB/만화 웹뷰어 (Node.js · PDF.js · Socket.IO)',
+    url: '',
+    homepage: '',
+    fork: false,
+    language: 'JavaScript',
+    stars: 0,
+    forks: 0,
+    updated: new Date().toISOString(),
+    topics: ['nodejs', 'pdf-viewer', 'drm', 'epub'],
+    hasRealDemo: true,
+    isPrivate: true,
+  },
+  {
+    id: 'manual-aladin-web-viewer',
+    name: 'aladin-web-viewer',
+    description: '알라딘 EPUB/PDF/오디오북/만화 웹뷰어 (Node.js · EPUB · TTS)',
+    url: '',
+    homepage: '',
+    fork: false,
+    language: 'JavaScript',
+    stars: 0,
+    forks: 0,
+    updated: new Date().toISOString(),
+    topics: ['nodejs', 'epub-viewer', 'drm', 'tts'],
+    hasRealDemo: true,
+    isPrivate: true,
+  },
   {
     id: 'manual-video_dl',
     name: 'video_dl',
@@ -188,6 +222,8 @@ export const PROFESSIONAL_REPOS = new Set([
   'SoneFe',
   'together',
   'Seoul-private',
+  'kyobo-web-viewer',
+  'aladin-web-viewer',
 ])
 
 const REPO_ORDER = [

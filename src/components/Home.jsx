@@ -551,15 +551,23 @@ const Home = () => {
                                 {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
                               </p>
                             <div className="card-meta">
-                              <span className="meta-item">
-                                <i className="fas fa-star"></i> {repo.stars}
-                              </span>
-                              <span className="meta-item">
-                                <i className="fas fa-code-branch"></i> {repo.forks}
-                              </span>
-                              <span className="meta-item">
-                                <i className="fas fa-external-link-alt"></i> Live Demo
-                              </span>
+                              {repo.isPrivate ? (
+                                <span className="meta-item">
+                                  <i className="fas fa-lock"></i> Private / Client Work
+                                </span>
+                              ) : (
+                                <>
+                                  <span className="meta-item">
+                                    <i className="fas fa-star"></i> {repo.stars}
+                                  </span>
+                                  <span className="meta-item">
+                                    <i className="fas fa-code-branch"></i> {repo.forks}
+                                  </span>
+                                  <span className="meta-item">
+                                    <i className="fas fa-external-link-alt"></i> Live Demo
+                                  </span>
+                                </>
+                              )}
                             </div>
                             </div>
                           </Link>

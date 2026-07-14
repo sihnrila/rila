@@ -158,14 +158,20 @@ const RepoDetail = () => {
           </div>
 
           <div className="project-links">
-            <a 
-              href={repo.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="project-link-button"
-            >
-              <i className="fab fa-github"></i> GITHUB
-            </a>
+            {repo.url ? (
+              <a
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-link-button"
+              >
+                <i className="fab fa-github"></i> GITHUB
+              </a>
+            ) : (
+              <span className="project-link-button" style={{ opacity: 0.4, cursor: 'default' }}>
+                <i className="fas fa-lock"></i> PRIVATE
+              </span>
+            )}
             {demoUrl && (
               <a
                 href={demoUrl}
