@@ -136,6 +136,8 @@ export const PROFESSIONAL_REPOS = new Set([
   'monaco-editor',
   'jigoorang-adim',
   'snudog',
+  'SoneFe',
+  'together',
 ])
 
 const REPO_ORDER = [
