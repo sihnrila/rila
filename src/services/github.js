@@ -151,7 +151,30 @@ const REPO_ORDER = [
   'snudog',
 ]
 
+const CACHE_KEY = 'github_repos_cache'
+const CACHE_TTL = 60 * 60 * 1000 // 1시간
+
+const sortRepos = (all) => {
+  all.sort((a, b) => {
+    const ai = REPO_ORDER.indexOf(a.name)
+    const bi = REPO_ORDER.indexOf(b.name)
+    if (ai !== -1 && bi !== -1) return ai - bi
+    if (ai !== -1) return -1
+    if (bi !== -1) return 1
+    return 0
+  })
+  return all
+}
+
 export const fetchGitHubRepos = async () => {
+  // 캐시 확인
+  try {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
+    if (cached && Date.now() - cached.ts < CACHE_TTL) {
+      return sortRepos(cached.data)
+    }
+  } catch {}
+
   try {
     const response = await axios.get(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos`, {
       params: {
@@ -166,18 +189,10 @@ export const fetchGitHubRepos = async () => {
 
     if (response.data && Array.isArray(response.data)) {
       const transformed = transformRepos(response.data)
-      // MANUAL_REPOS 중 API에서 이미 가져온 레포와 중복되지 않는 것만 추가
       const apiNames = new Set(transformed.map(r => r.name))
       const extras = MANUAL_REPOS.filter(r => !apiNames.has(r.name))
-      const all = [...transformed, ...extras]
-      all.sort((a, b) => {
-        const ai = REPO_ORDER.indexOf(a.name)
-        const bi = REPO_ORDER.indexOf(b.name)
-        if (ai !== -1 && bi !== -1) return ai - bi
-        if (ai !== -1) return -1
-        if (bi !== -1) return 1
-        return 0
-      })
+      const all = sortRepos([...transformed, ...extras])
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: all })) } catch {}
       console.log('GitHub API 응답:', transformed.length, '개 + 수동', extras.length, '개')
       return all
     }
@@ -185,14 +200,11 @@ export const fetchGitHubRepos = async () => {
     return []
   } catch (error) {
     console.error('GitHub API 호출 실패:', error)
-    if (error.response) {
-      console.error('응답 상태:', error.response.status)
-      console.error('응답 데이터:', error.response.data)
-    } else if (error.request) {
-      console.error('요청이 전송되었지만 응답을 받지 못했습니다:', error.request)
-    } else {
-      console.error('요청 설정 중 오류 발생:', error.message)
-    }
+    // rate limit 등 실패 시 만료된 캐시라도 반환
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
+      if (cached) return sortRepos(cached.data)
+    } catch {}
     return []
   }
 }
