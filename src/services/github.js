@@ -109,6 +109,36 @@ export const MANUAL_REPOS = [
   },
 ]
 
+const STATIC_FALLBACK_REPOS = [
+  { name: 'viewer',                    language: 'JavaScript', description: 'EPUB 웹뷰어' },
+  { name: 'monaco-editor',             language: 'JavaScript', description: '' },
+  { name: 'SoneFe',                    language: 'JavaScript', description: '' },
+  { name: 'jigoorang-adim',            language: 'HTML',       description: '' },
+  { name: 'together',                  language: 'Vue',        description: '' },
+  { name: 'sns',                       language: 'JavaScript', description: '' },
+  { name: 'wedding-editor',            language: 'JavaScript', description: '' },
+  { name: 'snudog',                    language: 'CSS',        description: '' },
+  { name: 'detailpage-editor',         language: 'TypeScript', description: '스마트스토어 상세페이지 자동 생성 에디터 (Vite + React + TypeScript)' },
+  { name: 'Crossword-puzzle',          language: 'JavaScript', description: '' },
+  { name: 'couple-maplibre-openfreemap', language: 'TypeScript', description: '' },
+  { name: 'PickUpDemo',                language: 'HTML',       description: '' },
+  { name: 'Seoul-private',             language: 'HTML',       description: '서울시 AR 뷰어 (3D/AR WebGL)' },
+  { name: 'rila',                      language: 'JavaScript', description: '' },
+].map(r => ({
+  id: r.name,
+  name: r.name,
+  description: r.description,
+  url: `https://github.com/sihnrila/${r.name}`,
+  homepage: resolveRepoDemoUrl(r.name, ''),
+  fork: false,
+  language: r.language,
+  stars: 0,
+  forks: 0,
+  updated: new Date().toISOString(),
+  topics: [],
+  hasRealDemo: SCREENSHOT_REPOS.has(r.name),
+}))
+
 const transformRepos = (data) => {
   if (!Array.isArray(data)) {
     console.error('GitHub API 응답이 배열이 아닙니다:', data)
@@ -200,12 +230,12 @@ export const fetchGitHubRepos = async () => {
     return []
   } catch (error) {
     console.error('GitHub API 호출 실패:', error)
-    // rate limit 등 실패 시 만료된 캐시라도 반환
+    // 캐시 → 정적 fallback 순으로 반환
     try {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
       if (cached) return sortRepos(cached.data)
     } catch {}
-    return []
+    return sortRepos([...STATIC_FALLBACK_REPOS])
   }
 }
 
