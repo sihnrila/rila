@@ -515,7 +515,7 @@ const Home = () => {
                             >
                               {repo.hasRealDemo ? (
                                 <img
-                                  src={`https://api.microlink.io?url=${encodeURIComponent(repo.homepage)}&screenshot=true&meta=false&embed=screenshot.url&force=true`}
+                                  src={`https://image.thum.io/get/width/1200/crop/800/${repo.homepage}`}
                                   alt={repo.name}
                                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
                                   onError={(e) => {
