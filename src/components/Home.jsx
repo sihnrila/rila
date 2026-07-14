@@ -511,7 +511,7 @@ const Home = () => {
                           >
                             <div
                               className="card_img"
-                              style={!REPO_STATIC_SCREENSHOTS[repo.name] ? { backgroundColor: getLanguageColor(repo.language) } : {}}
+                              style={!REPO_STATIC_SCREENSHOTS[repo.name] ? { backgroundColor: '#111' } : {}}
                             >
                               {REPO_STATIC_SCREENSHOTS[repo.name] ? (
                                 <img
@@ -520,7 +520,7 @@ const Home = () => {
                                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
                                   onError={(e) => {
                                     e.target.style.display = 'none'
-                                    e.target.parentElement.style.backgroundColor = getLanguageColor(repo.language)
+                                    e.target.parentElement.style.backgroundColor = '#111'
                                     e.target.parentElement.innerHTML = `<i class="fas fa-code"></i> ${repo.language || 'CODE'}`
                                   }}
                                 />
