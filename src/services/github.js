@@ -35,6 +35,8 @@ export const REPO_DEMO_URL_OVERRIDES = {
 
 }
 
+export const HIDDEN_REPOS = new Set(['PickUpDemo'])
+
 /**
  * 카드·상세에서 공통으로 사용하는 라이브 데모 URL
  * 1) GitHub 레포 Website(homepage) 2) REPO_DEMO_URL_OVERRIDES 3) *.pages.dev
@@ -73,6 +75,7 @@ export const REPO_STATIC_SCREENSHOTS = {
   'SoneFe': new URL('../assets/img/demos/SoneFe.png', import.meta.url).href,
   'jigoorang-adim': new URL('../assets/img/demos/jigoorang-adim.png', import.meta.url).href,
   'PickUpDemo': new URL('../assets/img/demos/PickUpDemo.png', import.meta.url).href,
+  'Seoul-private': new URL('../assets/img/demos/Seoul-private.png', import.meta.url).href,
 }
 
 // 스크린샷을 표시할 레포 (확인된 라이브 URL만)
@@ -89,10 +92,25 @@ export const SCREENSHOT_REPOS = new Set([
   'SoneFe',
   'jigoorang-adim',
   'PickUpDemo',
+  'Seoul-private',
 ])
 
 // Private 또는 수동으로 추가할 레포 카드 목록
 export const MANUAL_REPOS = [
+  {
+    id: 'manual-video_dl',
+    name: 'video_dl',
+    description: '유튜브 영상 다운로더',
+    url: 'https://github.com/sihnrila/video_dl',
+    homepage: '',
+    fork: false,
+    language: 'JavaScript',
+    stars: 0,
+    forks: 0,
+    updated: new Date().toISOString(),
+    topics: [],
+    hasRealDemo: false,
+  },
   {
     id: 'manual-viewer',
     name: 'viewer',
@@ -123,6 +141,7 @@ const STATIC_FALLBACK_REPOS = [
   { name: 'couple-maplibre-openfreemap', language: 'TypeScript', description: '' },
   { name: 'PickUpDemo',                language: 'HTML',       description: '' },
   { name: 'Seoul-private',             language: 'HTML',       description: '서울시 AR 뷰어 (3D/AR WebGL)' },
+  { name: 'video_dl',                  language: 'JavaScript', description: '유튜브 영상 다운로더' },
   { name: 'rila',                      language: 'JavaScript', description: '' },
 ].map(r => ({
   id: r.name,

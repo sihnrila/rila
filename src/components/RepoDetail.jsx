@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { getLanguageColor, resolveRepoDemoUrl } from '../services/github'
+import { getLanguageColor, resolveRepoDemoUrl, MANUAL_REPOS } from '../services/github'
 import axios from 'axios'
 
 const GITHUB_USERNAME = 'sihnrila'
@@ -17,6 +17,16 @@ const RepoDetail = () => {
   useEffect(() => {
     const loadRepo = async () => {
       setLoading(true)
+
+      // MANUAL_REPOS에 있으면 API 호출 없이 바로 사용
+      const manual = MANUAL_REPOS.find(r => r.name === repoName)
+      if (manual) {
+        setRepo(manual)
+        setDemoUrl(manual.homepage)
+        setLoading(false)
+        return
+      }
+
       try {
         // 저장소 정보 가져오기
         const response = await axios.get(`${GITHUB_API_BASE}/repos/${GITHUB_USERNAME}/${repoName}`, {
@@ -156,14 +166,16 @@ const RepoDetail = () => {
             >
               <i className="fab fa-github"></i> GITHUB
             </a>
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link-button"
-            >
-              <i className="fas fa-external-link-alt"></i> LIVE DEMO
-            </a>
+            {demoUrl && (
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-link-button"
+              >
+                <i className="fas fa-external-link-alt"></i> LIVE DEMO
+              </a>
+            )}
           </div>
 
           {repo.topics.length > 0 && (

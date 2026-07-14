@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchGitHubRepos, getLanguageColor, REPO_STATIC_SCREENSHOTS, PROFESSIONAL_REPOS } from '../services/github'
+import { fetchGitHubRepos, getLanguageColor, REPO_STATIC_SCREENSHOTS, PROFESSIONAL_REPOS, HIDDEN_REPOS } from '../services/github'
 import { fetchTistoryPosts, getTistoryBlogUrl } from '../services/tistory'
 import DesignModals from './DesignModals'
 import profile01 from '../assets/img/profile01.jpeg'
@@ -511,7 +511,7 @@ const Home = () => {
                     </div>
                   ) : (
                     repos
-                      .filter((repo) => !repo.fork && (
+                      .filter((repo) => !repo.fork && !HIDDEN_REPOS.has(repo.name) && (
                         activeTab === 'work'
                           ? PROFESSIONAL_REPOS.has(repo.name)
                           : !PROFESSIONAL_REPOS.has(repo.name)
