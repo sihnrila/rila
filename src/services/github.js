@@ -13,15 +13,15 @@ export const REPO_DEMO_URL_OVERRIDES = {
   rila: 'https://rila-5dl.pages.dev',
 
   tem: 'https://tem.pages.dev',
-  tem2: 'https://tem2.pages.dev',
-  'Seoul-private': 'https://Seoul-private.pages.dev',
+  'Seoul-private': 'https://seoul-private.pages.dev',
 
   sns: 'https://sns.pages.dev',
   'detailpage-editor': 'https://detailpage-editor.pages.dev',
 
   'wedding-editor': 'https://wedding-editor.pages.dev/start',
 
-  'monaco-editor': 'https://monaco-editor.pages.dev',
+  'monaco-editor': 'https://monaco-editor-aqn.pages.dev',
+  'viewer': 'https://viewer-9h6.pages.dev',
 
   together: 'https://together.pages.dev',
   'Crossword-puzzle': 'https://Crossword-puzzle.pages.dev',
@@ -33,11 +33,6 @@ export const REPO_DEMO_URL_OVERRIDES = {
   'jigoorang-adim': 'https://sihnrila.github.io/jigoorang-adim/',
   PickUpDemo: 'https://sihnrila.github.io/PickUpDemo/',
 
-  // 배포 주소 확인 후 수정 (현재는 관례상 pages.dev)
-  Flieupload_FE: 'https://Flieupload_FE.pages.dev',
-  JigooFe: 'https://JigooFe.pages.dev',
-  'Crossword-Generator': 'https://Crossword-Generator.pages.dev',
-  topichi_App: 'https://topichi_App.pages.dev',
 }
 
 /**
@@ -64,6 +59,40 @@ export const resolveRepoDemoUrl = (repoName, rawHomepage = '') => {
   return `https://${repoName}.pages.dev`
 }
 
+// 스크린샷을 표시할 레포 (확인된 라이브 URL만)
+export const SCREENSHOT_REPOS = new Set([
+  'sns',
+  'detailpage-editor',
+  'wedding-editor',
+  'monaco-editor',
+  'viewer',
+  'together',
+  'Crossword-puzzle',
+  'couple-maplibre-openfreemap',
+  'snudog',
+  'SoneFe',
+  'jigoorang-adim',
+  'PickUpDemo',
+])
+
+// Private 또는 수동으로 추가할 레포 카드 목록
+export const MANUAL_REPOS = [
+  {
+    id: 'manual-viewer',
+    name: 'viewer',
+    description: 'EPUB 뷰어',
+    url: 'https://github.com/sihnrila/viewer',
+    homepage: 'https://viewer-9h6.pages.dev',
+    fork: false,
+    language: 'JavaScript',
+    stars: 0,
+    forks: 0,
+    updated: new Date().toISOString(),
+    topics: [],
+    hasRealDemo: true,
+  },
+]
+
 const transformRepos = (data) => {
   if (!Array.isArray(data)) {
     console.error('GitHub API 응답이 배열이 아닙니다:', data)
@@ -82,6 +111,7 @@ const transformRepos = (data) => {
     forks: repo.forks_count,
     updated: repo.updated_at,
     topics: repo.topics || [],
+    hasRealDemo: SCREENSHOT_REPOS.has(repo.name),
   }))
 }
 
@@ -100,8 +130,12 @@ export const fetchGitHubRepos = async () => {
 
     if (response.data && Array.isArray(response.data)) {
       const transformed = transformRepos(response.data)
-      console.log('GitHub API 응답:', transformed.length, '개 레포지토리')
-      return transformed
+      // MANUAL_REPOS 중 API에서 이미 가져온 레포와 중복되지 않는 것만 추가
+      const apiNames = new Set(transformed.map(r => r.name))
+      const extras = MANUAL_REPOS.filter(r => !apiNames.has(r.name))
+      const all = [...transformed, ...extras]
+      console.log('GitHub API 응답:', transformed.length, '개 + 수동', extras.length, '개')
+      return all
     }
     console.warn('GitHub API 응답 형식이 예상과 다릅니다:', response.data)
     return []
