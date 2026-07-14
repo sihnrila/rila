@@ -7,7 +7,7 @@ import profile01 from '../assets/img/profile01.jpeg'
 import img02 from '../assets/img/img02.jpeg'
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState('design')
+  const [activeTab, setActiveTab] = useState('frontend')
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(true)
   const [tistoryPosts, setTistoryPosts] = useState([])
@@ -432,28 +432,28 @@ const Home = () => {
             </div>
             <div className="work-content">
           <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li 
-              className={`nav-item ${activeTab === 'design' ? 'active' : ''}`} 
+            <li
+              className={`nav-item ${activeTab === 'frontend' ? 'active' : ''}`}
               role="presentation"
             >
-              <button 
-                className="nav-link"
-                onClick={() => setActiveTab('design')}
-                type="button"
-              >
-                Design
-              </button>
-            </li>
-            <li 
-              className={`nav-item ${activeTab === 'frontend' ? 'active' : ''}`} 
-              role="presentation"
-            >
-              <button 
+              <button
                 className="nav-link"
                 onClick={() => setActiveTab('frontend')}
                 type="button"
               >
                 Markup / Frontend
+              </button>
+            </li>
+            <li
+              className={`nav-item ${activeTab === 'design' ? 'active' : ''}`}
+              role="presentation"
+            >
+              <button
+                className="nav-link"
+                onClick={() => setActiveTab('design')}
+                type="button"
+              >
+                Design
               </button>
             </li>
           </ul>
@@ -509,11 +509,24 @@ const Home = () => {
                           data-aos-anchor-placement="top-bottom"
                             style={{ textDecoration: 'none', color: 'inherit' }}
                           >
-                            <div 
+                            <div
                               className="card_img"
-                              style={{ backgroundColor: getLanguageColor(repo.language) }}
+                              style={!repo.hasRealDemo ? { backgroundColor: getLanguageColor(repo.language) } : {}}
                             >
-                              <i className="fas fa-code"></i> {repo.language || 'CODE'}
+                              {repo.hasRealDemo ? (
+                                <img
+                                  src={`https://api.microlink.io?url=${encodeURIComponent(repo.homepage)}&screenshot=true&meta=false&embed=screenshot.url&force=true`}
+                                  alt={repo.name}
+                                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
+                                  onError={(e) => {
+                                    e.target.style.display = 'none'
+                                    e.target.parentElement.style.backgroundColor = getLanguageColor(repo.language)
+                                    e.target.parentElement.innerHTML = `<i class="fas fa-code"></i> ${repo.language || 'CODE'}`
+                                  }}
+                                />
+                              ) : (
+                                <><i className="fas fa-code"></i> {repo.language || 'CODE'}</>
+                              )}
                             </div>
                           <div className="card-content">
                             <h3 className="card-title">{repo.name}</h3>
