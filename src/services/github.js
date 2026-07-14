@@ -15,7 +15,7 @@ export const REPO_DEMO_URL_OVERRIDES = {
   tem: 'https://tem.pages.dev',
   'Seoul-private': 'https://seoul-private.pages.dev',
 
-  sns: 'https://sns.pages.dev',
+  sns: 'https://sns-edy.pages.dev',
   'detailpage-editor': 'https://detailpage-editor.pages.dev',
 
   'wedding-editor': 'https://wedding-editor.pages.dev/start',
