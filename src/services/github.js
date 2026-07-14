@@ -131,6 +131,13 @@ const transformRepos = (data) => {
   }))
 }
 
+export const PROFESSIONAL_REPOS = new Set([
+  'viewer',
+  'monaco-editor',
+  'jigoorang-adim',
+  'snudog',
+])
+
 const REPO_ORDER = [
   'viewer',
   'monaco-editor',

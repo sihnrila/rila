@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchGitHubRepos, getLanguageColor, REPO_STATIC_SCREENSHOTS } from '../services/github'
+import { fetchGitHubRepos, getLanguageColor, REPO_STATIC_SCREENSHOTS, PROFESSIONAL_REPOS } from '../services/github'
 import { fetchTistoryPosts, getTistoryBlogUrl } from '../services/tistory'
 import DesignModals from './DesignModals'
 import profile01 from '../assets/img/profile01.jpeg'
 import img02 from '../assets/img/img02.jpeg'
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState('frontend')
+  const [activeTab, setActiveTab] = useState('work')
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(true)
   const [tistoryPosts, setTistoryPosts] = useState([])
@@ -433,15 +433,27 @@ const Home = () => {
             <div className="work-content">
           <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li
-              className={`nav-item ${activeTab === 'frontend' ? 'active' : ''}`}
+              className={`nav-item ${activeTab === 'work' ? 'active' : ''}`}
               role="presentation"
             >
               <button
                 className="nav-link"
-                onClick={() => setActiveTab('frontend')}
+                onClick={() => setActiveTab('work')}
                 type="button"
               >
-                Markup / Frontend
+                실무
+              </button>
+            </li>
+            <li
+              className={`nav-item ${activeTab === 'personal' ? 'active' : ''}`}
+              role="presentation"
+            >
+              <button
+                className="nav-link"
+                onClick={() => setActiveTab('personal')}
+                type="button"
+              >
+                개인 프로젝트
               </button>
             </li>
             <li
@@ -485,8 +497,8 @@ const Home = () => {
               </div>
             )}
 
-            {/* Frontend Tab */}
-            {activeTab === 'frontend' && (
+            {/* 실무 Tab */}
+            {(activeTab === 'work' || activeTab === 'personal') && (
               <div className="tab-pane fade show active">
                 <div className="card_cont">
                   {loading ? (
@@ -499,7 +511,11 @@ const Home = () => {
                     </div>
                   ) : (
                     repos
-                      .filter((repo) => !repo.fork)
+                      .filter((repo) => !repo.fork && (
+                        activeTab === 'work'
+                          ? PROFESSIONAL_REPOS.has(repo.name)
+                          : !PROFESSIONAL_REPOS.has(repo.name)
+                      ))
                       .map((repo) => (
                         <Link 
                           key={repo.id} 
