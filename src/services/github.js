@@ -66,6 +66,7 @@ export const REPO_STATIC_SCREENSHOTS = {
   'monaco-editor': new URL('../assets/img/demos/monaco-editor.png', import.meta.url).href,
   'together': new URL('../assets/img/demos/together.png', import.meta.url).href,
   'Crossword-puzzle': new URL('../assets/img/demos/Crossword-puzzle.png', import.meta.url).href,
+  'viewer': new URL('../assets/img/demos/viewer.png', import.meta.url).href,
 }
 
 // 스크린샷을 표시할 레포 (확인된 라이브 URL만)
