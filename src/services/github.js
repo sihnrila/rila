@@ -23,8 +23,8 @@ export const REPO_DEMO_URL_OVERRIDES = {
   'monaco-editor': 'https://monaco-editor-aqn.pages.dev',
   'viewer': 'https://viewer-9h6.pages.dev',
 
-  together: 'https://together.pages.dev',
-  'Crossword-puzzle': 'https://Crossword-puzzle.pages.dev',
+  together: 'https://together-921.pages.dev',
+  'Crossword-puzzle': 'https://crosswordpuzzle.pages.dev',
   'couple-maplibre-openfreemap': 'https://couple-maplibre-openfreemap.pages.dev',
 
   // GitHub Pages (User Pages 서브경로)
