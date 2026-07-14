@@ -67,6 +67,12 @@ export const REPO_STATIC_SCREENSHOTS = {
   'together': new URL('../assets/img/demos/together.png', import.meta.url).href,
   'Crossword-puzzle': new URL('../assets/img/demos/Crossword-puzzle.png', import.meta.url).href,
   'viewer': new URL('../assets/img/demos/viewer.png', import.meta.url).href,
+  'wedding-editor': new URL('../assets/img/demos/wedding-editor.png', import.meta.url).href,
+  'couple-maplibre-openfreemap': new URL('../assets/img/demos/couple-maplibre-openfreemap.png', import.meta.url).href,
+  'snudog': new URL('../assets/img/demos/snudog.png', import.meta.url).href,
+  'SoneFe': new URL('../assets/img/demos/SoneFe.png', import.meta.url).href,
+  'jigoorang-adim': new URL('../assets/img/demos/jigoorang-adim.png', import.meta.url).href,
+  'PickUpDemo': new URL('../assets/img/demos/PickUpDemo.png', import.meta.url).href,
 }
 
 // 스크린샷을 표시할 레포 (확인된 라이브 URL만)
