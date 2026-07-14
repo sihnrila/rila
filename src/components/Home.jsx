@@ -441,7 +441,7 @@ const Home = () => {
                 onClick={() => setActiveTab('work')}
                 type="button"
               >
-                실무
+                Work
               </button>
             </li>
             <li
@@ -453,7 +453,7 @@ const Home = () => {
                 onClick={() => setActiveTab('personal')}
                 type="button"
               >
-                개인 프로젝트
+                Personal
               </button>
             </li>
             <li

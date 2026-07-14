@@ -168,6 +168,7 @@ export const PROFESSIONAL_REPOS = new Set([
   'snudog',
   'SoneFe',
   'together',
+  'Seoul-private',
 ])
 
 const REPO_ORDER = [
