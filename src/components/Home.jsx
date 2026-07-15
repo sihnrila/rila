@@ -147,35 +147,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Capabilities Section */}
-        <section className="section-capabilities" id="capabilities" aria-labelledby="capabilities-title">
-          <div className="cap-container">
-            <h2 className="cap-heading" id="capabilities-title">핵심 역량</h2>
-            <div className="cap-grid">
-              <div className="cap-card">
-                <div className="cap-icon" aria-hidden="true"><i className="fas fa-code"></i></div>
-                <h3 className="cap-title">Frontend Development</h3>
-                <p className="cap-desc">웹 표준 기반의 구조적인 마크업, 반응형 UI, 상태 및 이벤트 기반 인터페이스 구현</p>
-              </div>
-              <div className="cap-card">
-                <div className="cap-icon" aria-hidden="true"><i className="fas fa-sitemap"></i></div>
-                <h3 className="cap-title">Service Architecture</h3>
-                <p className="cap-desc">서비스 흐름, 데이터 구조, API 연동 방식과 운영 구조를 함께 고려한 설계</p>
-              </div>
-              <div className="cap-card">
-                <div className="cap-icon" aria-hidden="true"><i className="fas fa-mobile-alt"></i></div>
-                <h3 className="cap-title">SDK & WebView</h3>
-                <p className="cap-desc">외부 서비스에서 재사용할 수 있는 JavaScript SDK와 iOS·Android WebView 연동 경험</p>
-              </div>
-              <div className="cap-card">
-                <div className="cap-icon" aria-hidden="true"><i className="fas fa-robot"></i></div>
-                <h3 className="cap-title">AI-assisted Workflow</h3>
-                <p className="cap-desc">생성형 AI를 활용한 데이터 생성, 검수, 문서화 및 반복 개발 업무 자동화</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Section 02 - About Me */}
         <section className="section02" id="aboutMe">
           <div className="about-container">
@@ -184,14 +155,14 @@ const Home = () => {
                 <span className="title-line">ABOUT ME</span>
               </h2>
             </div>
-            
+
             <div className="about-content">
               <div className="about-text">
                 <div className="about-intro">
                   <p className="intro-large">Frontend</p>
                   <p className="intro-large">Developer</p>
                 </div>
-                
+
                 <div className="about-description">
                   <div className="desc-item">
                     <span className="desc-number">01</span>
@@ -233,6 +204,32 @@ const Home = () => {
                   <span>이력서 보기</span>
                   <i className="fas fa-arrow-right"></i>
                 </Link>
+              </div>
+            </div>
+
+            <div className="about-capabilities">
+              <h3 className="about-cap-heading">핵심 역량</h3>
+              <div className="cap-grid">
+                <div className="cap-card">
+                  <div className="cap-icon" aria-hidden="true"><i className="fas fa-code"></i></div>
+                  <h4 className="cap-title">Frontend Development</h4>
+                  <p className="cap-desc">웹 표준 기반의 구조적인 마크업, 반응형 UI, 상태 및 이벤트 기반 인터페이스 구현</p>
+                </div>
+                <div className="cap-card">
+                  <div className="cap-icon" aria-hidden="true"><i className="fas fa-sitemap"></i></div>
+                  <h4 className="cap-title">Service Architecture</h4>
+                  <p className="cap-desc">서비스 흐름, 데이터 구조, API 연동 방식과 운영 구조를 함께 고려한 설계</p>
+                </div>
+                <div className="cap-card">
+                  <div className="cap-icon" aria-hidden="true"><i className="fas fa-mobile-alt"></i></div>
+                  <h4 className="cap-title">SDK & WebView</h4>
+                  <p className="cap-desc">외부 서비스에서 재사용할 수 있는 JavaScript SDK와 iOS·Android WebView 연동 경험</p>
+                </div>
+                <div className="cap-card">
+                  <div className="cap-icon" aria-hidden="true"><i className="fas fa-robot"></i></div>
+                  <h4 className="cap-title">AI-assisted Workflow</h4>
+                  <p className="cap-desc">생성형 AI를 활용한 데이터 생성, 검수, 문서화 및 반복 개발 업무 자동화</p>
+                </div>
               </div>
             </div>
           </div>
