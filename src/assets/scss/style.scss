@@ -3089,6 +3089,301 @@ button:focus-visible {
 }
 
 
+// ─── Repo Detail Page ──────────────────────────────────────────────────────
+.repo-detail-page {
+  min-height: calc(100vh - 80px);
+  padding: 7rem 6rem 8rem;
+  background: $bg-white;
+  margin-top: 80px;
+}
+
+.repo-detail-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.repo-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: transparent;
+  border: 1px solid $border-color;
+  color: $text-dark;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+  margin-bottom: 3.5rem;
+
+  &:hover {
+    border-color: $text-dark;
+    background: $bg-dark;
+    color: $bg-white;
+  }
+}
+
+.repo-hero-figure {
+  margin: 0 0 3rem;
+
+  .repo-hero-img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+
+  .repo-hero-caption {
+    font-size: 0.72rem;
+    color: $text-light;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.6rem;
+  }
+}
+
+.repo-detail-header {
+  margin-bottom: 4rem;
+
+  .repo-detail-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 900;
+    color: $text-dark;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem;
+  }
+
+  .repo-detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .repo-meta-period {
+    font-size: 0.8rem;
+    color: $text-light;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    i { color: $text-dark; }
+  }
+
+  .repo-meta-role {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    background: $bg-dark;
+    color: $bg-white;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  .repo-detail-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+
+    .repo-tag-item {
+      padding: 0.25rem 0.65rem;
+      border: 1px solid $border-color;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: $text-dark;
+      letter-spacing: 0.03em;
+    }
+  }
+}
+
+.repo-detail-body {
+  border-top: 1px solid $border-color;
+}
+
+.repo-section {
+  padding: 3rem 0;
+  border-bottom: 1px solid $border-color;
+
+  .repo-section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: $text-light;
+    margin: 0 0 1.5rem;
+  }
+
+  .repo-section-text {
+    font-size: 0.95rem;
+    color: $text-dark;
+    line-height: 1.8;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .repo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    li {
+      font-size: 0.93rem;
+      color: $text-dark;
+      line-height: 1.7;
+      padding-left: 1.25rem;
+      position: relative;
+
+      &::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: $text-light;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .repo-techstack-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .repo-tech-item {
+      padding: 0.35rem 0.85rem;
+      background: $bg-light;
+      border: 1px solid $border-color;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: $text-dark;
+      letter-spacing: 0.03em;
+    }
+  }
+}
+
+.repo-challenge {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-color;
+  margin-bottom: 1rem;
+
+  &:last-child { margin-bottom: 0; }
+
+  .challenge-row {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child { border-bottom: none; }
+  }
+
+  .challenge-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $text-light;
+    padding-top: 0.2rem;
+  }
+
+  .challenge-text {
+    font-size: 0.9rem;
+    color: $text-dark;
+    line-height: 1.7;
+    margin: 0;
+  }
+}
+
+.repo-detail-footer {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.repo-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: 1px solid $text-dark;
+
+  &.repo-link-github {
+    background: transparent;
+    color: $text-dark;
+
+    &:hover {
+      background: $bg-dark;
+      color: $bg-white;
+    }
+  }
+
+  &.repo-link-demo {
+    background: $bg-dark;
+    color: $bg-white;
+
+    &:hover {
+      background: transparent;
+      color: $text-dark;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .repo-detail-page {
+    padding: 6rem 4rem 6rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .repo-detail-page {
+    padding: 5rem 1.5rem 5rem;
+  }
+
+  .repo-back-btn {
+    margin-bottom: 2.5rem;
+  }
+
+  .repo-hero-figure .repo-hero-img {
+    max-height: 240px;
+  }
+
+  .repo-section {
+    padding: 2.5rem 0;
+  }
+
+  .repo-challenge .challenge-row {
+    grid-template-columns: 3.5rem 1fr;
+  }
+
+  .repo-detail-footer {
+    padding-top: 2.5rem;
+  }
+}
+
 // ─── Project card enhancements ─────────────────────────────────────────────
 .card-period {
   font-size: 0.75rem;

@@ -58,7 +58,7 @@ export const resolveRepoDemoUrl = (repoName, rawHomepage = '') => {
     return REPO_DEMO_URL_OVERRIDES[repoName]
   }
 
-  return `https://${repoName}.pages.dev`
+  return ''
 }
 
 // 정적 스크린샷 이미지 (외부 API 불필요)
