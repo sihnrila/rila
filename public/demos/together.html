@@ -64,7 +64,7 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
 .header.header2 .back{width:42px;height:42px;border-bottom:1px solid #fff;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/icon-back-1.png) center no-repeat;background-size:42px;position:absolute;top:12px;left:5px;}
 
 .map2{width:100%;height:100%;position:relative;}
-.map2 .gradi{width:100%;height:100%;opacity:0.2;background-blend-mode:overlay;background-image:linear-gradient(179deg,#3042CD 24%,#FF2BB9 104%);position:absolute;top:0;left:0;}
+.map2 .gradi{width:100%;height:100%;opacity:0.2;background-blend-mode:overlay;background-image:linear-gradient(179deg,#3042CD 24%,#FF2BB9 104%);position:absolute;top:0;left:0;pointer-events:none;z-index:1000;}
 .map2 .mak{width:45px;height:56px;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/icon-mk.png) no-repeat center;background-size:45px 56px;position:absolute;top:30%;right:20%;}
 .map2 .mak2{width:45px;height:56px;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/icon-mk2.png) no-repeat center;background-size:45px 56px;position:absolute;top:50%;right:70%;}
 .map2 .mak3{width:45px;height:56px;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/icon-mk3.png) no-repeat center top;background-size:45px 56px;position:absolute;top:40%;right:80%;}
@@ -176,6 +176,7 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
     <div class="body body3">
       <div class="map2" id="map">
         <div id="leaflet-map"></div>
+        <div class="gradi"></div>
         <div class="side_bar" id="side_bar">
           <div id="sb-btn1" class="tab4" onclick="setSideBar(0)"></div>
           <div id="sb-btn2" class="tab2" onclick="setSideBar(1)"></div>
@@ -544,6 +545,8 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
 <script>
 var mapInitialized = false;
 var sideBarState = 0;
+var leafletMap = null;
+var leafletMarkers = [];
 
 setTimeout(function() {
   document.getElementById('view-splash').style.display = 'none';
@@ -560,6 +563,7 @@ function switchTab(tab) {
   if (tab === 'map') {
     document.getElementById('view-map').style.display = 'block';
     if (!mapInitialized) initLeafletMap();
+    else if (leafletMap) setTimeout(function() { leafletMap.invalidateSize(); }, 100);
   } else if (tab === 'community') {
     document.getElementById('view-community').style.display = 'block';
   } else if (tab === 'campaign') {
@@ -580,10 +584,17 @@ function setSideBar(state) {
   if (state === 0) {
     btn1.className = 'tab4'; btn2.className = 'tab2'; btn3.className = 'tab3';
   } else if (state === 1) {
-    btn1.className = 'tab'; btn2.className = 'tab2'; btn3.className = 'tab6';
-  } else if (state === 2) {
     btn1.className = 'tab'; btn2.className = 'tab5'; btn3.className = 'tab3';
+  } else if (state === 2) {
+    btn1.className = 'tab'; btn2.className = 'tab2'; btn3.className = 'tab6';
   }
+
+  if (!leafletMap || !leafletMarkers.length) return;
+  leafletMarkers.forEach(function(s) {
+    var show = state === 0 || s.cat === ['', 'env', 'community'][state];
+    if (show) { if (!leafletMap.hasLayer(s.lm)) leafletMap.addLayer(s.lm); }
+    else       { if (leafletMap.hasLayer(s.lm))  leafletMap.removeLayer(s.lm); }
+  });
 }
 
 function setFilter(btn) {
@@ -638,37 +649,33 @@ function initLeafletMap() {
   if (typeof L === 'undefined') return;
   mapInitialized = true;
 
-  var map = L.map('leaflet-map', { zoomControl: true, attributionControl: true })
-    .setView([37.5535, 126.9254], 14); // 서울 마포구 중심
+  leafletMap = L.map('leaflet-map', { zoomControl: true, attributionControl: true })
+    .setView([37.5535, 126.9254], 14);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
-  }).addTo(map);
+  }).addTo(leafletMap);
 
-  var markerColor = '#3042CD';
-  function makeIcon(emoji) {
-    return L.divIcon({
-      html: '<div style="background:linear-gradient(135deg,#3042CD,#FF2BB9);width:40px;height:40px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 3px 10px rgba(48,66,205,0.4);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:16px;line-height:40px;display:block;text-align:center;">' + emoji + '</span></div>',
-      className: '',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-      popupAnchor: [0, -44]
-    });
+  var BASE = 'https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/';
+  function makeIcon(n) {
+    return L.icon({ iconUrl: BASE + 'icon-mk' + (n > 1 ? n : '') + '.png', iconSize: [45, 56], iconAnchor: [22, 56], popupAnchor: [0, -60] });
   }
 
   var spots = [
-    { lat: 37.5560, lng: 126.9200, emoji: '🌿', name: '망원 한강공원 플로깅', desc: '매주 토요일 오전 10시 · 환경 활동' },
-    { lat: 37.5510, lng: 126.9310, emoji: '🐾', name: '홍대 유기동물 입양 카페', desc: '입양 상담 · 임보 연결' },
-    { lat: 37.5580, lng: 126.9150, emoji: '📚', name: '마포 아동센터 코딩 봉사', desc: '매주 토요일 오후 2시 · 교육 봉사' },
-    { lat: 37.5490, lng: 126.9270, emoji: '♻️', name: '합정 텀블러 챌린지 거점', desc: '텀블러 인증 포인트 적립 가능' },
-    { lat: 37.5620, lng: 126.9230, emoji: '🌳', name: '망원동 나무 심기 프로젝트', desc: '이달의 캠페인 · 2,341명 참여중' }
+    { lat: 37.5560, lng: 126.9200, icon: 1, cat: 'env',       name: '망원 한강공원 플로깅',     desc: '매주 토요일 오전 10시 · 환경 활동' },
+    { lat: 37.5510, lng: 126.9310, icon: 2, cat: 'community',  name: '홍대 유기동물 입양 카페',   desc: '입양 상담 · 임보 연결' },
+    { lat: 37.5580, lng: 126.9150, icon: 1, cat: 'env',        name: '마포 아동센터 코딩 봉사',   desc: '매주 토요일 오후 2시 · 교육 봉사' },
+    { lat: 37.5490, lng: 126.9270, icon: 3, cat: 'env',        name: '합정 텀블러 챌린지 거점',  desc: '텀블러 인증 포인트 적립 가능' },
+    { lat: 37.5620, lng: 126.9230, icon: 2, cat: 'community',  name: '망원동 나무 심기 프로젝트', desc: '이달의 캠페인 · 2,341명 참여중' }
   ];
 
+  leafletMarkers = [];
   spots.forEach(function(s) {
-    L.marker([s.lat, s.lng], { icon: makeIcon(s.emoji) })
-      .addTo(map)
-      .bindPopup('<strong>' + s.name + '</strong>' + s.desc);
+    s.lm = L.marker([s.lat, s.lng], { icon: makeIcon(s.icon) })
+      .addTo(leafletMap)
+      .bindPopup('<strong>' + s.name + '</strong><br>' + s.desc);
+    leafletMarkers.push(s);
   });
 }
 </script>
