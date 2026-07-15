@@ -125,12 +125,10 @@ const Home = () => {
               <span className="line line-3" aria-hidden="true">PORTFOLIO</span>
             </h1>
             <p className="hero-identity">
-              서비스 구조와 사용자 경험을 함께 설계하는{' '}
-              <strong>프론트엔드 개발자 신리라</strong>입니다.
+              서비스 구조와 사용자 경험을 함께 설계하는 프론트엔드 개발자입니다.
             </p>
             <p className="hero-desc">
-              EPUB 웹뷰어, 교육 게임 플랫폼, 운영 CMS와 API 연동 프로젝트를 수행했습니다.<br className="br-desktop" />
-              화면 구현을 넘어 데이터 구조, 서비스 흐름, SDK, 관리자 기능과 운영 환경까지 함께 설계합니다.
+              EPUB 웹뷰어, 교육 게임 플랫폼, CMS·API 연동 프로젝트를 수행했습니다.
             </p>
             <div className="hero-cta">
               <a href="#work" className="cta-btn cta-primary" onClick={(e) => { e.preventDefault(); scrollToSection('work') }}>
@@ -139,12 +137,14 @@ const Home = () => {
               <a href="/resume" className="cta-btn cta-secondary">
                 이력서 보기
               </a>
-              <a href="https://github.com/sihnrila" target="_blank" rel="noopener noreferrer" className="cta-btn cta-ghost" aria-label="GitHub 프로필">
-                <i className="fab fa-github" aria-hidden="true"></i> GitHub
-              </a>
-              <a href="mailto:oo8923@gmail.com" className="cta-btn cta-ghost" aria-label="이메일 보내기">
-                <i className="fas fa-envelope" aria-hidden="true"></i> 이메일
-              </a>
+              <div className="hero-links">
+                <a href="https://github.com/sihnrila" target="_blank" rel="noopener noreferrer" className="hero-icon-link" aria-label="GitHub 프로필">
+                  <i className="fab fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="mailto:oo8923@gmail.com" className="hero-icon-link" aria-label="이메일 보내기">
+                  <i className="fas fa-envelope" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
           </div>
           <div className="scroll-indicator" aria-hidden="true">
