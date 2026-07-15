@@ -49,6 +49,7 @@ const Home = () => {
   useEffect(() => {
     const heroTitle = document.querySelector('.hero-title')
     if (!heroTitle) return
+    if (window.matchMedia('(hover: none)').matches) return
 
     const handleMouseMove = (e) => {
       const rect = heroTitle.getBoundingClientRect()
