@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoneFe — 영역 설정 데모</title>
+  <script src="https://unpkg.com/fabric@4.0.0-beta.12/dist/fabric.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+  <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+      background: #f4f5f7;
+      color: #1a1a2e;
+      min-height: 100vh;
+      font-size: 14px;
+    }
+
+    /* ── Header ── */
+    .app-header {
+      background: #fff;
+      border-bottom: 1px solid #e2e4e8;
+      padding: 0 1.5rem;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .app-header h1 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #111;
+    }
+    .header-badge {
+      font-size: 0.68rem;
+      background: #eff3ff;
+      color: #3b5bdb;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Main layout ── */
+    .app-body {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 1.25rem;
+      padding: 1.25rem 1.5rem 0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── Panel ── */
+    .panel {
+      background: #fff;
+      border: 1px solid #e2e4e8;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .panel-label {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid #e2e4e8;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+    }
+    .panel-body { padding: 1rem; }
+
+    /* ── Video + Canvas ── */
+    .video-panel .panel-body { padding: 0; }
+    .canvas-wrapper {
+      position: relative;
+      width: 700px;
+      height: 380px;
+      background: #000;
+      overflow: hidden;
+    }
+    .canvas-wrapper video {
+      width: 700px;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+    .canvas-container {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      z-index: 10 !important;
+    }
+    .draw-hint {
+      font-size: 0.72rem;
+      color: #aaa;
+      padding: 0.5rem 1rem;
+      background: #fafafa;
+      border-top: 1px solid #e2e4e8;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* ── Event tags ── */
+    .hint-text {
+      font-size: 0.72rem;
+      color: #aaa;
+      margin-bottom: 0.6rem;
+    }
+    .event-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .event-tag {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: grab;
+      border: none;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      user-select: none;
+    }
+    .event-tag:active { cursor: grabbing; }
+    .event-tag:hover { transform: translateY(-1px); filter: brightness(0.93); }
+
+    .tag-blue   { background: #dbe4ff; color: #3b5bdb; }
+    .tag-red    { background: #ffe3e3; color: #c92a2a; }
+    .tag-orange { background: #fff3bf; color: #e67700; }
+    .tag-green  { background: #d3f9d8; color: #2f9e44; }
+    .tag-purple { background: #f3d9fa; color: #862e9c; }
+    .tag-gray   { background: #f1f3f5; color: #495057; }
+
+    /* ── Draw tools ── */
+    .draw-tools { display: flex; flex-direction: column; gap: 0.4rem; }
+    .draw-btn {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid #e2e4e8;
+      border-radius: 6px;
+      background: #fff;
+      color: #333;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .draw-btn:hover:not(:disabled) { background: #f8f9fa; border-color: #ccc; }
+    .draw-btn:disabled { opacity: 0.38; cursor: not-allowed; }
+    .draw-btn.active { background: #eff3ff; border-color: #4c6ef5; color: #3b5bdb; }
+    .draw-btn.danger { color: #c92a2a; border-color: #ffe3e3; }
+    .draw-btn.danger:hover:not(:disabled) { background: #fff5f5; }
+    .draw-btn.primary { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+    .draw-btn.primary:hover:not(:disabled) { background: #2d2d44; }
+    .draw-btn .btn-icon { width: 16px; text-align: center; font-style: normal; }
+    .divider { border: none; border-top: 1px solid #e2e4e8; margin: 0.2rem 0; }
+
+    /* ── Timeline ── */
+    .timeline-wrap {
+      max-width: 1100px;
+      margin: 1.25rem auto 1.5rem;
+      padding: 0 1.5rem;
+    }
+    #visualization { border: none; min-height: 220px; }
+
+    /* vis.js overrides */
+    .vis-timeline { border: none !important; background: #fff; }
+    .vis-panel.vis-background { background: #fff !important; }
+    .vis-time-axis .vis-text {
+      color: #888 !important;
+      font-size: 0.7rem !important;
+      background: transparent !important;
+      padding: 6px !important;
+    }
+    .vis-labelset .vis-label .vis-inner {
+      font-size: 0.78rem;
+      color: #555;
+      font-weight: 600;
+      padding: 4px 10px;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+    .vis-panel.vis-center { border-top: 1px solid #e2e4e8 !important; border-bottom: none !important; }
+    .vis-panel.vis-left { border-right: 1px solid #e2e4e8 !important; }
+    .vis-time-axis .vis-grid { border-right: 1px solid #f0f0f0 !important; }
+    .vis-foreground .vis-group { border-bottom: 1px solid #f4f5f7 !important; }
+    .vis-item {
+      font-size: 0.72rem !important;
+      border: none !important;
+      border-radius: 4px !important;
+      color: #fff !important;
+      padding: 2px 8px !important;
+    }
+    .vis-item.vis-selected { opacity: 0.85; border: none !important; }
+    .vis-item .vis-delete:after { color: rgba(255,255,255,0.9); font-size: 15px; }
+    .vis-item .vis-delete { right: -22px; }
+    .vis-item-content { transform: none !important; }
+    .vis-label .vis-inner { min-height: 36px !important; }
+    .vis-panel.vis-top,
+    .vis-panel.vis-bottom { border: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="app-header">
+  <h1>SONEFE</h1>
+  <span class="header-badge">영역 설정 데모</span>
+</header>
+
+<!-- Main -->
+<div class="app-body">
+
+  <!-- Video + Canvas -->
+  <div class="panel video-panel">
+    <div class="panel-label">CCTV 영상</div>
+    <div class="canvas-wrapper">
+      <video id="videoElement" autoplay muted loop playsinline>
+        <source src="https://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+      </video>
+      <canvas id="canvas" width="700" height="380"></canvas>
+    </div>
+    <div class="draw-hint">첫 번째 점을 다시 클릭하면 다각형이 완성됩니다 · Alt + 드래그로 캔버스 이동</div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <!-- Event tags -->
+    <div class="panel">
+      <div class="panel-label">이벤트 태그</div>
+      <div class="panel-body">
+        <p class="hint-text">타임라인으로 드래그하세요</p>
+        <div class="event-tags" id="btn03"></div>
+      </div>
+    </div>
+
+    <!-- Draw tools -->
+    <div class="panel">
+      <div class="panel-label">드로잉 도구</div>
+      <div class="panel-body">
+        <div class="draw-tools">
+          <button class="draw-btn dr" id="drawing" type="button" disabled>
+            <i class="btn-icon">✏</i> 영역 그리기
+          </button>
+          <button class="draw-btn dr" id="edit" type="button" disabled>
+            <i class="btn-icon">◎</i> 꼭짓점 편집
+          </button>
+          <button class="draw-btn dr" id="resize" type="button" disabled>
+            <i class="btn-icon">⤢</i> 이동 / 크기
+          </button>
+          <hr class="divider">
+          <button class="draw-btn danger" id="remove" type="button">
+            <i class="btn-icon">✕</i> 전체 지우기
+          </button>
+          <button class="draw-btn primary" id="save" type="button">
+            <i class="btn-icon">↓</i> 저장
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Timeline -->
+<div class="timeline-wrap">
+  <div class="panel">
+    <div class="panel-label">타임라인</div>
+    <div id="visualization"></div>
+  </div>
+</div>
+
+
+<!-- ── polygon ── -->
+<script>
+let activeLine, activeShape, canvas;
+let lineArray = [], pointArray = [], obj = [], lcArr = [];
+const listColor = ['#4c6ef5','#2f9e44','#e67700','#c92a2a','#862e9c','#0c8599'];
+let drawMode = false;
+
+function initCanvas() {
+  canvas = new fabric.Canvas('canvas', { width: 700, height: 380 });
+  fabric.Object.prototype.originX = 'center';
+  fabric.Object.prototype.originY = 'center';
+  canvas.on('mouse:down', onMouseDown);
+  canvas.on('mouse:up',   onMouseUp);
+  canvas.on('mouse:move', onMouseMove);
+  canvas.on('object:moving', onObjectMove);
+}
+
+function onMouseDown(options) {
+  if (drawMode) {
+    if (options.target && options.target.id === pointArray[0].id) {
+      generatePolygon(pointArray);
+    } else {
+      addPoint(options);
+    }
+  }
+  const evt = options.e;
+  if (evt.altKey) {
+    this.isDragging = true;
+    this.selection = false;
+    this.lastPosX = evt.clientX;
+    this.lastPosY = evt.clientY;
+  }
+}
+
+function onMouseUp() { this.isDragging = false; this.selection = true; }
+
+function onMouseMove(options) {
+  if (this.isDragging) {
+    const e = options.e;
+    this.viewportTransform[4] += e.clientX - this.lastPosX;
+    this.viewportTransform[5] += e.clientY - this.lastPosY;
+    this.requestRenderAll();
+    this.lastPosX = e.clientX;
+    this.lastPosY = e.clientY;
+  }
+  if (drawMode && activeLine && activeLine.class === 'line') {
+    const p = canvas.getPointer(options.e);
+    activeLine.set({ x2: p.x, y2: p.y });
+    const pts = activeShape.get('points');
+    pts[pointArray.length] = { x: p.x, y: p.y };
+    activeShape.set({ points: pts });
+    canvas.renderAll();
+  }
+}
+
+function onObjectMove(opt) {
+  opt.target._calcDimensions();
+  opt.target.setCoords();
+  canvas.renderAll();
+}
+
+function toggleDrawPolygon() {
+  if (drawMode) {
+    activeLine = null; activeShape = null;
+    lineArray = []; pointArray = [];
+    canvas.selection = true;
+    canvas.backgroundColor = '';
+    drawMode = false;
+    $('#drawing').removeClass('active');
+  } else {
+    canvas.selection = false;
+    canvas.backgroundColor = 'rgba(0,0,0,0.12)';
+    drawMode = true;
+    $('#drawing').addClass('active');
+  }
+  canvas.renderAll();
+}
+
+function addPoint(options) {
+  const lx = options.e.layerX / canvas.getZoom();
+  const ly = options.e.layerY / canvas.getZoom();
+
+  const point = new fabric.Circle({
+    id: new Date().getTime(), radius: 5,
+    fill: pointArray.length === 0 ? '#fff' : '#4c6ef5',
+    stroke: 'rgba(255,255,255,0.6)', strokeWidth: 1.5,
+    left: lx, top: ly,
+    selectable: false, hasBorders: false, hasControls: false,
+    originX: 'center', originY: 'center', objectCaching: false,
+  });
+
+  const line = new fabric.Line([lx, ly, lx, ly], {
+    strokeWidth: 1.5, stroke: '#4c6ef5', fill: 'transparent',
+    originX: 'center', originY: 'center',
+    selectable: false, hasBorders: false, hasControls: false,
+    evented: false, objectCaching: false,
+  });
+  line.class = 'line';
+
+  const color = '#4c6ef5';
+  if (activeShape) {
+    const pts = activeShape.get('points');
+    pts.push({ x: canvas.getPointer(options.e).x, y: canvas.getPointer(options.e).y });
+    const poly = new fabric.Polygon(pts, {
+      stroke: color, strokeWidth: 1.5, fill: color + '22',
+      selectable: false, hasBorders: false, hasControls: false,
+      evented: false, objectCaching: false,
+    });
+    canvas.remove(activeShape);
+    canvas.add(poly);
+    activeShape = poly;
+  } else {
+    const poly = new fabric.Polygon([{ x: lx, y: ly }], {
+      stroke: color, strokeWidth: 1.5, fill: color + '22',
+      selectable: false, hasBorders: false, hasControls: false,
+      evented: false, objectCaching: false,
+    });
+    activeShape = poly;
+    canvas.add(poly);
+  }
+
+  activeLine = line;
+  pointArray.push(point);
+  lineArray.push(line);
+  canvas.add(line);
+  canvas.add(point);
+}
+
+function generatePolygon(pointArray) {
+  const points = pointArray.map(p => { canvas.remove(p); return { x: p.left, y: p.top }; });
+  obj.push(points);
+  lineArray.forEach(l => canvas.remove(l));
+  canvas.remove(activeShape).remove(activeLine);
+
+  const c = listColor[(obj.length - 1) % listColor.length];
+  canvas.add(new fabric.Polygon(points, {
+    id: new Date().getTime(),
+    stroke: c, fill: c + '2e', strokeWidth: 2,
+    objectCaching: false, selectable: true,
+  }));
+  canvas.renderAll();
+  lcArr.push(obj);
+  toggleDrawPolygon();
+}
+
+function polygonPositionHandler(dim, finalMatrix, o) {
+  const x = o.points[this.pointIndex].x - o.pathOffset.x;
+  const y = o.points[this.pointIndex].y - o.pathOffset.y;
+  return fabric.util.transformPoint({ x, y },
+    fabric.util.multiplyTransformMatrices(o.canvas.viewportTransform, o.calcTransformMatrix())
+  );
+}
+
+function actionHandler(eventData, transform, x, y) {
+  const polygon = transform.target;
+  const ctrl = polygon.controls[polygon.__corner];
+  const mlp = polygon.toLocalPoint(new fabric.Point(x, y), 'center', 'center');
+  const base = polygon._getNonTransformedDimensions();
+  const size = polygon._getTransformedDimensions(0, 0);
+  polygon.points[ctrl.pointIndex] = {
+    x: mlp.x * base.x / size.x + polygon.pathOffset.x,
+    y: mlp.y * base.y / size.y + polygon.pathOffset.y,
+  };
+  return true;
+}
+
+function anchorWrapper(anchorIndex, fn) {
+  return function (eventData, transform, x, y) {
+    const fo = transform.target;
+    const abs = fabric.util.transformPoint({
+      x: fo.points[anchorIndex].x - fo.pathOffset.x,
+      y: fo.points[anchorIndex].y - fo.pathOffset.y,
+    }, fo.calcTransformMatrix());
+    const done = fn(eventData, transform, x, y);
+    const base = fo._getNonTransformedDimensions();
+    fo.setPositionByOrigin(abs,
+      (fo.points[anchorIndex].x - fo.pathOffset.x) / base.x + 0.5,
+      (fo.points[anchorIndex].y - fo.pathOffset.y) / base.y + 0.5
+    );
+    return done;
+  };
+}
+
+function editPolygon() {
+  let ao = canvas.getActiveObject() || canvas.getObjects()[0];
+  if (!ao) return;
+  canvas.setActiveObject(ao);
+  ao.edit = true; ao.objectCaching = true;
+  const last = ao.points.length - 1;
+  ao.cornerStyle = 'circle';
+  ao.controls = ao.points.reduce((acc, _, i) => {
+    acc['p' + i] = new fabric.Control({
+      positionHandler: polygonPositionHandler,
+      actionHandler: anchorWrapper(i > 0 ? i - 1 : last, actionHandler),
+      actionName: 'modifyPolygon',
+      pointIndex: i,
+    });
+    return acc;
+  }, {});
+  ao.hasBorders = false;
+  canvas.requestRenderAll();
+}
+
+function resizePolygon() {
+  let ao = canvas.getActiveObject() || canvas.getObjects()[0];
+  if (!ao) return;
+  canvas.setActiveObject(ao);
+  ao.edit = false; ao.objectCaching = false;
+  ao.controls = fabric.Object.prototype.controls;
+  ao.cornerStyle = 'circle';
+  ao.hasBorders = true;
+  canvas.requestRenderAll();
+}
+</script>
+
+
+<!-- ── timeline ── -->
+<script>
+const days = ['월','화','수','목','금','토','일'];
+const btnArray = ['잔류','난동','침입','배회','싸움','얼굴'];
+const tagClasses = ['tag-blue','tag-red','tag-orange','tag-green','tag-purple','tag-gray'];
+const itemColors = ['#4c6ef5','#c92a2a','#e67700','#2f9e44','#862e9c','#495057'];
+let dataArr = [];
+
+const groups = new vis.DataSet();
+days.forEach((d, i) => groups.add({ id: i, content: d }));
+
+const btnarea = document.getElementById('btn03');
+btnArray.forEach((label, k) => {
+  const btn = document.createElement('button');
+  btn.draggable = true;
+  btn.className = 'event-tag ' + tagClasses[k];
+  btn.value = 'range';
+  btn.textContent = label;
+  btn.dataset.color = itemColors[k];
+  btnarea.appendChild(btn);
+});
+
+const items = new vis.DataSet();
+const timeline = new vis.Timeline(
+  document.getElementById('visualization'),
+  items, groups,
+  {
+    min: new Date(2022, 0, 1),
+    max: new Date(2022, 0, 2),
+    zoomMin: 1000 * 60 * 60 * 12,
+    stack: true,
+    start: new Date(new Date().valueOf() - 10000000),
+    end: new Date(1000 * 60 * 60 * 24 + new Date().valueOf()),
+    editable: { add: true, updateTime: true, updateGroup: false, remove: true, overrideItems: true },
+    tooltipOnItemUpdateTime: true,
+    multiselect: false,
+    showMajorLabels: false,
+    orientation: 'top',
+  }
+);
+
+items.on('*', () => {
+  $('#drawing, #edit, #resize').prop('disabled', false);
+});
+
+document.querySelectorAll('#btn03 .event-tag').forEach(btn => {
+  btn.addEventListener('dragstart', e => {
+    const src = e.target;
+    e.dataTransfer.effectAllowed = 'move';
+    const item = {
+      time: Date.now(),
+      type: src.value,
+      content: src.textContent,
+      style: `background:${src.dataset.color};border:none;border-radius:4px;`,
+    };
+    dataArr.push({ item, poly: obj });
+    e.dataTransfer.setData('text', JSON.stringify(item));
+  });
+});
+</script>
+
+
+<!-- ── toggle ── -->
+<script>
+$(function () {
+  $('#drawing').on('click', toggleDrawPolygon);
+
+  $('#edit').on('click', function () {
+    $('.draw-btn.dr').removeClass('active');
+    $(this).addClass('active');
+    editPolygon();
+  });
+
+  $('#resize').on('click', function () {
+    $('.draw-btn.dr').removeClass('active');
+    $(this).addClass('active');
+    resizePolygon();
+  });
+
+  $('#remove').on('click', function () {
+    canvas.clear();
+    obj = [];
+    canvas.backgroundColor = '';
+    canvas.renderAll();
+    items.clear();
+    $('#drawing, #edit, #resize').prop('disabled', true).removeClass('active');
+  });
+
+  $('#save').on('click', function () {
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL({ format: 'png' });
+    a.download = 'sonefe_' + Date.now() + '.png';
+    a.click();
+  });
+
+  initCanvas();
+});
+</script>
+
+</body>
+</html>
