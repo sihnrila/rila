@@ -1786,7 +1786,6 @@ footer{
 
 
    .section01{
-        padding: 13rem 0;
         img{
             width: 50%;
         }
@@ -3050,8 +3049,8 @@ button:focus-visible {
   }
 
   @media screen and (max-width: 767px) {
-    min-height: auto;
-    padding: 2rem 0 3rem;
+    min-height: 100dvh;
+    padding: 0;
 
     .hero-title {
       font-size: clamp(2.8rem, 13vw, 3.2rem);
@@ -3076,7 +3075,8 @@ button:focus-visible {
 
   // 390px / 360px 소형 모바일
   @media screen and (max-width: 400px) {
-    padding: 1.5rem 0 2.5rem;
+    min-height: 100dvh;
+    padding: 0;
 
     .hero-title { font-size: clamp(2.6rem, 12.5vw, 2.8rem); }
     .hero-content { padding: 1rem; }
