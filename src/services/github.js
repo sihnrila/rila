@@ -274,6 +274,7 @@ export const PROFESSIONAL_REPOS = new Set([
   'aladin-web-viewer',
   'topik-landing',
   'topik-cms',
+  '3D-AR-Viewer',
 ])
 
 const REPO_ORDER = [
@@ -283,6 +284,7 @@ const REPO_ORDER = [
   'aladin-web-viewer',
   'topik-landing',
   'topik-cms',
+  '3D-AR-Viewer',
   'SoneFe',
   'jigoorang-adim',
   'together',
@@ -291,7 +293,7 @@ const REPO_ORDER = [
   'snudog',
 ]
 
-const CACHE_KEY = 'github_repos_cache_v3'
+const CACHE_KEY = 'github_repos_cache_v4'
 const CACHE_TTL = 60 * 60 * 1000 // 1시간
 
 const sortRepos = (all) => {

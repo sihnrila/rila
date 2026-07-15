@@ -160,6 +160,31 @@ export const PROJECT_META = {
     needsReview: false,
   },
 
+  '3D-AR-Viewer': {
+    title: '3D/AR 쇼룸 뷰어',
+    period: '2026.01',
+    role: 'Frontend Developer',
+    tags: ['3D/AR', 'Shopify', 'WebGL', 'QR코드'],
+    highlight: 'Shopify Theme App Extension 기반 3D/AR 상품 뷰어 Free/Pro 구현',
+    summary: 'Shopify 스토어에 3D/AR 상품 뷰어를 제공하는 Theme App Extension을 개발했습니다. Free/Pro 플랜 구조의 3D 뷰어, QR 카드, 모바일 AR 뷰어를 포함합니다.',
+    responsibilities: [
+      '3D/AR 뷰어 Shopify Theme App Extension 개발',
+      'Free/Pro 플랜 구조 설계 및 기능 분리',
+      'PDP QR 카드 블록 구현 (링크 공유·클립보드 폴백 처리)',
+      '모바일 QR 스캔 진입 AR 뷰어 페이지 구현',
+      '카테고리별(인테리어/패션) UI 카피 분리',
+      'GLB 3D 모델 로딩 및 에러 처리',
+    ],
+    challenges: [],
+    techStack: ['JavaScript', 'Shopify Liquid', 'WebGL/AR', 'QR Code API'],
+    screenshotAlt: '3D/AR 쇼룸 뷰어 화면',
+    screenshotCaption: '3D 뷰어 데모',
+    githubUrl: 'https://github.com/sihnrila/3D-AR-Viewer',
+    demoUrl: undefined,
+    hasRealDemo: false,
+    needsReview: false,
+  },
+
   'SoneFe': {
     title: '통합 보안 관제 시스템',
     period: '2023',
