@@ -29,7 +29,7 @@ export const REPO_DEMO_URL_OVERRIDES = {
 
   // GitHub Pages (User Pages 서브경로)
   snudog: 'https://sihnrila.github.io/snudog/',
-  SoneFe: 'https://rila-5dl.pages.dev/demos/SoneFe.html',
+  SoneFe: 'https://sihnrila.github.io/SoneFe/',
   'jigoorang-adim': 'https://sihnrila.github.io/jigoorang-adim/',
   PickUpDemo: 'https://sihnrila.github.io/PickUpDemo/',
 
