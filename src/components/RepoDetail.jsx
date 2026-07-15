@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { getLanguageColor, resolveRepoDemoUrl, MANUAL_REPOS } from '../services/github'
+import { getLanguageColor, resolveRepoDemoUrl, MANUAL_REPOS, REPO_STATIC_SCREENSHOTS } from '../services/github'
 import axios from 'axios'
 
 const GITHUB_USERNAME = 'sihnrila'
@@ -108,25 +108,41 @@ const RepoDetail = () => {
           <button className="back-button" onClick={() => navigate('/')}>
             <i className="fas fa-arrow-left"></i> BACK
           </button>
-          <div 
-            className="project-hero-image"
-            style={{ 
-              backgroundColor: getLanguageColor(repo.language),
-              width: '100%',
-              height: '20rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontSize: 'clamp(2rem, 5vw, 4rem)',
-              fontWeight: 900,
-              marginBottom: '3rem',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase'
-            }}
-          >
-            <i className="fas fa-code"></i> {repo.language || 'CODE'}
-          </div>
+          {REPO_STATIC_SCREENSHOTS[repo.name] ? (
+            <img
+              src={REPO_STATIC_SCREENSHOTS[repo.name]}
+              alt={repo.name}
+              className="project-hero-image"
+              style={{
+                width: '100%',
+                height: '20rem',
+                objectFit: 'cover',
+                objectPosition: 'top',
+                marginBottom: '3rem',
+                display: 'block',
+              }}
+            />
+          ) : (
+            <div
+              className="project-hero-image"
+              style={{
+                backgroundColor: getLanguageColor(repo.language),
+                width: '100%',
+                height: '20rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#fff',
+                fontSize: 'clamp(2rem, 5vw, 4rem)',
+                fontWeight: 900,
+                marginBottom: '3rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase'
+              }}
+            >
+              <i className="fas fa-code"></i> {repo.language || 'CODE'}
+            </div>
+          )}
           <h1 className="project-title">{repo.name}</h1>
           {repo.description && (
             <p className="project-subtitle">{repo.description}</p>

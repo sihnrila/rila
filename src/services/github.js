@@ -76,8 +76,8 @@ export const REPO_STATIC_SCREENSHOTS = {
   'jigoorang-adim': new URL('../assets/img/demos/jigoorang-adim.png', import.meta.url).href,
   'PickUpDemo': new URL('../assets/img/demos/PickUpDemo.png', import.meta.url).href,
   'Seoul-private': new URL('../assets/img/demos/Seoul-private.png', import.meta.url).href,
-  'kyobo-web-viewer': new URL('../assets/img/demos/kyobo-web-viewer.png', import.meta.url).href,
-  'aladin-web-viewer': new URL('../assets/img/demos/aladin-web-viewer.png', import.meta.url).href,
+  'kyobo-web-viewer': new URL('../assets/img/demos/kyobo-web-viewer.png', import.meta.url).href + '?v=2',
+  'aladin-web-viewer': new URL('../assets/img/demos/aladin-web-viewer.png', import.meta.url).href + '?v=2',
 }
 
 // 스크린샷을 표시할 레포 (확인된 라이브 URL만)
@@ -144,6 +144,20 @@ export const MANUAL_REPOS = [
     updated: new Date().toISOString(),
     topics: [],
     hasRealDemo: false,
+  },
+  {
+    id: 'manual-Seoul-private',
+    name: 'Seoul-private',
+    description: '서울시 AR 뷰어 (3D/AR WebGL)',
+    url: 'https://github.com/sihnrila/Seoul-private',
+    homepage: 'https://seoul-private.pages.dev',
+    fork: false,
+    language: 'HTML',
+    stars: 0,
+    forks: 0,
+    updated: new Date().toISOString(),
+    topics: [],
+    hasRealDemo: true,
   },
   {
     id: 'manual-viewer',
@@ -229,6 +243,8 @@ export const PROFESSIONAL_REPOS = new Set([
 const REPO_ORDER = [
   'viewer',
   'monaco-editor',
+  'kyobo-web-viewer',
+  'aladin-web-viewer',
   'SoneFe',
   'jigoorang-adim',
   'together',
@@ -237,7 +253,7 @@ const REPO_ORDER = [
   'snudog',
 ]
 
-const CACHE_KEY = 'github_repos_cache'
+const CACHE_KEY = 'github_repos_cache_v2'
 const CACHE_TTL = 60 * 60 * 1000 // 1시간
 
 const sortRepos = (all) => {
@@ -291,7 +307,9 @@ export const fetchGitHubRepos = async () => {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
       if (cached) return sortRepos(cached.data)
     } catch {}
-    return sortRepos([...STATIC_FALLBACK_REPOS])
+    const fallbackNames = new Set(STATIC_FALLBACK_REPOS.map(r => r.name))
+    const manualExtras = MANUAL_REPOS.filter(r => !fallbackNames.has(r.name))
+    return sortRepos([...STATIC_FALLBACK_REPOS, ...manualExtras])
   }
 }
 
