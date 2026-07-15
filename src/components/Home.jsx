@@ -18,8 +18,6 @@ const Home = () => {
     const loadRepos = async () => {
       setLoading(true)
       const data = await fetchGitHubRepos()
-      console.log('로드된 레포지토리:', data)
-      console.log('wedding-editor 포함 여부:', data.some(repo => repo.name.includes('wedding')))
       setRepos(data)
       setLoading(false)
     }
@@ -30,7 +28,6 @@ const Home = () => {
     const loadTistoryPosts = async () => {
       setTistoryLoading(true)
       const data = await fetchTistoryPosts()
-      console.log('로드된 티스토리 포스트:', data)
       setTistoryPosts(data)
       setTistoryLoading(false)
     }
@@ -128,7 +125,7 @@ const Home = () => {
               <span className="line line-3" aria-hidden="true">PORTFOLIO</span>
             </h1>
             <p className="hero-identity">
-              서비스 구조와 사용자 경험을 함께 설계하는<br />
+              서비스 구조와 사용자 경험을 함께 설계하는{' '}
               <strong>프론트엔드 개발자 신리라</strong>입니다.
             </p>
             <p className="hero-desc">
@@ -749,7 +746,7 @@ const Home = () => {
           </a>
           <br />
           code by rila❤️‍🔥<br />
-          you can see this code
+          <a href="https://github.com/sihnrila/rila" target="_blank" rel="noopener noreferrer">you can see this code</a>
         </footer>
       </div>
       

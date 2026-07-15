@@ -333,7 +333,6 @@ export const fetchGitHubRepos = async () => {
       const extras = MANUAL_REPOS.filter(r => !apiNames.has(r.name))
       const all = sortRepos([...transformed, ...extras])
       try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: all })) } catch {}
-      console.log('GitHub API 응답:', transformed.length, '개 + 수동', extras.length, '개')
       return all
     }
     console.warn('GitHub API 응답 형식이 예상과 다릅니다:', response.data)

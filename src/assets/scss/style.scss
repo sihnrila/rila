@@ -27,6 +27,14 @@ $gradient-accent: linear-gradient(135deg, #000000 0%, #666666 100%);
     scroll-behavior: smooth;
 }
 
+html {
+    overflow-x: hidden;
+}
+
+section[id] {
+    scroll-margin-top: 80px;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -34,6 +42,7 @@ body {
     background: $bg-light;
     color: $text-dark;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 
@@ -815,16 +824,16 @@ nav.navbar {
 
 .section03{
     width: 100%;
-    padding: 10rem 6rem;
+    padding: 6rem 6rem;
     background: $bg-white;
-    
+
     .skills-container {
         max-width: 1200px;
         margin: 0 auto;
     }
-    
+
     .skills-header {
-        margin-bottom: 8rem;
+        margin-bottom: 4rem;
         
         .skills-title {
             font-size: $title_size;
@@ -1825,10 +1834,10 @@ footer{
    }
 
    .section03{
-        padding: 8rem 1.5rem;
-        
+        padding: 5rem 1.5rem;
+
         .skills-header {
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             
             .skills-title {
                 font-size: $title_size;
@@ -2895,6 +2904,8 @@ button:focus-visible {
     margin-bottom: 1rem;
     font-weight: 400;
     letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
     strong { font-weight: 800; }
   }
 
@@ -2949,10 +2960,28 @@ button:focus-visible {
   }
 
   @media screen and (max-width: 767px) {
+    min-height: auto;
+    padding: 5rem 0 5rem;
+
+    .hero-content { padding: 1.5rem; }
     .hero-identity { font-size: clamp(1rem, 4vw, 1.25rem); }
     .hero-desc { font-size: 0.9rem; }
-    .hero-cta { gap: 0.5rem; }
-    .cta-btn { padding: 0.65rem 1.1rem; font-size: 0.8rem; }
+    .hero-cta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-btn {
+      padding: 0.65rem 0.5rem;
+      font-size: 0.78rem;
+      justify-content: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .br-desktop { display: none; }
   }
 }
