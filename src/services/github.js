@@ -80,6 +80,7 @@ export const REPO_STATIC_SCREENSHOTS = {
   'aladin-web-viewer': new URL('../assets/img/demos/aladin-web-viewer.png', import.meta.url).href + '?v=4',
   'topik-landing': new URL('../assets/img/demos/topik-landing.png', import.meta.url).href,
   'topik-cms': new URL('../assets/img/demos/topik-cms.png', import.meta.url).href,
+  '3D-AR-Viewer': new URL('../assets/img/demos/3D-AR-Viewer.png', import.meta.url).href,
 }
 
 // 스크린샷을 표시할 레포 (확인된 라이브 URL만)
@@ -101,6 +102,7 @@ export const SCREENSHOT_REPOS = new Set([
   'aladin-web-viewer',
   'topik-landing',
   'topik-cms',
+  '3D-AR-Viewer',
 ])
 
 // Private 또는 수동으로 추가할 레포 카드 목록

@@ -6,6 +6,8 @@
 <title>가치줄기</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spoqa+Han+Sans+Neo:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <style>
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
@@ -150,8 +152,12 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
 #view-campaign{display:none;}
 #view-profile{display:none;}
 
-/* 카카오 지도 컨테이너 */
-#kakao-map{width:100%;height:100%;display:none;}
+/* Leaflet 지도 컨테이너 */
+#leaflet-map{width:100%;height:100%;}
+.leaflet-popup-content-wrapper{border-radius:12px !important;font-family:'Spoqa Han Sans Neo',sans-serif !important;}
+.leaflet-popup-content{font-size:13px;color:#453B42;line-height:1.5;margin:10px 14px !important;}
+.leaflet-popup-content strong{color:#3042CD;font-weight:700;display:block;margin-bottom:2px;}
+.leaflet-control-attribution{font-size:9px !important;}
 </style>
 </head>
 <body>
@@ -169,11 +175,7 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
     </div>
     <div class="body body3">
       <div class="map2" id="map">
-        <div id="kakao-map"></div>
-        <div class="gradi" id="map-fallback-gradi"></div>
-        <div class="mak" id="map-fallback-mak1"></div>
-        <div class="mak2" id="map-fallback-mak2"></div>
-        <div class="mak3" id="map-fallback-mak3"></div>
+        <div id="leaflet-map"></div>
         <div class="side_bar" id="side_bar">
           <div id="sb-btn1" class="tab4" onclick="setSideBar(0)"></div>
           <div id="sb-btn2" class="tab2" onclick="setSideBar(1)"></div>
@@ -540,15 +542,14 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
 </div>
 
 <script>
-var kakaoLoaded = false;
 var mapInitialized = false;
 var sideBarState = 0;
 
 setTimeout(function() {
   document.getElementById('view-splash').style.display = 'none';
   document.getElementById('view-map').style.display = 'block';
-  initKakaoMap();
-}, 3000);
+  initLeafletMap();
+}, 2000);
 
 function switchTab(tab) {
   document.getElementById('view-map').style.display = 'none';
@@ -558,7 +559,7 @@ function switchTab(tab) {
 
   if (tab === 'map') {
     document.getElementById('view-map').style.display = 'block';
-    if (!mapInitialized) initKakaoMap();
+    if (!mapInitialized) initLeafletMap();
   } else if (tab === 'community') {
     document.getElementById('view-community').style.display = 'block';
   } else if (tab === 'campaign') {
@@ -632,47 +633,43 @@ function joinFeatured(el) {
   }
 }
 
-function initKakaoMap() {
+function initLeafletMap() {
   if (mapInitialized) return;
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=5715011e564f34008898ac0b2c497e94';
-  script.onload = function() {
-    try {
-      kakao.maps.load(function() {
-        var container = document.getElementById('kakao-map');
-        var options = { center: new kakao.maps.LatLng(37.5665, 126.9780), level: 3 };
-        var map = new kakao.maps.Map(container, options);
-        var imgBase = 'https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/';
-        var markerData = [
-          { lat: 37.5685, lng: 126.9800, img: 'icon-mk.png',  w: 45, h: 56 },
-          { lat: 37.5650, lng: 126.9720, img: 'icon-mk2.png', w: 45, h: 56 },
-          { lat: 37.5630, lng: 126.9850, img: 'icon-mk3.png', w: 45, h: 56 }
-        ];
-        markerData.forEach(function(d) {
-          var markerImage = new kakao.maps.MarkerImage(imgBase + d.img, new kakao.maps.Size(d.w, d.h));
-          new kakao.maps.Marker({ map: map, position: new kakao.maps.LatLng(d.lat, d.lng), image: markerImage });
-        });
-        container.style.display = 'block';
-        document.getElementById('map-fallback-gradi').style.display = 'none';
-        document.getElementById('map-fallback-mak1').style.display = 'none';
-        document.getElementById('map-fallback-mak2').style.display = 'none';
-        document.getElementById('map-fallback-mak3').style.display = 'none';
-        mapInitialized = true;
-        kakaoLoaded = true;
-      });
-    } catch(e) { showFallback(); }
-  };
-  script.onerror = function() { showFallback(); };
-  document.head.appendChild(script);
-}
+  if (typeof L === 'undefined') return;
+  mapInitialized = true;
 
-function showFallback() {
-  document.getElementById('kakao-map').style.display = 'none';
-  document.getElementById('map-fallback-gradi').style.display = 'block';
-  document.getElementById('map-fallback-mak1').style.display = 'block';
-  document.getElementById('map-fallback-mak2').style.display = 'block';
-  document.getElementById('map-fallback-mak3').style.display = 'block';
+  var map = L.map('leaflet-map', { zoomControl: true, attributionControl: true })
+    .setView([37.5535, 126.9254], 14); // 서울 마포구 중심
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  var markerColor = '#3042CD';
+  function makeIcon(emoji) {
+    return L.divIcon({
+      html: '<div style="background:linear-gradient(135deg,#3042CD,#FF2BB9);width:40px;height:40px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 3px 10px rgba(48,66,205,0.4);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:16px;line-height:40px;display:block;text-align:center;">' + emoji + '</span></div>',
+      className: '',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -44]
+    });
+  }
+
+  var spots = [
+    { lat: 37.5560, lng: 126.9200, emoji: '🌿', name: '망원 한강공원 플로깅', desc: '매주 토요일 오전 10시 · 환경 활동' },
+    { lat: 37.5510, lng: 126.9310, emoji: '🐾', name: '홍대 유기동물 입양 카페', desc: '입양 상담 · 임보 연결' },
+    { lat: 37.5580, lng: 126.9150, emoji: '📚', name: '마포 아동센터 코딩 봉사', desc: '매주 토요일 오후 2시 · 교육 봉사' },
+    { lat: 37.5490, lng: 126.9270, emoji: '♻️', name: '합정 텀블러 챌린지 거점', desc: '텀블러 인증 포인트 적립 가능' },
+    { lat: 37.5620, lng: 126.9230, emoji: '🌳', name: '망원동 나무 심기 프로젝트', desc: '이달의 캠페인 · 2,341명 참여중' }
+  ];
+
+  spots.forEach(function(s) {
+    L.marker([s.lat, s.lng], { icon: makeIcon(s.emoji) })
+      .addTo(map)
+      .bindPopup('<strong>' + s.name + '</strong>' + s.desc);
+  });
 }
 </script>
 </body>
