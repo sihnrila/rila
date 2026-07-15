@@ -76,8 +76,10 @@ export const REPO_STATIC_SCREENSHOTS = {
   'jigoorang-adim': new URL('../assets/img/demos/jigoorang-adim.png', import.meta.url).href,
   'PickUpDemo': new URL('../assets/img/demos/PickUpDemo.png', import.meta.url).href,
   'Seoul-private': new URL('../assets/img/demos/Seoul-private.png', import.meta.url).href,
-  'kyobo-web-viewer': new URL('../assets/img/demos/kyobo-web-viewer.png', import.meta.url).href + '?v=2',
+  'kyobo-web-viewer': new URL('../assets/img/demos/kyobo-web-viewer.png', import.meta.url).href + '?v=3',
   'aladin-web-viewer': new URL('../assets/img/demos/aladin-web-viewer.png', import.meta.url).href + '?v=2',
+  'topik-landing': new URL('../assets/img/demos/topik-landing.png', import.meta.url).href,
+  'topik-cms': new URL('../assets/img/demos/topik-cms.png', import.meta.url).href,
 }
 
 // 스크린샷을 표시할 레포 (확인된 라이브 URL만)
@@ -97,6 +99,8 @@ export const SCREENSHOT_REPOS = new Set([
   'Seoul-private',
   'kyobo-web-viewer',
   'aladin-web-viewer',
+  'topik-landing',
+  'topik-cms',
 ])
 
 // Private 또는 수동으로 추가할 레포 카드 목록
@@ -158,6 +162,36 @@ export const MANUAL_REPOS = [
     updated: new Date().toISOString(),
     topics: [],
     hasRealDemo: true,
+  },
+  {
+    id: 'manual-topik-landing',
+    name: 'topik-landing',
+    description: 'My Little Korea 한국어 학습 보드게임 랜딩페이지 (Next.js)',
+    url: '',
+    homepage: '',
+    fork: false,
+    language: 'TypeScript',
+    stars: 0,
+    forks: 0,
+    updated: new Date().toISOString(),
+    topics: ['nextjs', 'landing-page', 'korean'],
+    hasRealDemo: true,
+    isPrivate: true,
+  },
+  {
+    id: 'manual-topik-cms',
+    name: 'topik-cms',
+    description: 'TOPIKPLAY 콘텐츠 관리 시스템 (React · Node.js)',
+    url: '',
+    homepage: '',
+    fork: false,
+    language: 'TypeScript',
+    stars: 0,
+    forks: 0,
+    updated: new Date().toISOString(),
+    topics: ['react', 'cms', 'dashboard'],
+    hasRealDemo: true,
+    isPrivate: true,
   },
   {
     id: 'manual-viewer',
@@ -238,6 +272,8 @@ export const PROFESSIONAL_REPOS = new Set([
   'Seoul-private',
   'kyobo-web-viewer',
   'aladin-web-viewer',
+  'topik-landing',
+  'topik-cms',
 ])
 
 const REPO_ORDER = [
@@ -245,6 +281,8 @@ const REPO_ORDER = [
   'monaco-editor',
   'kyobo-web-viewer',
   'aladin-web-viewer',
+  'topik-landing',
+  'topik-cms',
   'SoneFe',
   'jigoorang-adim',
   'together',
