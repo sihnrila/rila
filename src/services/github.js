@@ -77,7 +77,7 @@ export const REPO_STATIC_SCREENSHOTS = {
   'PickUpDemo': new URL('../assets/img/demos/PickUpDemo.png', import.meta.url).href,
   'Seoul-private': new URL('../assets/img/demos/Seoul-private.png', import.meta.url).href,
   'kyobo-web-viewer': new URL('../assets/img/demos/kyobo-web-viewer.png', import.meta.url).href + '?v=3',
-  'aladin-web-viewer': new URL('../assets/img/demos/aladin-web-viewer.png', import.meta.url).href + '?v=3',
+  'aladin-web-viewer': new URL('../assets/img/demos/aladin-web-viewer.png', import.meta.url).href + '?v=4',
   'topik-landing': new URL('../assets/img/demos/topik-landing.png', import.meta.url).href,
   'topik-cms': new URL('../assets/img/demos/topik-cms.png', import.meta.url).href,
 }
