@@ -124,9 +124,6 @@ const Home = () => {
               <span className="line line-2" aria-hidden="true">SIN</span>
               <span className="line line-3" aria-hidden="true">PORTFOLIO</span>
             </h1>
-            <p className="hero-identity">
-              서비스 구조까지 이해하고 구현하는 프론트엔드 개발자입니다.
-            </p>
             <div className="hero-cta">
               <a href="#work" className="cta-btn cta-primary" onClick={(e) => { e.preventDefault(); scrollToSection('work') }}>
                 프로젝트 보기
