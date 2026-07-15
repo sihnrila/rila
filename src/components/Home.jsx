@@ -127,9 +127,6 @@ const Home = () => {
             <p className="hero-identity">
               서비스 구조까지 이해하고 구현하는 프론트엔드 개발자입니다.
             </p>
-            <p className="hero-desc">
-              EPUB 웹뷰어, 교육 게임 플랫폼, CMS·API 연동 프로젝트를 수행했습니다.
-            </p>
             <div className="hero-cta">
               <a href="#work" className="cta-btn cta-primary" onClick={(e) => { e.preventDefault(); scrollToSection('work') }}>
                 프로젝트 보기

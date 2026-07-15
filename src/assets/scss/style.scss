@@ -2902,20 +2902,11 @@ button:focus-visible {
     color: $text-dark;
     line-height: 1.5;
     margin-top: 0.75rem;
-    margin-bottom: 0.4rem;
+    margin-bottom: 1.5rem;
     font-weight: 400;
     letter-spacing: -0.01em;
     word-break: keep-all;
     overflow-wrap: break-word;
-  }
-
-  .hero-desc {
-    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-    color: #444444;
-    line-height: 1.6;
-    max-width: 540px;
-    margin: 0 auto 1.5rem;
-    font-weight: 400;
   }
 
   .hero-cta {
@@ -3003,8 +2994,8 @@ button:focus-visible {
     .hero-identity {
       font-size: clamp(0.92rem, 4vw, 1.05rem);
       margin-top: 0.5rem;
+      margin-bottom: 1.25rem;
     }
-    .hero-desc { font-size: 0.85rem; margin-bottom: 1.1rem; }
     .hero-cta {
       gap: 0.5rem;
       flex-wrap: wrap;
@@ -3022,8 +3013,7 @@ button:focus-visible {
 
     .hero-title { font-size: clamp(2.6rem, 12.5vw, 2.8rem); }
     .hero-content { padding: 1rem; }
-    .hero-identity { font-size: 0.92rem; }
-    .hero-desc { font-size: 0.82rem; max-width: 100%; }
+    .hero-identity { font-size: 0.92rem; margin-bottom: 1.1rem; }
     .cta-btn {
       padding: 0.55rem 0.95rem;
       font-size: 0.76rem;
