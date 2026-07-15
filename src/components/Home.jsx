@@ -605,9 +605,9 @@ const Home = () => {
                                 ))}
                               </div>
                             )}
-                            {PROJECT_META[repo.name]?.highlight && (
+                            {PROJECT_META[repo.name]?.summary && (
                               <p className="card-highlight">
-                                {PROJECT_META[repo.name].highlight}
+                                {PROJECT_META[repo.name].summary}
                               </p>
                             )}
                             <div className="card-cta">

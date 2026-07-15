@@ -70,6 +70,11 @@ const RepoDetail = () => {
         )}
 
         <header className="repo-detail-header">
+          {meta.projectFamily && (
+            <p className="repo-project-family" aria-label="프로젝트 소속">
+              {meta.projectFamily}
+            </p>
+          )}
           <h1 className="repo-detail-title">{meta.title || repoName}</h1>
           <div className="repo-detail-meta">
             {meta.period && (

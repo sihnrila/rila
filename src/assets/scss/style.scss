@@ -3148,6 +3148,17 @@ button:focus-visible {
 .repo-detail-header {
   margin-bottom: 4rem;
 
+  .repo-project-family {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: $text-light;
+    margin: 0 0 0.75rem;
+    border-left: 2px solid $text-dark;
+    padding-left: 0.6rem;
+  }
+
   .repo-detail-title {
     font-size: clamp(2rem, 6vw, 3.5rem);
     font-weight: 900;
