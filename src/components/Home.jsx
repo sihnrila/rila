@@ -125,6 +125,7 @@ const Home = () => {
               <span className="line line-2" aria-hidden="true">SIN</span>
               <span className="line line-3" aria-hidden="true">PORTFOLIO</span>
             </h1>
+            <p className="hero-tagline">EPUB Viewer · SDK · CMS · WebView</p>
             <div className="hero-cta">
               <a href="#work" className="cta-btn cta-primary" onClick={(e) => { e.preventDefault(); scrollToSection('work') }}>
                 프로젝트 보기
