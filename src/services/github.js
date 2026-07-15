@@ -23,7 +23,7 @@ export const REPO_DEMO_URL_OVERRIDES = {
   'monaco-editor': 'https://monaco-editor-aqn.pages.dev',
   'viewer': 'https://viewer-9h6.pages.dev',
 
-  together: 'https://together-921.pages.dev',
+  together: 'https://rila-5dl.pages.dev/demos/together.html',
   'Crossword-puzzle': 'https://crosswordpuzzle.pages.dev',
   'couple-maplibre-openfreemap': 'https://couple-maplibre-openfreemap.pages.dev',
 
