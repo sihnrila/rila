@@ -384,8 +384,8 @@ nav.navbar {
 
 .section01{
     width: 100%;
-    min-height: calc(100vh - 80px);
-    padding: 2rem 0 5rem;
+    min-height: calc(88vh - 80px);
+    padding: 1.5rem 0 2.5rem;
     margin-top: 80px;
     background: $bg-white;
     position: relative;
@@ -395,7 +395,7 @@ nav.navbar {
     align-items: center;
     justify-content: center;
     text-align: center;
-    
+
     // 히어로 콘텐츠
     .hero-content {
         position: relative;
@@ -403,16 +403,16 @@ nav.navbar {
         width: 100%;
         max-width: 1400px;
         padding: 2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 0.75rem;
     }
-    
+
     // 타이포그래피 중심 히어로 타이틀
     .hero-title {
-        font-size: clamp(4rem, 15vw, 12rem);
+        font-size: clamp(3.2rem, 12.5vw, 10rem);
         font-weight: 900;
-        line-height: 0.85;
+        line-height: 0.82;
         color: $text-dark;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         text-transform: uppercase;
         letter-spacing: -0.02em;
         position: relative;
@@ -438,8 +438,9 @@ nav.navbar {
             
             &.line-2 {
                 animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both, gradientShift 3s ease infinite 0.4s;
+                margin-bottom: -0.04em;
             }
-            
+
             &.line-3 {
                 animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both, gradientShift 3s ease infinite 0.6s;
                 font-size: 0.3em;
@@ -2897,11 +2898,11 @@ button:focus-visible {
 // ─── Hero additions ───────────────────────────────────────────────────────
 .section01 {
   .hero-identity {
-    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
     color: $text-dark;
-    line-height: 1.55;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    margin-top: 0.75rem;
+    margin-bottom: 0.4rem;
     font-weight: 400;
     letter-spacing: -0.01em;
     word-break: keep-all;
@@ -2909,12 +2910,12 @@ button:focus-visible {
   }
 
   .hero-desc {
-    font-size: clamp(0.85rem, 1.3vw, 0.95rem);
-    color: $text-light;
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+    color: #444444;
     line-height: 1.6;
-    max-width: 560px;
-    margin: 0 auto 1.75rem;
-    font-weight: 300;
+    max-width: 540px;
+    margin: 0 auto 1.5rem;
+    font-weight: 400;
   }
 
   .hero-cta {
@@ -2930,7 +2931,7 @@ button:focus-visible {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.7rem 1.4rem;
+    padding: 0.65rem 1.35rem;
     font-size: 0.82rem;
     font-weight: 600;
     text-decoration: none;
@@ -2956,7 +2957,7 @@ button:focus-visible {
   .hero-links {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     margin-left: 0.25rem;
   }
 
@@ -2966,7 +2967,7 @@ button:focus-visible {
     justify-content: center;
     width: 36px;
     height: 36px;
-    color: $text-light;
+    color: #666666;
     font-size: 1rem;
     text-decoration: none;
     border-radius: 50%;
@@ -2978,13 +2979,32 @@ button:focus-visible {
     }
   }
 
+  // 1280px 이하: 타이틀 약간 축소
+  @media screen and (max-width: 1280px) {
+    .hero-title { font-size: clamp(3.2rem, 12vw, 9rem); }
+  }
+
+  // 태블릿 ~ 소형 노트북
+  @media screen and (max-width: 1024px) {
+    min-height: calc(85vh - 80px);
+    padding: 1.5rem 0 2rem;
+    .hero-content { margin-bottom: 0.5rem; }
+  }
+
   @media screen and (max-width: 767px) {
     min-height: auto;
-    padding: 4rem 0 4rem;
+    padding: 2rem 0 3rem;
 
-    .hero-content { padding: 1.5rem; }
-    .hero-identity { font-size: clamp(0.95rem, 4vw, 1.15rem); }
-    .hero-desc { font-size: 0.85rem; margin-bottom: 1.25rem; }
+    .hero-title {
+      font-size: clamp(2.8rem, 13vw, 3.2rem);
+      margin-bottom: 0.75rem;
+    }
+    .hero-content { padding: 1.25rem; margin-bottom: 0.5rem; }
+    .hero-identity {
+      font-size: clamp(0.92rem, 4vw, 1.05rem);
+      margin-top: 0.5rem;
+    }
+    .hero-desc { font-size: 0.85rem; margin-bottom: 1.1rem; }
     .hero-cta {
       gap: 0.5rem;
       flex-wrap: wrap;
@@ -2994,6 +3014,20 @@ button:focus-visible {
       font-size: 0.78rem;
     }
     .hero-links { margin-left: 0; }
+  }
+
+  // 390px / 360px 소형 모바일
+  @media screen and (max-width: 400px) {
+    padding: 1.5rem 0 2.5rem;
+
+    .hero-title { font-size: clamp(2.6rem, 12.5vw, 2.8rem); }
+    .hero-content { padding: 1rem; }
+    .hero-identity { font-size: 0.92rem; }
+    .hero-desc { font-size: 0.82rem; max-width: 100%; }
+    .cta-btn {
+      padding: 0.55rem 0.95rem;
+      font-size: 0.76rem;
+    }
   }
 }
 

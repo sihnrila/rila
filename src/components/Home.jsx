@@ -125,7 +125,7 @@ const Home = () => {
               <span className="line line-3" aria-hidden="true">PORTFOLIO</span>
             </h1>
             <p className="hero-identity">
-              서비스 구조와 사용자 경험을 함께 설계하는 프론트엔드 개발자입니다.
+              서비스 구조까지 이해하고 구현하는 프론트엔드 개발자입니다.
             </p>
             <p className="hero-desc">
               EPUB 웹뷰어, 교육 게임 플랫폼, CMS·API 연동 프로젝트를 수행했습니다.
