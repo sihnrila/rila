@@ -12,7 +12,7 @@ const Resume = () => {
             <i className="fas fa-arrow-left"></i> BACK
           </button>
           <h1 className="project-title">RESUME</h1>
-          <p className="project-subtitle">Creative Technologist</p>
+          <p className="project-subtitle">Frontend Developer</p>
           <p className="project-tools">
             <i className="fas fa-user"></i> 신리라 (Rila Shin)
           </p>
@@ -24,7 +24,7 @@ const Resume = () => {
             <h3 className="resume-section-title">자기소개서</h3>
             <div className="resume-intro">
               <p className="resume-intro-text">
-                열정으로 무장한 프론트앤드 신리라입니다.
+                서비스 구조와 사용자 경험을 함께 설계하는 프론트엔드 개발자 신리라입니다.
               </p>
               <p className="resume-intro-text">
                 저는 개발사와 초기 스타트업에서 마크업 및 웹 프론트엔드로 일한 경험이 있습니다. 다양한 개발 환경 속에서 튼튼하게 코드를 작성하는 방법을 배우고, 원활한 협업을 바탕으로 주도적으로 업무를 진행하는 방법을 익혔습니다.

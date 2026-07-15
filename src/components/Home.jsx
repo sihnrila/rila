@@ -5,6 +5,7 @@ import { fetchTistoryPosts, getTistoryBlogUrl } from '../services/tistory'
 import DesignModals from './DesignModals'
 import profile01 from '../assets/img/profile01.jpeg'
 import img02 from '../assets/img/img02.jpeg'
+import { PROJECT_META } from '../data/projects'
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('work')
@@ -38,6 +39,13 @@ const Home = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   // 마우스 움직임에 따른 타이포그래피 인터랙션
@@ -108,24 +116,72 @@ const Home = () => {
   ]
 
   return (
-    <div className="container">
+    <div className="container" id="main-content">
       <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" data-bs-smooth-scroll="true" className="scrollspy-example" tabIndex="0">
         
         {/* Section 01 - Hero Typography */}
         <section className="section01" id="myName">
           <div className="hero-content">
-            <h1 className="hero-title">
-              <span className="line line-1">RILA</span>
-              <span className="line line-2">SIN</span>
-              <span className="line line-3">PORTFOLIO</span>
+            <h1 className="hero-title" aria-label="신리라 포트폴리오">
+              <span className="line line-1" aria-hidden="true">RILA</span>
+              <span className="line line-2" aria-hidden="true">SIN</span>
+              <span className="line line-3" aria-hidden="true">PORTFOLIO</span>
             </h1>
-            <p className="hero-subtitle">
-              FRONTEND DEVELOPER & DESIGNER
+            <p className="hero-identity">
+              서비스 구조와 사용자 경험을 함께 설계하는<br />
+              <strong>프론트엔드 개발자 신리라</strong>입니다.
             </p>
+            <p className="hero-desc">
+              EPUB 웹뷰어, 교육 게임 플랫폼, 운영 CMS와 API 연동 프로젝트를 수행했습니다.<br className="br-desktop" />
+              화면 구현을 넘어 데이터 구조, 서비스 흐름, SDK, 관리자 기능과 운영 환경까지 함께 설계합니다.
+            </p>
+            <div className="hero-cta">
+              <a href="#work" className="cta-btn cta-primary" onClick={(e) => { e.preventDefault(); scrollToSection('work') }}>
+                프로젝트 보기
+              </a>
+              <a href="/resume" className="cta-btn cta-secondary">
+                이력서 보기
+              </a>
+              <a href="https://github.com/sihnrila" target="_blank" rel="noopener noreferrer" className="cta-btn cta-ghost" aria-label="GitHub 프로필">
+                <i className="fab fa-github" aria-hidden="true"></i> GitHub
+              </a>
+              <a href="mailto:oo8923@gmail.com" className="cta-btn cta-ghost" aria-label="이메일 보내기">
+                <i className="fas fa-envelope" aria-hidden="true"></i> 이메일
+              </a>
+            </div>
           </div>
-          <div className="scroll-indicator">
+          <div className="scroll-indicator" aria-hidden="true">
             <span>Scroll</span>
             <div className="scroll-line"></div>
+          </div>
+        </section>
+
+        {/* Capabilities Section */}
+        <section className="section-capabilities" id="capabilities" aria-labelledby="capabilities-title">
+          <div className="cap-container">
+            <h2 className="cap-heading" id="capabilities-title">핵심 역량</h2>
+            <div className="cap-grid">
+              <div className="cap-card">
+                <div className="cap-icon" aria-hidden="true"><i className="fas fa-code"></i></div>
+                <h3 className="cap-title">Frontend Development</h3>
+                <p className="cap-desc">웹 표준 기반의 구조적인 마크업, 반응형 UI, 상태 및 이벤트 기반 인터페이스 구현</p>
+              </div>
+              <div className="cap-card">
+                <div className="cap-icon" aria-hidden="true"><i className="fas fa-sitemap"></i></div>
+                <h3 className="cap-title">Service Architecture</h3>
+                <p className="cap-desc">서비스 흐름, 데이터 구조, API 연동 방식과 운영 구조를 함께 고려한 설계</p>
+              </div>
+              <div className="cap-card">
+                <div className="cap-icon" aria-hidden="true"><i className="fas fa-mobile-alt"></i></div>
+                <h3 className="cap-title">SDK & WebView</h3>
+                <p className="cap-desc">외부 서비스에서 재사용할 수 있는 JavaScript SDK와 iOS·Android WebView 연동 경험</p>
+              </div>
+              <div className="cap-card">
+                <div className="cap-icon" aria-hidden="true"><i className="fas fa-robot"></i></div>
+                <h3 className="cap-title">AI-assisted Workflow</h3>
+                <p className="cap-desc">생성형 AI를 활용한 데이터 생성, 검수, 문서화 및 반복 개발 업무 자동화</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -141,8 +197,8 @@ const Home = () => {
             <div className="about-content">
               <div className="about-text">
                 <div className="about-intro">
-                  <p className="intro-large">열정으로 무장한</p>
-                  <p className="intro-large">신리라입니다</p>
+                  <p className="intro-large">Frontend</p>
+                  <p className="intro-large">Developer</p>
                 </div>
                 
                 <div className="about-description">
@@ -151,34 +207,31 @@ const Home = () => {
                     <div className="desc-text">
                       <h3 className="desc-title">Education</h3>
                       <p>숭실사이버대학교 ICT 공학부 재학 중<br />
-                      웹퍼블리셔 전문가 과정 이수 (HTML, CSS, JavaScript)</p>
+                      웹퍼블리셔 전문가 과정 이수</p>
                     </div>
                   </div>
-                  
                   <div className="desc-item">
                     <span className="desc-number">02</span>
                     <div className="desc-text">
                       <h3 className="desc-title">Experience</h3>
-                      <p>스타트업 및 웹 에이전시 프리랜서 경험<br />
-                      독학으로 Vue.js, SCSS, Python 습득</p>
+                      <p>EPUB 웹뷰어, 교육 게임 플랫폼, 운영 CMS 개발<br />
+                      SDK 설계·WebView 연동·접근성 구현 경험</p>
                     </div>
                   </div>
-                  
                   <div className="desc-item">
                     <span className="desc-number">03</span>
                     <div className="desc-text">
-                      <h3 className="desc-title">Philosophy</h3>
-                      <p>열심히 하는 것도 좋지만, 일을 할 때만큼은 "잘하자"는 마인드<br />
-                      사용자 중심의 사고와 빠른 피드백 수용</p>
+                      <h3 className="desc-title">Approach</h3>
+                      <p>화면 구현을 넘어 서비스 흐름과 데이터 구조를 함께 이해하고<br />
+                      백엔드·API·CMS·인프라 영역까지 확장해 기능을 구현합니다.</p>
                     </div>
                   </div>
-                  
                   <div className="desc-item">
                     <span className="desc-number">04</span>
                     <div className="desc-text">
-                      <h3 className="desc-title">Approach</h3>
-                      <p>팀원들과의 적극적인 커뮤니케이션<br />
-                      반복 업무 자동화 및 프로세스 개선에 관심</p>
+                      <h3 className="desc-title">AI Workflow</h3>
+                      <p>생성형 AI를 데이터 생성, 검수, 문서화와<br />
+                      반복 업무 자동화 과정에 실무 활용 중</p>
                     </div>
                   </div>
                 </div>
@@ -186,7 +239,7 @@ const Home = () => {
               <div className="about-image">
                 <img src={profile01} alt="Rila" />
                 <Link to="/resume" className="resume-button">
-                  <span>VIEW RESUME</span>
+                  <span>이력서 보기</span>
                   <i className="fas fa-arrow-right"></i>
                 </Link>
               </div>
@@ -546,28 +599,31 @@ const Home = () => {
                             </div>
                           <div className="card-content">
                             <h3 className="card-title">{repo.name}</h3>
-                            <p className="card-tools">
-                                <i className="fas fa-code"></i> {repo.language || 'Other'} 
-                                {repo.description && ` - ${repo.description.substring(0, 50)}${repo.description.length > 50 ? '...' : ''}`}
+                            {PROJECT_META[repo.name]?.period && (
+                              <p className="card-period">
+                                <i className="fas fa-calendar-alt" aria-hidden="true"></i> {PROJECT_META[repo.name].period}
+                                {PROJECT_META[repo.name]?.role && <span className="card-role">{PROJECT_META[repo.name].role}</span>}
                               </p>
-                            <div className="card-meta">
-                              {repo.isPrivate ? (
-                                <span className="meta-item">
-                                  <i className="fas fa-lock"></i> Private / Client Work
-                                </span>
-                              ) : (
-                                <>
-                                  <span className="meta-item">
-                                    <i className="fas fa-star"></i> {repo.stars}
-                                  </span>
-                                  <span className="meta-item">
-                                    <i className="fas fa-code-branch"></i> {repo.forks}
-                                  </span>
-                                  <span className="meta-item">
-                                    <i className="fas fa-external-link-alt"></i> Live Demo
-                                  </span>
-                                </>
-                              )}
+                            )}
+                            {repo.description && (
+                              <p className="card-tools">
+                                {repo.description.substring(0, 60)}{repo.description.length > 60 ? '...' : ''}
+                              </p>
+                            )}
+                            {PROJECT_META[repo.name]?.tags && (
+                              <div className="card-tags" aria-label="역할 및 기술">
+                                {PROJECT_META[repo.name].tags.slice(0, 3).map(tag => (
+                                  <span key={tag} className="role-tag">{tag}</span>
+                                ))}
+                              </div>
+                            )}
+                            {PROJECT_META[repo.name]?.highlight && (
+                              <p className="card-highlight">
+                                {PROJECT_META[repo.name].highlight}
+                              </p>
+                            )}
+                            <div className="card-cta">
+                              <span className="card-cta-text">상세 보기 <i className="fas fa-arrow-right" aria-hidden="true"></i></span>
                             </div>
                             </div>
                           </Link>

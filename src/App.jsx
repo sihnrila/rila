@@ -9,6 +9,7 @@ import Resume from './components/Resume'
 function App() {
   return (
     <BrowserRouter>
+      <a href="#main-content" className="skip-link">본문 바로가기</a>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

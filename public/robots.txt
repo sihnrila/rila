@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rila-5dl.pages.dev/sitemap.xml

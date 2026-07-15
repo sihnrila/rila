@@ -61,11 +61,13 @@ const Navbar = () => {
           >
             RILA
           </a>
-          <button 
+          <button
             className="sidebar-toggle"
-            type="button" 
+            type="button"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            aria-label="Toggle navigation"
+            aria-label="메뉴 열기/닫기"
+            aria-expanded={isSidebarOpen}
+            aria-controls="sidebar-nav"
           >
             <span></span>
             <span></span>
@@ -111,12 +113,20 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a 
-                  className="nav-link" 
+                <a
+                  className="nav-link"
                   href="#contact"
                   onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}
                 >
                   CONTACT
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  href="/resume"
+                >
+                  RESUME
                 </a>
               </li>
             </ul>
@@ -133,7 +143,7 @@ const Navbar = () => {
       )}
 
       {/* 사이드바 */}
-      <div className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
+      <div className={`sidebar ${isSidebarOpen ? 'active' : ''}`} id="sidebar-nav" aria-hidden={!isSidebarOpen}>
         <div className="sidebar-header">
           <a 
             href="#" 
@@ -181,12 +191,21 @@ const Navbar = () => {
             </a>
           </li>
           <li className="nav-item">
-            <a 
-              className="nav-link" 
+            <a
+              className="nav-link"
               href="#contact"
               onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}
             >
               <span className="nav-text">CONTACT</span>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a
+              className="nav-link"
+              href="/resume"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              <span className="nav-text">RESUME</span>
             </a>
           </li>
         </ul>
