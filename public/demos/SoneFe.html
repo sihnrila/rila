@@ -58,6 +58,41 @@
       margin: 0 auto;
     }
 
+    @media (max-width: 767px) {
+      .app-body {
+        grid-template-columns: 1fr;
+        padding: 0.75rem 0.75rem 0;
+        gap: 0.75rem;
+      }
+      .sidebar {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .sidebar .panel {
+        flex: 1 1 calc(50% - 0.375rem);
+        min-width: 0;
+      }
+      .event-tags { gap: 0.3rem; }
+      .event-tag { font-size: 0.72rem; padding: 4px 9px; }
+      .timeline-wrap { display: none; }
+      .mobile-timeline-notice {
+        display: flex !important;
+      }
+    }
+
+    .mobile-timeline-notice {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0.75rem;
+      padding: 0.65rem 1rem;
+      background: #eff3ff;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #3b5bdb;
+    }
+
     /* ── Panel ── */
     .panel {
       background: #fff;
@@ -80,14 +115,14 @@
     .video-panel .panel-body { padding: 0; }
     .canvas-wrapper {
       position: relative;
-      width: 700px;
-      height: 380px;
+      width: 100%;
+      aspect-ratio: 700 / 380;
       background: #000;
       overflow: hidden;
     }
     .canvas-wrapper video {
-      width: 700px;
-      height: 380px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
     }
@@ -289,6 +324,10 @@
   </div>
 </div>
 
+<div class="mobile-timeline-notice">
+  ℹ 타임라인 드래그 기능은 데스크톱에서 이용 가능합니다
+</div>
+
 
 <!-- ── polygon ── -->
 <script>
@@ -297,14 +336,29 @@ let lineArray = [], pointArray = [], obj = [], lcArr = [];
 const listColor = ['#4c6ef5','#2f9e44','#e67700','#c92a2a','#862e9c','#0c8599'];
 let drawMode = false;
 
+function getCanvasSize() {
+  const wrapper = document.querySelector('.canvas-wrapper');
+  const w = wrapper.clientWidth || 700;
+  const h = Math.round(w * 380 / 700);
+  return { w, h };
+}
+
 function initCanvas() {
-  canvas = new fabric.Canvas('canvas', { width: 700, height: 380 });
+  const { w, h } = getCanvasSize();
+  canvas = new fabric.Canvas('canvas', { width: w, height: h });
   fabric.Object.prototype.originX = 'center';
   fabric.Object.prototype.originY = 'center';
   canvas.on('mouse:down', onMouseDown);
   canvas.on('mouse:up',   onMouseUp);
   canvas.on('mouse:move', onMouseMove);
   canvas.on('object:moving', onObjectMove);
+
+  window.addEventListener('resize', () => {
+    const { w: nw, h: nh } = getCanvasSize();
+    canvas.setWidth(nw);
+    canvas.setHeight(nh);
+    canvas.renderAll();
+  });
 }
 
 function onMouseDown(options) {
@@ -369,8 +423,9 @@ function toggleDrawPolygon() {
 }
 
 function addPoint(options) {
-  const lx = options.e.layerX / canvas.getZoom();
-  const ly = options.e.layerY / canvas.getZoom();
+  const p0 = canvas.getPointer(options.e);
+  const lx = p0.x;
+  const ly = p0.y;
 
   const point = new fabric.Circle({
     id: new Date().getTime(), radius: 5,
