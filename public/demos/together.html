@@ -23,12 +23,10 @@ ul,li{list-style:none;padding:0;margin:0;}
 a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;cursor:pointer;line-height:inherit;}
 
 .bg_01{background:#FEEBFA;}
-
 .wrap{width:100%;max-width:720px;margin:0 auto;padding-bottom:20px;}
 .wrap.wrap2{padding-bottom:0;}
 
 .header{width:100%;height:70px;padding:20px;position:fixed;top:0;left:0;color:#3042CD;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/logo-splash.png) no-repeat right bottom #FEEBFA;background-size:123px auto;}
-
 .body{width:100%;padding:0 20px;position:relative;}
 .body2{width:100%;height:calc(100vh + 20px);padding:0 20px;background:#FEEBFA;}
 .body.body3{padding:0px;height:calc(95vh);}
@@ -59,31 +57,32 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
 .side_bar div.tab6{background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/btn_side_04ac.png) no-repeat center;background-size:100%;border-bottom:0;}
 
 .splash{width:100%;max-width:720px;height:100vh;margin:0 auto;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/logo-splash.png) no-repeat center;background-size:50%;background-color:#FEEBFA;}
-
 .header.header2{background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/logo-01.png) no-repeat #fff;background-position:50% 20px;position:fixed;background-size:110px auto;top:0;left:0;z-index:10;}
 .header.header2 .back{width:42px;height:42px;border-bottom:1px solid #fff;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/icon-back-1.png) center no-repeat;background-size:42px;position:absolute;top:12px;left:5px;}
 
 .map2{width:100%;height:100%;position:relative;}
-.map2 .gradi{width:100%;height:100%;opacity:0.2;background-blend-mode:overlay;background-image:linear-gradient(179deg,#3042CD 24%,#FF2BB9 104%);position:absolute;top:0;left:0;pointer-events:none;z-index:1000;}
+.map2 .gradi{width:100%;height:100%;opacity:0.15;background-image:linear-gradient(179deg,#FF2BB9 0%,#a044eb 100%);position:absolute;top:0;left:0;pointer-events:none;z-index:1000;}
 .map2 .mak{width:45px;height:56px;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/icon-mk.png) no-repeat center;background-size:45px 56px;position:absolute;top:30%;right:20%;}
 .map2 .mak2{width:45px;height:56px;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/icon-mk2.png) no-repeat center;background-size:45px 56px;position:absolute;top:50%;right:70%;}
 .map2 .mak3{width:45px;height:56px;background:url(https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/icon-mk3.png) no-repeat center top;background-size:45px 56px;position:absolute;top:40%;right:80%;}
 
-/* ── 공통 스크롤 뷰 ── */
-.scroll_view{width:100%;height:calc(100vh - 155px);margin-top:70px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 20px;}
+#leaflet-map{width:100%;height:100%;}
+.leaflet-popup-content-wrapper{border-radius:12px !important;font-family:'Spoqa Han Sans Neo',sans-serif !important;}
+.leaflet-popup-content{font-size:13px;color:#453B42;line-height:1.5;margin:10px 14px !important;}
+.leaflet-popup-content strong{color:#FF2BB9;font-weight:700;display:block;margin-bottom:2px;}
+.leaflet-control-attribution{font-size:9px !important;}
 
-/* ── 공통 카드 ── */
+.scroll_view{width:100%;height:calc(100vh - 155px);margin-top:70px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 20px;}
 .card{background:#fff;border-radius:16px;margin-bottom:14px;overflow:hidden;}
 
 /* ── 커뮤니티 ── */
 .comm_filter{display:flex;gap:8px;margin-bottom:16px;}
 .comm_filter button{flex:none;padding:7px 14px;border-radius:20px;border:1.5px solid #E0D8E0;background:#fff;font-size:13px;color:#453B42;cursor:pointer;font-family:'Spoqa Han Sans Neo',sans-serif;}
-.comm_filter button.on{background:#3042CD;border-color:#3042CD;color:#fff;}
-
+.comm_filter button.on{background:linear-gradient(135deg,#FF2BB9,#a044eb);border-color:#FF2BB9;color:#fff;}
 .post_card{padding:16px;}
 .post_header{display:flex;align-items:center;margin-bottom:10px;}
 .avatar{width:38px;height:38px;border-radius:50%;margin-right:10px;flex:none;object-fit:cover;background:#EDD8F5;}
-.avatar_txt{width:38px;height:38px;border-radius:50%;margin-right:10px;flex:none;background:linear-gradient(135deg,#3042CD,#FF2BB9);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;}
+.avatar_txt{width:38px;height:38px;border-radius:50%;margin-right:10px;flex:none;background:linear-gradient(135deg,#FF2BB9,#a044eb);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;}
 .post_meta{flex:1;}
 .post_name{font-size:13px;font-weight:700;color:#222;display:block;line-height:1.3;}
 .post_time{font-size:11px;color:#aaa;display:block;margin-top:2px;line-height:1;}
@@ -96,68 +95,108 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
 .act_btn svg{flex:none;}
 
 /* ── 캠페인 ── */
-.camp_header_block{background:linear-gradient(135deg,#3042CD,#FF2BB9);border-radius:16px;padding:20px;margin-bottom:14px;color:#fff;}
-.camp_header_block .ch_label{font-size:11px;font-weight:700;opacity:0.8;margin-bottom:6px;}
+.camp_header_block{background:linear-gradient(135deg,#FF2BB9,#a044eb);border-radius:16px;padding:20px;margin-bottom:14px;color:#fff;cursor:pointer;}
+.camp_header_block .ch_label{font-size:11px;font-weight:700;opacity:0.85;margin-bottom:6px;}
 .camp_header_block .ch_title{font-size:18px;font-weight:700;line-height:1.4;margin-bottom:10px;}
-.camp_header_block .ch_meta{font-size:12px;opacity:0.8;}
-.camp_header_block .ch_join{display:inline-block;margin-top:14px;background:#fff;color:#3042CD;font-size:13px;font-weight:700;padding:9px 22px;border-radius:20px;cursor:pointer;}
-
+.camp_header_block .ch_meta{font-size:12px;opacity:0.85;}
+.camp_header_block .ch_join{display:inline-block;margin-top:14px;background:#fff;color:#FF2BB9;font-size:13px;font-weight:700;padding:9px 22px;border-radius:20px;cursor:pointer;}
 .camp_card{padding:16px;}
-.camp_title{font-size:14px;font-weight:700;color:#222;margin-bottom:6px;line-height:1.4;}
+.camp_title{font-size:14px;font-weight:700;color:#222;margin-bottom:6px;line-height:1.4;cursor:pointer;}
+.camp_title:active{color:#FF2BB9;}
 .camp_desc{font-size:12px;color:#777;line-height:1.5;margin-bottom:12px;}
 .progress_wrap{margin-bottom:8px;}
 .progress_bar{width:100%;height:6px;background:#F0EAF0;border-radius:3px;overflow:hidden;}
-.progress_fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#3042CD,#FF2BB9);}
+.progress_fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#FF2BB9,#a044eb);}
 .progress_meta{display:flex;justify-content:space-between;margin-top:5px;}
 .progress_meta span{font-size:11px;color:#999;}
-.progress_meta strong{font-size:11px;color:#3042CD;font-weight:700;}
+.progress_meta strong{font-size:11px;color:#FF2BB9;font-weight:700;}
 .camp_footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid #f4f0f4;}
 .camp_participants{font-size:12px;color:#999;}
 .camp_participants strong{color:#453B42;font-weight:700;}
-.join_btn{padding:7px 18px;background:#3042CD;color:#fff;font-size:12px;font-weight:700;border-radius:14px;border:none;cursor:pointer;font-family:'Spoqa Han Sans Neo',sans-serif;}
+.join_btn{padding:7px 18px;background:linear-gradient(135deg,#FF2BB9,#a044eb);color:#fff;font-size:12px;font-weight:700;border-radius:14px;border:none;cursor:pointer;font-family:'Spoqa Han Sans Neo',sans-serif;}
 .join_btn.joined{background:#FEEBFA;color:#FF2BB9;}
 
 /* ── 프로필 ── */
 .profile_top{background:#fff;border-radius:16px;padding:24px 16px 16px;margin-bottom:14px;text-align:center;}
-.profile_avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#3042CD,#FF2BB9);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;}
+.profile_avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#FF2BB9,#a044eb);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;}
 .profile_name{font-size:17px;font-weight:700;color:#222;margin-bottom:4px;}
 .profile_bio{font-size:12px;color:#999;line-height:1.5;margin-bottom:16px;}
 .profile_stats{display:flex;justify-content:center;gap:0;}
 .stat_item{flex:1;text-align:center;border-right:1px solid #f0f0f0;}
 .stat_item:last-child{border-right:none;}
-.stat_num{font-size:16px;font-weight:700;color:#3042CD;display:block;}
+.stat_num{font-size:16px;font-weight:700;color:#FF2BB9;display:block;}
 .stat_label{font-size:11px;color:#aaa;margin-top:3px;display:block;}
 .edit_profile_btn{display:block;margin:14px auto 0;padding:9px 28px;background:#FEEBFA;color:#FF2BB9;font-size:13px;font-weight:700;border-radius:20px;border:none;cursor:pointer;font-family:'Spoqa Han Sans Neo',sans-serif;}
-
 .profile_section_title{font-size:13px;font-weight:700;color:#453B42;margin-bottom:10px;padding:0 2px;}
-
 .badge_row{display:flex;gap:10px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;}
 .badge_item{flex:none;text-align:center;}
 .badge_icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#FEEBFA,#EDD8F5);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 5px;}
-.badge_icon.earned{background:linear-gradient(135deg,#3042CD,#FF2BB9);}
+.badge_icon.earned{background:linear-gradient(135deg,#FF2BB9,#a044eb);}
 .badge_name{font-size:10px;color:#999;white-space:nowrap;}
-
-.activity_list{}
 .activity_item{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
 .activity_dot{width:36px;height:36px;border-radius:10px;background:#FEEBFA;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;}
 .activity_info{flex:1;}
 .activity_title{font-size:13px;font-weight:700;color:#222;margin-bottom:2px;line-height:1.3;}
 .activity_sub{font-size:11px;color:#aaa;}
-.activity_point{font-size:13px;font-weight:700;color:#3042CD;}
+.activity_point{font-size:13px;font-weight:700;color:#FF2BB9;}
+
+/* ── 캠페인 상세 ── */
+.cd-detail-text{font-size:13px;color:#555;line-height:1.7;margin-bottom:12px;white-space:pre-line;}
+.cd-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.cd-tag{background:#FEEBFA;color:#FF2BB9;font-size:11px;font-weight:700;padding:4px 10px;border-radius:10px;}
+.cd-period{font-size:12px;color:#aaa;margin-bottom:14px;}
+.cd-reward-box{background:linear-gradient(135deg,#FF2BB9,#a044eb);border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.cd-reward-label{font-size:12px;color:rgba(255,255,255,0.85);}
+.cd-reward-value{font-size:17px;font-weight:700;color:#fff;}
+.cd-p-title{font-size:13px;font-weight:700;color:#453B42;margin-bottom:10px;}
+.cd-p-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.cd-p-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FEEBFA,#EDD8F5);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#FF2BB9;flex:none;}
+.cd-p-name{font-size:13px;color:#222;font-weight:500;}
+.cd-join-btn{width:100%;background:linear-gradient(135deg,#FF2BB9,#a044eb);color:#fff;border:none;border-radius:16px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Spoqa Han Sans Neo',sans-serif;margin-top:4px;}
+.cd-join-btn.joined{background:#FEEBFA;color:#FF2BB9;}
+
+/* ── 댓글 드로어 ── */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:1999;display:none;}
+.drawer-overlay.open{display:block;}
+.drawer-base{position:fixed;bottom:0;left:0;right:0;max-width:720px;margin:0 auto;background:#fff;border-radius:20px 20px 0 0;z-index:2000;transform:translateY(100%);transition:transform 0.3s cubic-bezier(.32,.72,0,1);}
+.drawer-base.open{transform:translateY(0);}
+.drawer-handle{width:40px;height:4px;background:#e0d8e0;border-radius:2px;margin:12px auto 6px;}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 10px;border-bottom:1px solid #f4f0f4;}
+.drawer-title{font-size:15px;font-weight:700;color:#222;}
+.drawer-close{background:none;border:none;font-size:20px;color:#ccc;cursor:pointer;padding:2px 4px;line-height:1;}
+.comment-drawer{max-height:70vh;display:flex;flex-direction:column;}
+.comment-list{flex:1;overflow-y:auto;padding:12px 16px;min-height:80px;}
+.comment-item{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start;}
+.ci-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF2BB9,#a044eb);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex:none;}
+.ci-av.other{background:linear-gradient(135deg,#e0d0f0,#c8b0e8);}
+.ci-body{flex:1;}
+.ci-name-row{display:flex;align-items:baseline;gap:6px;margin-bottom:3px;}
+.ci-name{font-size:12px;font-weight:700;color:#222;}
+.ci-time{font-size:10px;color:#bbb;}
+.ci-text{font-size:13px;color:#453B42;line-height:1.5;}
+.comment-empty{text-align:center;padding:28px 0;color:#ccc;font-size:13px;}
+.comment-input-row{display:flex;align-items:center;gap:8px;padding:10px 14px 20px;border-top:1px solid #f4f0f4;}
+.comment-input-field{flex:1;border:1.5px solid #e0d8e0;border-radius:20px;padding:8px 14px;font-size:13px;font-family:'Spoqa Han Santos Neo',sans-serif;outline:none;color:#222;min-width:0;}
+.comment-input-field:focus{border-color:#FF2BB9;}
+.comment-send-btn{background:linear-gradient(135deg,#FF2BB9,#a044eb);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Spoqa Han Sans Neo',sans-serif;flex:none;}
+
+/* ── 프로필 수정 드로어 ── */
+.pe-body{padding:16px 20px 28px;}
+.pe-avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#FF2BB9,#a044eb);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;margin:0 auto 18px;}
+.form-field{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:#453B42;margin-bottom:6px;}
+.form-input{width:100%;border:1.5px solid #e0d8e0;border-radius:12px;padding:10px 14px;font-size:14px;font-family:'Spoqa Han Sans Neo',sans-serif;outline:none;color:#222;}
+.form-input:focus{border-color:#FF2BB9;}
+.form-textarea{resize:none;height:76px;line-height:1.5;vertical-align:top;}
+.save-profile-btn{width:100%;background:linear-gradient(135deg,#FF2BB9,#a044eb);color:#fff;border:none;border-radius:16px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Spoqa Han Sans Neo',sans-serif;margin-top:6px;}
+
+/* ── 토스트 ── */
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(30,20,40,0.88);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .25s,transform .25s;z-index:3000;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 /* ── 뷰 전환 ── */
 #view-splash{display:block;}
-#view-map{display:none;}
-#view-community{display:none;}
-#view-campaign{display:none;}
-#view-profile{display:none;}
-
-/* Leaflet 지도 컨테이너 */
-#leaflet-map{width:100%;height:100%;}
-.leaflet-popup-content-wrapper{border-radius:12px !important;font-family:'Spoqa Han Sans Neo',sans-serif !important;}
-.leaflet-popup-content{font-size:13px;color:#453B42;line-height:1.5;margin:10px 14px !important;}
-.leaflet-popup-content strong{color:#3042CD;font-weight:700;display:block;margin-bottom:2px;}
-.leaflet-control-attribution{font-size:9px !important;}
+#view-map,#view-community,#view-campaign,#view-campaign-detail,#view-profile{display:none;}
 </style>
 </head>
 <body>
@@ -167,12 +206,10 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
   <div class="splash"></div>
 </div>
 
-<!-- ===== MAP VIEW ===== -->
+<!-- ===== MAP ===== -->
 <div id="view-map">
   <div class="wrap wrap2">
-    <div class="header header2">
-      <span class="back"></span>
-    </div>
+    <div class="header header2"><span class="back"></span></div>
     <div class="body body3">
       <div class="map2" id="map">
         <div id="leaflet-map"></div>
@@ -184,35 +221,21 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
         </div>
       </div>
     </div>
-    <ul class="tap_bar" id="tap-map">
-      <li onclick="switchTab('map')" class="on" id="nav-map">
-        <a><span class="icon v01"></span><span class="label">지도</span></a>
-      </li>
-      <li onclick="switchTab('community')" id="nav-community">
-        <a><span class="icon v02"></span><span class="label">커뮤니티</span></a>
-      </li>
-      <li>
-        <a><span class="logo"></span></a>
-      </li>
-      <li onclick="switchTab('campaign')" id="nav-campaign">
-        <a><span class="icon v03"></span><span class="label">캠페인</span></a>
-      </li>
-      <li onclick="switchTab('profile')" id="nav-profile">
-        <a><span class="icon v04"></span><span class="label">프로필</span></a>
-      </li>
+    <ul class="tap_bar">
+      <li onclick="switchTab('map')" class="on"><a><span class="icon v01"></span><span class="label">지도</span></a></li>
+      <li onclick="switchTab('community')"><a><span class="icon v02"></span><span class="label">커뮤니티</span></a></li>
+      <li><a><span class="logo"></span></a></li>
+      <li onclick="switchTab('campaign')"><a><span class="icon v03"></span><span class="label">캠페인</span></a></li>
+      <li onclick="switchTab('profile')"><a><span class="icon v04"></span><span class="label">프로필</span></a></li>
     </ul>
   </div>
 </div>
 
-<!-- ===== COMMUNITY VIEW ===== -->
+<!-- ===== COMMUNITY ===== -->
 <div id="view-community">
   <div class="wrap wrap2 bg_01">
-    <div class="header header2">
-      <span class="back" onclick="switchTab('map')"></span>
-    </div>
-
+    <div class="header header2"><span class="back" onclick="switchTab('map')"></span></div>
     <div class="scroll_view">
-      <!-- 필터 -->
       <div class="comm_filter">
         <button class="on" onclick="setFilter(this)">전체</button>
         <button onclick="setFilter(this)">환경</button>
@@ -220,29 +243,25 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
         <button onclick="setFilter(this)">교육</button>
       </div>
 
-      <!-- 게시글 1 -->
-      <div class="card">
+      <div class="card" id="post-1">
         <div class="post_card">
           <div class="post_header">
             <div class="avatar_txt">김</div>
-            <div class="post_meta">
-              <span class="post_name">김지원</span>
-              <span class="post_time">10분 전</span>
-            </div>
+            <div class="post_meta"><span class="post_name">김지원</span><span class="post_time">10분 전</span></div>
             <span class="post_tag">환경</span>
           </div>
           <div class="post_body">오늘 한강 플로깅 다녀왔어요! 2시간 동안 쓰레기 3봉지 수거했습니다 🌿 다음 주 토요일에 또 모임 있는데 같이 하실 분 계세요?</div>
           <div class="post_img">🌿</div>
           <div class="post_actions">
-            <button class="act_btn liked" onclick="toggleLike(this)">
+            <button class="act_btn like-btn liked" data-post="1" data-count="24" onclick="toggleLike(this)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF2BB9"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-              좋아요 24
+              <span>좋아요 <span class="like-count">24</span></span>
             </button>
-            <button class="act_btn" onclick="this.style.color='#3042CD'">
+            <button class="act_btn" onclick="openComments('1')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              댓글 8
+              <span>댓글 <span id="cc-1">8</span></span>
             </button>
-            <button class="act_btn">
+            <button class="act_btn" onclick="sharePost('한강 플로깅 모임')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
               공유
             </button>
@@ -250,29 +269,25 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
         </div>
       </div>
 
-      <!-- 게시글 2 -->
-      <div class="card">
+      <div class="card" id="post-2">
         <div class="post_card">
           <div class="post_header">
             <div class="avatar_txt" style="background:linear-gradient(135deg,#FF2BB9,#ff8c00);">박</div>
-            <div class="post_meta">
-              <span class="post_name">박서연</span>
-              <span class="post_time">1시간 전</span>
-            </div>
+            <div class="post_meta"><span class="post_name">박서연</span><span class="post_time">1시간 전</span></div>
             <span class="post_tag">동물</span>
           </div>
           <div class="post_body">유기견 임시보호 중인데 입양처를 찾고 있어요. 이름은 초코, 2살 추정 믹스견입니다. 순하고 사람 좋아해요 🐕</div>
           <div class="post_img">🐕</div>
           <div class="post_actions">
-            <button class="act_btn" onclick="toggleLike(this)">
+            <button class="act_btn like-btn" data-post="2" data-count="47" onclick="toggleLike(this)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              좋아요 47
+              <span>좋아요 <span class="like-count">47</span></span>
             </button>
-            <button class="act_btn">
+            <button class="act_btn" onclick="openComments('2')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              댓글 19
+              <span>댓글 <span id="cc-2">19</span></span>
             </button>
-            <button class="act_btn">
+            <button class="act_btn" onclick="sharePost('유기견 입양 찾아요')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
               공유
             </button>
@@ -280,28 +295,24 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
         </div>
       </div>
 
-      <!-- 게시글 3 -->
-      <div class="card">
+      <div class="card" id="post-3">
         <div class="post_card">
           <div class="post_header">
-            <div class="avatar_txt" style="background:linear-gradient(135deg,#2ecc71,#3042CD);">이</div>
-            <div class="post_meta">
-              <span class="post_name">이준혁</span>
-              <span class="post_time">3시간 전</span>
-            </div>
+            <div class="avatar_txt" style="background:linear-gradient(135deg,#2ecc71,#a044eb);">이</div>
+            <div class="post_meta"><span class="post_name">이준혁</span><span class="post_time">3시간 전</span></div>
             <span class="post_tag">교육</span>
           </div>
           <div class="post_body">지역 아동센터에서 무료 코딩 교육 봉사 모집합니다. 매주 토요일 오후 2-4시, 경험 없어도 괜찮아요! 관심 있으신 분은 댓글 달아주세요 📚</div>
           <div class="post_actions">
-            <button class="act_btn" onclick="toggleLike(this)">
+            <button class="act_btn like-btn" data-post="3" data-count="31" onclick="toggleLike(this)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              좋아요 31
+              <span>좋아요 <span class="like-count">31</span></span>
             </button>
-            <button class="act_btn">
+            <button class="act_btn" onclick="openComments('3')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              댓글 12
+              <span>댓글 <span id="cc-3">12</span></span>
             </button>
-            <button class="act_btn">
+            <button class="act_btn" onclick="sharePost('코딩 교육 봉사 모집')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
               공유
             </button>
@@ -309,45 +320,31 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
         </div>
       </div>
     </div>
-
     <ul class="tap_bar">
-      <li onclick="switchTab('map')">
-        <a><span class="icon v01"></span><span class="label">지도</span></a>
-      </li>
-      <li onclick="switchTab('community')" class="on">
-        <a><span class="icon v02"></span><span class="label">커뮤니티</span></a>
-      </li>
+      <li onclick="switchTab('map')"><a><span class="icon v01"></span><span class="label">지도</span></a></li>
+      <li onclick="switchTab('community')" class="on"><a><span class="icon v02"></span><span class="label">커뮤니티</span></a></li>
       <li><a><span class="logo"></span></a></li>
-      <li onclick="switchTab('campaign')">
-        <a><span class="icon v03"></span><span class="label">캠페인</span></a>
-      </li>
-      <li onclick="switchTab('profile')">
-        <a><span class="icon v04"></span><span class="label">프로필</span></a>
-      </li>
+      <li onclick="switchTab('campaign')"><a><span class="icon v03"></span><span class="label">캠페인</span></a></li>
+      <li onclick="switchTab('profile')"><a><span class="icon v04"></span><span class="label">프로필</span></a></li>
     </ul>
   </div>
 </div>
 
-<!-- ===== CAMPAIGN VIEW ===== -->
+<!-- ===== CAMPAIGN ===== -->
 <div id="view-campaign">
   <div class="wrap wrap2 bg_01">
-    <div class="header header2">
-      <span class="back" onclick="switchTab('map')"></span>
-    </div>
-
+    <div class="header header2"><span class="back" onclick="switchTab('map')"></span></div>
     <div class="scroll_view">
-      <!-- 피처드 캠페인 -->
-      <div class="camp_header_block">
+      <div class="camp_header_block" onclick="openCampaignDetail('featured')">
         <div class="ch_label">🔥 이달의 캠페인</div>
         <div class="ch_title">서울 도심 1천 그루 나무 심기 프로젝트</div>
         <div class="ch_meta">참여자 2,341명 · 목표 3,000명</div>
-        <span class="ch_join" onclick="joinFeatured(this)">지금 참여하기</span>
+        <span class="ch_join" id="featured-join-btn" onclick="event.stopPropagation();toggleFeaturedJoin(this)">지금 참여하기</span>
       </div>
 
-      <!-- 캠페인 카드 1 -->
       <div class="card">
         <div class="camp_card">
-          <div class="camp_title">🌊 한강 플라스틱 제로 캠페인</div>
+          <div class="camp_title" onclick="openCampaignDetail('river')">🌊 한강 플라스틱 제로 캠페인</div>
           <div class="camp_desc">매주 한강 주변 쓰레기를 줍고 기록하는 캠페인입니다. 참여할수록 포인트가 쌓여요!</div>
           <div class="progress_wrap">
             <div class="progress_bar"><div class="progress_fill" style="width:73%"></div></div>
@@ -355,15 +352,14 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
           </div>
           <div class="camp_footer">
             <span class="camp_participants">참여 <strong>1,460명</strong> / 2,000명</span>
-            <button class="join_btn" onclick="toggleJoin(this)">참여하기</button>
+            <button class="join_btn" data-camp="river" onclick="toggleJoin(this)">참여하기</button>
           </div>
         </div>
       </div>
 
-      <!-- 캠페인 카드 2 -->
       <div class="card">
         <div class="camp_card">
-          <div class="camp_title">🐾 유기동물 입양 인식 개선 캠페인</div>
+          <div class="camp_title" onclick="openCampaignDetail('animal')">🐾 유기동물 입양 인식 개선 캠페인</div>
           <div class="camp_desc">SNS에 입양 인증 사진을 올리고 유기동물 입양 문화를 함께 만들어요.</div>
           <div class="progress_wrap">
             <div class="progress_bar"><div class="progress_fill" style="width:45%"></div></div>
@@ -371,15 +367,14 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
           </div>
           <div class="camp_footer">
             <span class="camp_participants">참여 <strong>892명</strong> / 2,000명</span>
-            <button class="join_btn joined" onclick="toggleJoin(this)">참여중</button>
+            <button class="join_btn joined" data-camp="animal" onclick="toggleJoin(this)">참여중</button>
           </div>
         </div>
       </div>
 
-      <!-- 캠페인 카드 3 -->
       <div class="card">
         <div class="camp_card">
-          <div class="camp_title">📚 저소득층 아동 도서 기부 캠페인</div>
+          <div class="camp_title" onclick="openCampaignDetail('book')">📚 저소득층 아동 도서 기부 캠페인</div>
           <div class="camp_desc">읽지 않는 책을 기부하거나, 소액 후원으로 아이들에게 꿈을 선물하세요.</div>
           <div class="progress_wrap">
             <div class="progress_bar"><div class="progress_fill" style="width:88%"></div></div>
@@ -387,15 +382,14 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
           </div>
           <div class="camp_footer">
             <span class="camp_participants">참여 <strong>3,520명</strong> / 4,000명</span>
-            <button class="join_btn" onclick="toggleJoin(this)">참여하기</button>
+            <button class="join_btn" data-camp="book" onclick="toggleJoin(this)">참여하기</button>
           </div>
         </div>
       </div>
 
-      <!-- 캠페인 카드 4 -->
       <div class="card">
         <div class="camp_card">
-          <div class="camp_title">♻️ 텀블러 챌린지 100일</div>
+          <div class="camp_title" onclick="openCampaignDetail('tumbler')">♻️ 텀블러 챌린지 100일</div>
           <div class="camp_desc">100일 동안 텀블러 사용을 인증하고 일회용컵 사용을 줄이는 챌린지에 도전하세요.</div>
           <div class="progress_wrap">
             <div class="progress_bar"><div class="progress_fill" style="width:61%"></div></div>
@@ -403,150 +397,176 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
           </div>
           <div class="camp_footer">
             <span class="camp_participants">참여 <strong>609명</strong> / 1,000명</span>
-            <button class="join_btn" onclick="toggleJoin(this)">참여하기</button>
+            <button class="join_btn" data-camp="tumbler" onclick="toggleJoin(this)">참여하기</button>
           </div>
         </div>
       </div>
     </div>
-
     <ul class="tap_bar">
-      <li onclick="switchTab('map')">
-        <a><span class="icon v01"></span><span class="label">지도</span></a>
-      </li>
-      <li onclick="switchTab('community')">
-        <a><span class="icon v02"></span><span class="label">커뮤니티</span></a>
-      </li>
+      <li onclick="switchTab('map')"><a><span class="icon v01"></span><span class="label">지도</span></a></li>
+      <li onclick="switchTab('community')"><a><span class="icon v02"></span><span class="label">커뮤니티</span></a></li>
       <li><a><span class="logo"></span></a></li>
-      <li onclick="switchTab('campaign')" class="on">
-        <a><span class="icon v03"></span><span class="label">캠페인</span></a>
-      </li>
-      <li onclick="switchTab('profile')">
-        <a><span class="icon v04"></span><span class="label">프로필</span></a>
-      </li>
+      <li onclick="switchTab('campaign')" class="on"><a><span class="icon v03"></span><span class="label">캠페인</span></a></li>
+      <li onclick="switchTab('profile')"><a><span class="icon v04"></span><span class="label">프로필</span></a></li>
     </ul>
   </div>
 </div>
 
-<!-- ===== PROFILE VIEW ===== -->
+<!-- ===== CAMPAIGN DETAIL ===== -->
+<div id="view-campaign-detail">
+  <div class="wrap wrap2 bg_01">
+    <div class="header header2"><span class="back" onclick="switchTab('campaign')"></span></div>
+    <div class="scroll_view">
+      <div id="cd-hero" class="camp_header_block" style="cursor:default;"></div>
+      <div class="card"><div class="camp_card" id="cd-body"></div></div>
+      <div class="card"><div class="camp_card" id="cd-participants"></div></div>
+      <button class="cd-join-btn" id="cd-join-btn" onclick="toggleDetailJoin()">참여하기</button>
+    </div>
+    <ul class="tap_bar">
+      <li onclick="switchTab('map')"><a><span class="icon v01"></span><span class="label">지도</span></a></li>
+      <li onclick="switchTab('community')"><a><span class="icon v02"></span><span class="label">커뮤니티</span></a></li>
+      <li><a><span class="logo"></span></a></li>
+      <li onclick="switchTab('campaign')" class="on"><a><span class="icon v03"></span><span class="label">캠페인</span></a></li>
+      <li onclick="switchTab('profile')"><a><span class="icon v04"></span><span class="label">프로필</span></a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== PROFILE ===== -->
 <div id="view-profile">
   <div class="wrap wrap2 bg_01">
-    <div class="header header2">
-      <span class="back" onclick="switchTab('map')"></span>
-    </div>
-
+    <div class="header header2"><span class="back" onclick="switchTab('map')"></span></div>
     <div class="scroll_view">
-      <!-- 프로필 상단 -->
       <div class="profile_top">
-        <div class="profile_avatar">나</div>
-        <div class="profile_name">나다운</div>
-        <div class="profile_bio">🌿 환경을 생각하는 작은 실천가<br>서울 마포구 · 가치줄기 2년차</div>
+        <div class="profile_avatar" id="profile-avatar-display">나</div>
+        <div class="profile_name" id="profile-name-display">나다운</div>
+        <div class="profile_bio" id="profile-bio-display">🌿 환경을 생각하는 작은 실천가<br>서울 마포구 · 가치줄기 2년차</div>
         <div class="profile_stats">
-          <div class="stat_item">
-            <span class="stat_num">127</span>
-            <span class="stat_label">활동</span>
-          </div>
-          <div class="stat_item">
-            <span class="stat_num">384</span>
-            <span class="stat_label">팔로워</span>
-          </div>
-          <div class="stat_item">
-            <span class="stat_num">219</span>
-            <span class="stat_label">팔로잉</span>
-          </div>
-          <div class="stat_item">
-            <span class="stat_num">4,820</span>
-            <span class="stat_label">포인트</span>
-          </div>
+          <div class="stat_item"><span class="stat_num">127</span><span class="stat_label">활동</span></div>
+          <div class="stat_item"><span class="stat_num">384</span><span class="stat_label">팔로워</span></div>
+          <div class="stat_item"><span class="stat_num">219</span><span class="stat_label">팔로잉</span></div>
+          <div class="stat_item"><span class="stat_num">4,820</span><span class="stat_label">포인트</span></div>
         </div>
-        <button class="edit_profile_btn">프로필 수정</button>
+        <button class="edit_profile_btn" onclick="openProfileEdit()">프로필 수정</button>
       </div>
-
-      <!-- 배지 -->
       <div class="profile_section_title">획득한 배지</div>
       <div class="badge_row">
-        <div class="badge_item">
-          <div class="badge_icon earned">🌱</div>
-          <div class="badge_name">씨앗러</div>
-        </div>
-        <div class="badge_item">
-          <div class="badge_icon earned">♻️</div>
-          <div class="badge_name">재활용왕</div>
-        </div>
-        <div class="badge_item">
-          <div class="badge_icon earned">🐾</div>
-          <div class="badge_name">동물친구</div>
-        </div>
-        <div class="badge_item">
-          <div class="badge_icon">🌊</div>
-          <div class="badge_name">해양수호자</div>
-        </div>
-        <div class="badge_item">
-          <div class="badge_icon">🌳</div>
-          <div class="badge_name">숲지킴이</div>
-        </div>
+        <div class="badge_item"><div class="badge_icon earned">🌱</div><div class="badge_name">씨앗러</div></div>
+        <div class="badge_item"><div class="badge_icon earned">♻️</div><div class="badge_name">재활용왕</div></div>
+        <div class="badge_item"><div class="badge_icon earned">🐾</div><div class="badge_name">동물친구</div></div>
+        <div class="badge_item"><div class="badge_icon">🌊</div><div class="badge_name">해양수호자</div></div>
+        <div class="badge_item"><div class="badge_icon">🌳</div><div class="badge_name">숲지킴이</div></div>
       </div>
-
-      <!-- 최근 활동 -->
       <div class="profile_section_title" style="margin-top:6px;">최근 활동</div>
-      <div class="activity_list">
-        <div class="activity_item">
-          <div class="activity_dot">🌿</div>
-          <div class="activity_info">
-            <div class="activity_title">한강 플로깅 참여</div>
-            <div class="activity_sub">오늘 · 환경 캠페인</div>
-          </div>
-          <div class="activity_point">+150P</div>
-        </div>
-        <div class="activity_item">
-          <div class="activity_dot">📝</div>
-          <div class="activity_info">
-            <div class="activity_title">커뮤니티 게시글 작성</div>
-            <div class="activity_sub">어제 · 커뮤니티</div>
-          </div>
-          <div class="activity_point">+30P</div>
-        </div>
-        <div class="activity_item">
-          <div class="activity_dot">🐾</div>
-          <div class="activity_info">
-            <div class="activity_title">유기동물 입양 캠페인 참여</div>
-            <div class="activity_sub">3일 전 · 동물 캠페인</div>
-          </div>
-          <div class="activity_point">+200P</div>
-        </div>
-        <div class="activity_item">
-          <div class="activity_dot">♻️</div>
-          <div class="activity_info">
-            <div class="activity_title">텀블러 챌린지 인증</div>
-            <div class="activity_sub">5일 전 · 환경 챌린지</div>
-          </div>
-          <div class="activity_point">+50P</div>
-        </div>
-      </div>
+      <div class="activity_item"><div class="activity_dot">🌿</div><div class="activity_info"><div class="activity_title">한강 플로깅 참여</div><div class="activity_sub">오늘 · 환경 캠페인</div></div><div class="activity_point">+150P</div></div>
+      <div class="activity_item"><div class="activity_dot">📝</div><div class="activity_info"><div class="activity_title">커뮤니티 게시글 작성</div><div class="activity_sub">어제 · 커뮤니티</div></div><div class="activity_point">+30P</div></div>
+      <div class="activity_item"><div class="activity_dot">🐾</div><div class="activity_info"><div class="activity_title">유기동물 입양 캠페인 참여</div><div class="activity_sub">3일 전 · 동물 캠페인</div></div><div class="activity_point">+200P</div></div>
+      <div class="activity_item"><div class="activity_dot">♻️</div><div class="activity_info"><div class="activity_title">텀블러 챌린지 인증</div><div class="activity_sub">5일 전 · 환경 챌린지</div></div><div class="activity_point">+50P</div></div>
     </div>
-
     <ul class="tap_bar">
-      <li onclick="switchTab('map')">
-        <a><span class="icon v01"></span><span class="label">지도</span></a>
-      </li>
-      <li onclick="switchTab('community')">
-        <a><span class="icon v02"></span><span class="label">커뮤니티</span></a>
-      </li>
+      <li onclick="switchTab('map')"><a><span class="icon v01"></span><span class="label">지도</span></a></li>
+      <li onclick="switchTab('community')"><a><span class="icon v02"></span><span class="label">커뮤니티</span></a></li>
       <li><a><span class="logo"></span></a></li>
-      <li onclick="switchTab('campaign')">
-        <a><span class="icon v03"></span><span class="label">캠페인</span></a>
-      </li>
-      <li onclick="switchTab('profile')" class="on">
-        <a><span class="icon v04"></span><span class="label">프로필</span></a>
-      </li>
+      <li onclick="switchTab('campaign')"><a><span class="icon v03"></span><span class="label">캠페인</span></a></li>
+      <li onclick="switchTab('profile')" class="on"><a><span class="icon v04"></span><span class="label">프로필</span></a></li>
     </ul>
   </div>
 </div>
+
+<!-- ===== OVERLAYS ===== -->
+<div id="drawer-overlay" class="drawer-overlay" onclick="closeAllDrawers()"></div>
+
+<!-- 댓글 드로어 -->
+<div id="comment-drawer" class="drawer-base comment-drawer">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <span class="drawer-title">댓글</span>
+    <button class="drawer-close" onclick="closeAllDrawers()">×</button>
+  </div>
+  <div id="comment-list" class="comment-list"></div>
+  <div class="comment-input-row">
+    <div class="ci-av" style="width:30px;height:30px;font-size:11px;">나</div>
+    <input id="comment-input" class="comment-input-field" type="text" placeholder="댓글을 입력하세요..." onkeydown="if(event.key==='Enter')submitComment()">
+    <button class="comment-send-btn" onclick="submitComment()">전송</button>
+  </div>
+</div>
+
+<!-- 프로필 수정 드로어 -->
+<div id="profile-edit-drawer" class="drawer-base">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <span class="drawer-title">프로필 수정</span>
+    <button class="drawer-close" onclick="closeAllDrawers()">×</button>
+  </div>
+  <div class="pe-body">
+    <div class="pe-avatar" id="pe-avatar-preview">나</div>
+    <div class="form-field">
+      <label class="form-label">이름</label>
+      <input id="edit-name" class="form-input" type="text" placeholder="이름을 입력하세요">
+    </div>
+    <div class="form-field">
+      <label class="form-label">한 줄 소개</label>
+      <textarea id="edit-bio" class="form-input form-textarea" placeholder="자기소개를 입력하세요"></textarea>
+    </div>
+    <button class="save-profile-btn" onclick="saveProfile()">저장하기</button>
+  </div>
+</div>
+
+<!-- 토스트 -->
+<div id="toast" class="toast"></div>
 
 <script>
 var mapInitialized = false;
 var sideBarState = 0;
 var leafletMap = null;
 var leafletMarkers = [];
+var currentPostId = null;
+var currentCampaignId = null;
+
+var CAMPAIGNS = {
+  featured: {
+    label: '🔥 이달의 캠페인', title: '서울 도심 1천 그루 나무 심기 프로젝트',
+    detail: '서울시와 함께하는 도심 녹화 프로젝트입니다.\n\n망원·합정·홍대 일대에 총 1천 그루의 나무를 심습니다. 참여자에게는 나무 이름표를 만들어 드리며, 이후 성장 과정을 앱으로 확인할 수 있습니다.',
+    progress: 78, current: 2341, goal: 3000,
+    reward: '참여당 +300P', period: '2024.04 — 2024.06',
+    tags: ['환경', '식목', '서울시'], topParticipants: ['김지원', '이환경', '박나무', '최초록', '정가치']
+  },
+  river: {
+    label: '환경', title: '🌊 한강 플라스틱 제로 캠페인',
+    detail: '매주 일요일 오전 9시, 뚝섬·여의도·망원 한강공원에서 진행합니다.\n\n쓰레기 1kg 수거마다 10P, 인증샷 공유 시 추가 50P가 지급됩니다. 현재까지 총 2.4톤의 플라스틱을 수거했습니다.',
+    progress: 73, current: 1460, goal: 2000,
+    reward: '참여당 +150P', period: '2024.01 — 진행중',
+    tags: ['환경', '정화활동', '플로깅'], topParticipants: ['김지원', '이한강', '박플로깅', '최강변', '정환경']
+  },
+  animal: {
+    label: '동물', title: '🐾 유기동물 입양 인식 개선 캠페인',
+    detail: '입양한 반려동물과의 사진을 #가치줄기입양 태그와 함께 SNS에 공유해 주세요.\n\n입양 인증 1건당 200P가 지급되며, 매월 베스트 인증샷을 선정해 특별 선물을 드립니다.',
+    progress: 45, current: 892, goal: 2000,
+    reward: '인증당 +200P', period: '2024.03 — 진행중',
+    tags: ['동물', '입양', '반려동물'], topParticipants: ['박서연', '김동물', '이반려', '최입양']
+  },
+  book: {
+    label: '교육', title: '📚 저소득층 아동 도서 기부 캠페인',
+    detail: '전국 250개 아동센터와 연계하여 도서를 직접 전달합니다.\n\n책 1권 기부 시 50P, 소액 후원 시 후원금의 10%가 포인트로 지급됩니다.',
+    progress: 88, current: 3520, goal: 4000,
+    reward: '기부당 +50P', period: '2024.02 — 진행중',
+    tags: ['교육', '기부', '아동'], topParticipants: ['이준혁', '박교육', '김기부', '정아동', '최도서', '한책']
+  },
+  tumbler: {
+    label: '환경', title: '♻️ 텀블러 챌린지 100일',
+    detail: '매일 텀블러 사용 사진을 인증하면 1일 50P가 지급됩니다.\n\n7일 연속 인증 시 300P 보너스, 100일 완주 시 5,000P + 특별 배지가 지급됩니다.',
+    progress: 61, current: 609, goal: 1000,
+    reward: '일당 +50P', period: '2024.04 — 진행중',
+    tags: ['환경', '텀블러', '챌린지'], topParticipants: ['김텀블러', '이챌린지', '박환경']
+  }
+};
+
+/* ── 초기화 ── */
+window.addEventListener('load', function() {
+  loadProfile();
+  initLikes();
+  initJoins();
+});
 
 setTimeout(function() {
   document.getElementById('view-splash').style.display = 'none';
@@ -554,16 +574,20 @@ setTimeout(function() {
   initLeafletMap();
 }, 2000);
 
-function switchTab(tab) {
-  document.getElementById('view-map').style.display = 'none';
-  document.getElementById('view-community').style.display = 'none';
-  document.getElementById('view-campaign').style.display = 'none';
-  document.getElementById('view-profile').style.display = 'none';
+/* ── 탭 전환 ── */
+function hideAllViews() {
+  ['view-map','view-community','view-campaign','view-campaign-detail','view-profile'].forEach(function(id) {
+    document.getElementById(id).style.display = 'none';
+  });
+}
 
+function switchTab(tab) {
+  closeAllDrawers();
+  hideAllViews();
   if (tab === 'map') {
     document.getElementById('view-map').style.display = 'block';
     if (!mapInitialized) initLeafletMap();
-    else if (leafletMap) setTimeout(function() { leafletMap.invalidateSize(); }, 100);
+    else if (leafletMap) setTimeout(function(){ leafletMap.invalidateSize(); }, 100);
   } else if (tab === 'community') {
     document.getElementById('view-community').style.display = 'block';
   } else if (tab === 'campaign') {
@@ -573,101 +597,42 @@ function switchTab(tab) {
   }
 }
 
+/* ── 지도 ── */
 function setSideBar(state) {
   sideBarState = state;
-  var btn1 = document.getElementById('sb-btn1');
-  var btn2 = document.getElementById('sb-btn2');
-  var btn3 = document.getElementById('sb-btn3');
-  btn1.className = '';
-  btn2.className = '';
-  btn3.className = '';
-  if (state === 0) {
-    btn1.className = 'tab4'; btn2.className = 'tab2'; btn3.className = 'tab3';
-  } else if (state === 1) {
-    btn1.className = 'tab'; btn2.className = 'tab5'; btn3.className = 'tab3';
-  } else if (state === 2) {
-    btn1.className = 'tab'; btn2.className = 'tab2'; btn3.className = 'tab6';
-  }
+  var b1 = document.getElementById('sb-btn1'), b2 = document.getElementById('sb-btn2'), b3 = document.getElementById('sb-btn3');
+  b1.className = ''; b2.className = ''; b3.className = '';
+  if (state === 0) { b1.className='tab4'; b2.className='tab2'; b3.className='tab3'; }
+  else if (state === 1) { b1.className='tab'; b2.className='tab5'; b3.className='tab3'; }
+  else { b1.className='tab'; b2.className='tab2'; b3.className='tab6'; }
 
   if (!leafletMap || !leafletMarkers.length) return;
+  var cats = ['', 'env', 'community'];
   leafletMarkers.forEach(function(s) {
-    var show = state === 0 || s.cat === ['', 'env', 'community'][state];
+    var show = state === 0 || s.cat === cats[state];
     if (show) { if (!leafletMap.hasLayer(s.lm)) leafletMap.addLayer(s.lm); }
     else       { if (leafletMap.hasLayer(s.lm))  leafletMap.removeLayer(s.lm); }
   });
-}
-
-function setFilter(btn) {
-  document.querySelectorAll('.comm_filter button').forEach(function(b) { b.classList.remove('on'); });
-  btn.classList.add('on');
-}
-
-function toggleLike(btn) {
-  var isLiked = btn.classList.contains('liked');
-  var svg = btn.querySelector('svg');
-  var text = btn.textContent.trim();
-  var num = parseInt(text.replace(/[^0-9]/g, ''));
-  if (isLiked) {
-    btn.classList.remove('liked');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke', 'currentColor');
-    svg.setAttribute('stroke-width', '2');
-    btn.innerHTML = svg.outerHTML + ' 좋아요 ' + (num - 1);
-  } else {
-    btn.classList.add('liked');
-    svg.setAttribute('fill', '#FF2BB9');
-    svg.removeAttribute('stroke');
-    svg.removeAttribute('stroke-width');
-    btn.innerHTML = svg.outerHTML + ' 좋아요 ' + (num + 1);
-  }
-}
-
-function toggleJoin(btn) {
-  if (btn.classList.contains('joined')) {
-    btn.classList.remove('joined');
-    btn.textContent = '참여하기';
-  } else {
-    btn.classList.add('joined');
-    btn.textContent = '참여중';
-  }
-}
-
-function joinFeatured(el) {
-  if (el.textContent === '지금 참여하기') {
-    el.textContent = '참여중 ✓';
-    el.style.background = 'rgba(255,255,255,0.3)';
-    el.style.color = '#fff';
-  } else {
-    el.textContent = '지금 참여하기';
-    el.style.background = '#fff';
-    el.style.color = '#3042CD';
-  }
 }
 
 function initLeafletMap() {
   if (mapInitialized) return;
   if (typeof L === 'undefined') return;
   mapInitialized = true;
-
-  leafletMap = L.map('leaflet-map', { zoomControl: true, attributionControl: true })
-    .setView([37.5535, 126.9254], 14);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap'
-  }).addTo(leafletMap);
+  leafletMap = L.map('leaflet-map', { zoomControl: true, attributionControl: true }).setView([37.5535, 126.9254], 14);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(leafletMap);
 
   var BASE = 'https://raw.githubusercontent.com/sihnrila/together/master/src/assets/img/';
   function makeIcon(n) {
-    return L.icon({ iconUrl: BASE + 'icon-mk' + (n > 1 ? n : '') + '.png', iconSize: [45, 56], iconAnchor: [22, 56], popupAnchor: [0, -60] });
+    return L.icon({ iconUrl: BASE + 'icon-mk' + (n > 1 ? n : '') + '.png', iconSize:[45,56], iconAnchor:[22,56], popupAnchor:[0,-60] });
   }
 
   var spots = [
-    { lat: 37.5560, lng: 126.9200, icon: 1, cat: 'env',       name: '망원 한강공원 플로깅',     desc: '매주 토요일 오전 10시 · 환경 활동' },
-    { lat: 37.5510, lng: 126.9310, icon: 2, cat: 'community',  name: '홍대 유기동물 입양 카페',   desc: '입양 상담 · 임보 연결' },
-    { lat: 37.5580, lng: 126.9150, icon: 1, cat: 'env',        name: '마포 아동센터 코딩 봉사',   desc: '매주 토요일 오후 2시 · 교육 봉사' },
-    { lat: 37.5490, lng: 126.9270, icon: 3, cat: 'env',        name: '합정 텀블러 챌린지 거점',  desc: '텀블러 인증 포인트 적립 가능' },
-    { lat: 37.5620, lng: 126.9230, icon: 2, cat: 'community',  name: '망원동 나무 심기 프로젝트', desc: '이달의 캠페인 · 2,341명 참여중' }
+    { lat:37.5560, lng:126.9200, icon:1, cat:'env',       name:'망원 한강공원 플로깅',     desc:'매주 토요일 오전 10시 · 환경 활동' },
+    { lat:37.5510, lng:126.9310, icon:2, cat:'community',  name:'홍대 유기동물 입양 카페',   desc:'입양 상담 · 임보 연결' },
+    { lat:37.5580, lng:126.9150, icon:1, cat:'env',        name:'마포 아동센터 코딩 봉사',   desc:'매주 토요일 오후 2시 · 교육 봉사' },
+    { lat:37.5490, lng:126.9270, icon:3, cat:'env',        name:'합정 텀블러 챌린지 거점',  desc:'텀블러 인증 포인트 적립 가능' },
+    { lat:37.5620, lng:126.9230, icon:2, cat:'community',  name:'망원동 나무 심기 프로젝트', desc:'이달의 캠페인 · 2,341명 참여중' }
   ];
 
   leafletMarkers = [];
@@ -677,6 +642,235 @@ function initLeafletMap() {
       .bindPopup('<strong>' + s.name + '</strong><br>' + s.desc);
     leafletMarkers.push(s);
   });
+}
+
+/* ── 커뮤니티 ── */
+function setFilter(btn) {
+  document.querySelectorAll('.comm_filter button').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+}
+
+function toggleLike(btn) {
+  var postId = btn.dataset.post;
+  var liked = btn.classList.contains('liked');
+  var svg = btn.querySelector('svg');
+  var countEl = btn.querySelector('.like-count');
+  var num = parseInt(countEl.textContent);
+  if (liked) {
+    btn.classList.remove('liked');
+    svg.setAttribute('fill','none'); svg.setAttribute('stroke','currentColor'); svg.setAttribute('stroke-width','2');
+    countEl.textContent = num - 1;
+    if (postId) localStorage.setItem('tc_liked_' + postId, '0');
+  } else {
+    btn.classList.add('liked');
+    svg.setAttribute('fill','#FF2BB9'); svg.removeAttribute('stroke'); svg.removeAttribute('stroke-width');
+    countEl.textContent = num + 1;
+    if (postId) localStorage.setItem('tc_liked_' + postId, '1');
+  }
+}
+
+function initLikes() {
+  document.querySelectorAll('.like-btn[data-post]').forEach(function(btn) {
+    var id = btn.dataset.post;
+    var saved = localStorage.getItem('tc_liked_' + id);
+    if (saved === '1' && !btn.classList.contains('liked')) {
+      btn.classList.add('liked');
+      var svg = btn.querySelector('svg');
+      if (svg) { svg.setAttribute('fill','#FF2BB9'); svg.removeAttribute('stroke'); svg.removeAttribute('stroke-width'); }
+    } else if (saved === '0' && btn.classList.contains('liked')) {
+      btn.classList.remove('liked');
+      var svg = btn.querySelector('svg');
+      if (svg) { svg.setAttribute('fill','none'); svg.setAttribute('stroke','currentColor'); svg.setAttribute('stroke-width','2'); }
+    }
+  });
+}
+
+/* ── 댓글 ── */
+function openComments(postId) {
+  currentPostId = postId;
+  renderComments();
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('comment-drawer').classList.add('open');
+  setTimeout(function(){ document.getElementById('comment-input').focus(); }, 350);
+}
+
+function renderComments() {
+  var comments = JSON.parse(localStorage.getItem('tc_comments_' + currentPostId) || '[]');
+  var list = document.getElementById('comment-list');
+  if (!comments.length) {
+    list.innerHTML = '<div class="comment-empty">첫 댓글을 남겨보세요 💬</div>';
+    return;
+  }
+  var html = '';
+  comments.forEach(function(c) {
+    var isMe = c.author === '나다운' || c.isMe;
+    html += '<div class="comment-item">' +
+      '<div class="ci-av' + (isMe ? '' : ' other') + '">' + c.author[0] + '</div>' +
+      '<div class="ci-body"><div class="ci-name-row"><span class="ci-name">' + c.author + '</span><span class="ci-time">' + c.time + '</span></div>' +
+      '<div class="ci-text">' + c.text + '</div></div></div>';
+  });
+  list.innerHTML = html;
+  list.scrollTop = list.scrollHeight;
+  updateCommentCount(currentPostId, comments.length);
+}
+
+function submitComment() {
+  var input = document.getElementById('comment-input');
+  var text = input.value.trim();
+  if (!text) return;
+  var profileName = localStorage.getItem('tc_profile_name') || '나다운';
+  var now = new Date();
+  var time = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+  var comments = JSON.parse(localStorage.getItem('tc_comments_' + currentPostId) || '[]');
+  comments.push({ author: profileName, text: text, time: time, isMe: true });
+  localStorage.setItem('tc_comments_' + currentPostId, JSON.stringify(comments));
+  input.value = '';
+  renderComments();
+}
+
+function updateCommentCount(postId, count) {
+  var el = document.getElementById('cc-' + postId);
+  if (el) el.textContent = count;
+}
+
+/* ── 공유 ── */
+function sharePost(title) {
+  var url = window.location.href;
+  if (navigator.share) {
+    navigator.share({ title: title, text: title + ' — 가치줄기', url: url });
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){ showToast('링크가 복사됐어요! 🔗'); });
+  } else {
+    showToast('링크: ' + url);
+  }
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+
+/* ── 캠페인 ── */
+function toggleJoin(btn) {
+  var id = btn.dataset.camp;
+  var joined = btn.classList.contains('joined');
+  btn.classList.toggle('joined', !joined);
+  btn.textContent = joined ? '참여하기' : '참여중';
+  if (id) localStorage.setItem('tc_joined_' + id, joined ? '0' : '1');
+}
+
+function toggleFeaturedJoin(el) {
+  var joined = el.textContent.indexOf('참여중') !== -1;
+  el.textContent = joined ? '지금 참여하기' : '참여중 ✓';
+  el.style.background = joined ? '#fff' : 'rgba(255,255,255,0.25)';
+  el.style.color = joined ? '#FF2BB9' : '#fff';
+  localStorage.setItem('tc_joined_featured', joined ? '0' : '1');
+}
+
+function initJoins() {
+  document.querySelectorAll('.join_btn[data-camp]').forEach(function(btn) {
+    var id = btn.dataset.camp;
+    var saved = localStorage.getItem('tc_joined_' + id);
+    if (saved === '1') { btn.classList.add('joined'); btn.textContent = '참여중'; }
+    else if (saved === '0') { btn.classList.remove('joined'); btn.textContent = '참여하기'; }
+  });
+  if (localStorage.getItem('tc_joined_featured') === '1') {
+    var el = document.getElementById('featured-join-btn');
+    if (el) { el.textContent = '참여중 ✓'; el.style.background = 'rgba(255,255,255,0.25)'; el.style.color = '#fff'; }
+  }
+}
+
+function openCampaignDetail(id) {
+  var camp = CAMPAIGNS[id];
+  if (!camp) return;
+  currentCampaignId = id;
+  var joined = localStorage.getItem('tc_joined_' + id) === '1' || (id === 'animal' && localStorage.getItem('tc_joined_animal') !== '0');
+
+  document.getElementById('cd-hero').innerHTML =
+    '<div class="ch_label">' + camp.label + '</div>' +
+    '<div class="ch_title">' + camp.title + '</div>' +
+    '<div class="ch_meta">참여자 ' + camp.current.toLocaleString() + '명 · 목표 ' + camp.goal.toLocaleString() + '명</div>';
+
+  document.getElementById('cd-body').innerHTML =
+    '<div class="cd-detail-text">' + camp.detail + '</div>' +
+    '<div class="cd-tags">' + camp.tags.map(function(t){ return '<span class="cd-tag">' + t + '</span>'; }).join('') + '</div>' +
+    '<div class="cd-period">' + camp.period + '</div>' +
+    '<div class="cd-reward-box"><span class="cd-reward-label">참여 보상</span><span class="cd-reward-value">' + camp.reward + '</span></div>' +
+    '<div class="progress_wrap"><div class="progress_bar"><div class="progress_fill" style="width:' + camp.progress + '%"></div></div>' +
+    '<div class="progress_meta"><span>진행률</span><strong>' + camp.progress + '%</strong></div></div>';
+
+  var ph = '<div class="cd-p-title">함께하는 이웃 ' + camp.current.toLocaleString() + '명</div>';
+  camp.topParticipants.forEach(function(name) {
+    ph += '<div class="cd-p-row"><div class="cd-p-avatar">' + name[0] + '</div><div class="cd-p-name">' + name + '</div></div>';
+  });
+  document.getElementById('cd-participants').innerHTML = ph;
+
+  var btn = document.getElementById('cd-join-btn');
+  btn.className = 'cd-join-btn' + (joined ? ' joined' : '');
+  btn.textContent = joined ? '참여중 ✓' : '참여하기';
+
+  hideAllViews();
+  document.getElementById('view-campaign-detail').style.display = 'block';
+}
+
+function toggleDetailJoin() {
+  var btn = document.getElementById('cd-join-btn');
+  var joined = btn.classList.contains('joined');
+  btn.classList.toggle('joined', !joined);
+  btn.textContent = joined ? '참여하기' : '참여중 ✓';
+  if (currentCampaignId) {
+    localStorage.setItem('tc_joined_' + currentCampaignId, joined ? '0' : '1');
+    var listBtn = document.querySelector('.join_btn[data-camp="' + currentCampaignId + '"]');
+    if (listBtn) { listBtn.classList.toggle('joined', !joined); listBtn.textContent = joined ? '참여하기' : '참여중'; }
+  }
+}
+
+/* ── 프로필 ── */
+function loadProfile() {
+  var name = localStorage.getItem('tc_profile_name');
+  var bio  = localStorage.getItem('tc_profile_bio');
+  if (name) {
+    document.getElementById('profile-name-display').textContent = name;
+    document.getElementById('profile-avatar-display').textContent = name[0];
+    document.getElementById('pe-avatar-preview').textContent = name[0];
+  }
+  if (bio) {
+    document.getElementById('profile-bio-display').innerHTML = bio.replace(/\n/g,'<br>');
+  }
+}
+
+function openProfileEdit() {
+  var name = localStorage.getItem('tc_profile_name') || document.getElementById('profile-name-display').textContent;
+  var bioEl = document.getElementById('profile-bio-display');
+  var bio  = localStorage.getItem('tc_profile_bio') || bioEl.innerText;
+  document.getElementById('edit-name').value = name;
+  document.getElementById('edit-bio').value = bio;
+  document.getElementById('pe-avatar-preview').textContent = name[0] || '나';
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('profile-edit-drawer').classList.add('open');
+}
+
+function saveProfile() {
+  var name = document.getElementById('edit-name').value.trim();
+  var bio  = document.getElementById('edit-bio').value.trim();
+  if (!name) { showToast('이름을 입력해 주세요'); return; }
+  localStorage.setItem('tc_profile_name', name);
+  localStorage.setItem('tc_profile_bio', bio);
+  document.getElementById('profile-name-display').textContent = name;
+  document.getElementById('profile-avatar-display').textContent = name[0];
+  document.getElementById('profile-bio-display').innerHTML = bio.replace(/\n/g,'<br>');
+  closeAllDrawers();
+  showToast('프로필이 저장됐어요 ✓');
+}
+
+/* ── 드로어 닫기 ── */
+function closeAllDrawers() {
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('comment-drawer').classList.remove('open');
+  document.getElementById('profile-edit-drawer').classList.remove('open');
+  currentPostId = null;
 }
 </script>
 </body>
