@@ -209,6 +209,21 @@ export const MANUAL_REPOS = [
     topics: [],
     hasRealDemo: true,
   },
+  {
+    id: 'manual-3D-AR-Viewer',
+    name: '3D-AR-Viewer',
+    description: 'Shopify 3D/AR 상품 뷰어 Theme App Extension (Free/Pro · QR · iOS/Android AR)',
+    url: 'https://github.com/sihnrila/3D-AR-Viewer',
+    homepage: '',
+    fork: false,
+    language: 'JavaScript',
+    stars: 0,
+    forks: 0,
+    updated: new Date().toISOString(),
+    topics: ['shopify', 'webgl', 'ar', 'three-js'],
+    hasRealDemo: true,
+    isPrivate: true,
+  },
 ]
 
 const STATIC_FALLBACK_REPOS = [
@@ -295,7 +310,7 @@ const REPO_ORDER = [
   'snudog',
 ]
 
-const CACHE_KEY = 'github_repos_cache_v4'
+const CACHE_KEY = 'github_repos_cache_v5'
 const CACHE_TTL = 60 * 60 * 1000 // 1시간
 
 const sortRepos = (all) => {
