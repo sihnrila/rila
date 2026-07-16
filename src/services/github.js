@@ -224,7 +224,6 @@ export const MANUAL_REPOS = [
     updated: new Date().toISOString(),
     topics: ['shopify', 'webgl', 'ar', 'three-js'],
     hasRealDemo: true,
-    isPrivate: true,
   },
 ]
 
@@ -293,7 +292,6 @@ export const PROFESSIONAL_REPOS = new Set([
   'aladin-web-viewer',
   'topik-landing',
   'topik-cms',
-  '3D-AR-Viewer',
 ])
 
 const REPO_ORDER = [
@@ -303,16 +301,16 @@ const REPO_ORDER = [
   'aladin-web-viewer',
   'topik-landing',
   'topik-cms',
-  '3D-AR-Viewer',
   'SoneFe',
   'jigoorang-adim',
   'together',
   'sns',
   'wedding-editor',
   'snudog',
+  '3D-AR-Viewer',
 ]
 
-const CACHE_KEY = 'github_repos_cache_v5'
+const CACHE_KEY = 'github_repos_cache_v6'
 const CACHE_TTL = 60 * 60 * 1000 // 1시간
 
 const sortRepos = (all) => {
