@@ -274,10 +274,10 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
           <div class="post_header">
             <div class="avatar_txt" style="background:linear-gradient(135deg,#FF2BB9,#ff8c00);">박</div>
             <div class="post_meta"><span class="post_name">박서연</span><span class="post_time">1시간 전</span></div>
-            <span class="post_tag">동물</span>
+            <span class="post_tag">플로깅</span>
           </div>
-          <div class="post_body">유기견 임시보호 중인데 입양처를 찾고 있어요. 이름은 초코, 2살 추정 믹스견입니다. 순하고 사람 좋아해요 🐕</div>
-          <div class="post_img">🐕</div>
+          <div class="post_body">오늘 합정역 골목 클린업 다녀왔어요 💪 한 시간 만에 종량제 봉투 2개 채웠어요. 불법 투기 쓰레기가 너무 많네요… 핫스팟 지도에 핀 꽂아뒀으니 다음 주 같이 가실 분!</div>
+          <div class="post_img">🗑️</div>
           <div class="post_actions">
             <button class="act_btn like-btn" data-post="2" data-count="47" onclick="toggleLike(this)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -300,9 +300,9 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
           <div class="post_header">
             <div class="avatar_txt" style="background:linear-gradient(135deg,#2ecc71,#a044eb);">이</div>
             <div class="post_meta"><span class="post_name">이준혁</span><span class="post_time">3시간 전</span></div>
-            <span class="post_tag">교육</span>
+            <span class="post_tag">재활용</span>
           </div>
-          <div class="post_body">지역 아동센터에서 무료 코딩 교육 봉사 모집합니다. 매주 토요일 오후 2-4시, 경험 없어도 괜찮아요! 관심 있으신 분은 댓글 달아주세요 📚</div>
+          <div class="post_body">분리수거 헷갈리는 거 정리해봤어요♻️ 영수증·코팅지는 종이 아닌 일반쓰레기! 페트병은 뚜껑 분리 후 찌그러뜨려서. 오늘 클린업 가서 보니 분리수거 잘못된 봉투가 너무 많더라고요. 작은 것부터 같이 바꿔봐요 🙏</div>
           <div class="post_actions">
             <button class="act_btn like-btn" data-post="3" data-count="31" onclick="toggleLike(this)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -359,8 +359,8 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
 
       <div class="card">
         <div class="camp_card">
-          <div class="camp_title" onclick="openCampaignDetail('animal')">🐾 유기동물 입양 인식 개선 캠페인</div>
-          <div class="camp_desc">SNS에 입양 인증 사진을 올리고 유기동물 입양 문화를 함께 만들어요.</div>
+          <div class="camp_title" onclick="openCampaignDetail('animal')">🗺️ 마포구 전역 클린맵 채우기 챌린지</div>
+          <div class="camp_desc">지도에서 아직 아무도 안 간 구역을 클린업하고 핀을 꽂아 마포 전체를 완성해요!</div>
           <div class="progress_wrap">
             <div class="progress_bar"><div class="progress_fill" style="width:45%"></div></div>
             <div class="progress_meta"><span>참여 진행률</span><strong>45%</strong></div>
@@ -374,8 +374,8 @@ a{text-decoration:none;color:inherit;font-size:inherit;display:inline-block;curs
 
       <div class="card">
         <div class="camp_card">
-          <div class="camp_title" onclick="openCampaignDetail('book')">📚 저소득층 아동 도서 기부 캠페인</div>
-          <div class="camp_desc">읽지 않는 책을 기부하거나, 소액 후원으로 아이들에게 꿈을 선물하세요.</div>
+          <div class="camp_title" onclick="openCampaignDetail('book')">🏃 플로깅 마라톤 — 5km 달리며 줍기</div>
+          <div class="camp_desc">조깅하면서 쓰레기를 줍는 플로깅! 5km 완주 인증 시 포인트 지급.</div>
           <div class="progress_wrap">
             <div class="progress_bar"><div class="progress_fill" style="width:88%"></div></div>
             <div class="progress_meta"><span>참여 진행률</span><strong>88%</strong></div>
@@ -539,18 +539,18 @@ var CAMPAIGNS = {
     tags: ['환경', '정화활동', '플로깅'], topParticipants: ['김지원', '이한강', '박플로깅', '최강변', '정환경']
   },
   animal: {
-    label: '동물', title: '🐾 유기동물 입양 인식 개선 캠페인',
-    detail: '입양한 반려동물과의 사진을 #가치줄기입양 태그와 함께 SNS에 공유해 주세요.\n\n입양 인증 1건당 200P가 지급되며, 매월 베스트 인증샷을 선정해 특별 선물을 드립니다.',
+    label: '클린맵', title: '🗺️ 마포구 전역 클린맵 채우기 챌린지',
+    detail: '마포구 지도를 격자로 나눠, 아무도 클린업하지 않은 구역에 처음으로 핀을 꽂으면 보너스 포인트!\n\n인증사진 업로드 후 앱 지도에 "완료" 핀이 자동 등록됩니다.',
     progress: 45, current: 892, goal: 2000,
-    reward: '인증당 +200P', period: '2024.03 — 진행중',
-    tags: ['동물', '입양', '반려동물'], topParticipants: ['박서연', '김동물', '이반려', '최입양']
+    reward: '구역당 +200P', period: '2024.03 — 진행중',
+    tags: ['클린맵', '플로깅', '마포구'], topParticipants: ['박서연', '김지원', '이클린', '최맵핀']
   },
   book: {
-    label: '교육', title: '📚 저소득층 아동 도서 기부 캠페인',
-    detail: '전국 250개 아동센터와 연계하여 도서를 직접 전달합니다.\n\n책 1권 기부 시 50P, 소액 후원 시 후원금의 10%가 포인트로 지급됩니다.',
+    label: '플로깅', title: '🏃 플로깅 마라톤 — 5km 달리며 줍기',
+    detail: '조깅 경로를 따라 쓰레기를 주우며 5km를 완주하는 챌린지입니다.\n\n완주 인증(GPS 트랙 + 쓰레기 봉투 사진) 시 500P, 10km 완주 시 1,200P가 지급됩니다.',
     progress: 88, current: 3520, goal: 4000,
-    reward: '기부당 +50P', period: '2024.02 — 진행중',
-    tags: ['교육', '기부', '아동'], topParticipants: ['이준혁', '박교육', '김기부', '정아동', '최도서', '한책']
+    reward: '5km 완주 +500P', period: '2024.02 — 진행중',
+    tags: ['플로깅', '마라톤', '운동'], topParticipants: ['이준혁', '박플로깅', '김달리기', '정환경', '최5km', '한조깅']
   },
   tumbler: {
     label: '환경', title: '♻️ 텀블러 챌린지 100일',
@@ -607,9 +607,9 @@ function setSideBar(state) {
   else { b1.className='tab'; b2.className='tab2'; b3.className='tab6'; }
 
   if (!leafletMap || !leafletMarkers.length) return;
-  var cats = ['', 'env', 'community'];
+  var cat = ['trash', 'home', 'recycle'][state];
   leafletMarkers.forEach(function(s) {
-    var show = state === 0 || s.cat === cats[state];
+    var show = s.cat === cat;
     if (show) { if (!leafletMap.hasLayer(s.lm)) leafletMap.addLayer(s.lm); }
     else       { if (leafletMap.hasLayer(s.lm))  leafletMap.removeLayer(s.lm); }
   });
@@ -628,11 +628,16 @@ function initLeafletMap() {
   }
 
   var spots = [
-    { lat:37.5560, lng:126.9200, icon:1, cat:'env',       name:'망원 한강공원 플로깅',     desc:'매주 토요일 오전 10시 · 환경 활동' },
-    { lat:37.5510, lng:126.9310, icon:2, cat:'community',  name:'홍대 유기동물 입양 카페',   desc:'입양 상담 · 임보 연결' },
-    { lat:37.5580, lng:126.9150, icon:1, cat:'env',        name:'마포 아동센터 코딩 봉사',   desc:'매주 토요일 오후 2시 · 교육 봉사' },
-    { lat:37.5490, lng:126.9270, icon:3, cat:'env',        name:'합정 텀블러 챌린지 거점',  desc:'텀블러 인증 포인트 적립 가능' },
-    { lat:37.5620, lng:126.9230, icon:2, cat:'community',  name:'망원동 나무 심기 프로젝트', desc:'이달의 캠페인 · 2,341명 참여중' }
+    /* 휴지통 — 쓰레기 수거 핫스팟 */
+    { lat:37.5560, lng:126.9200, icon:1, cat:'trash', name:'망원 한강공원 수거 포인트',    desc:'페트·비닐 집중 발생 구역' },
+    { lat:37.5490, lng:126.9270, icon:1, cat:'trash', name:'합정역 골목 쓰레기 핫스팟',   desc:'불법 투기 다발 구역 · 클린업 필요' },
+    { lat:37.5540, lng:126.9180, icon:1, cat:'trash', name:'홍대 앞 골목 쓰레기 다발 구역', desc:'주말 심야 이후 투기 집중' },
+    /* 홈 — 클린업 거점 */
+    { lat:37.5510, lng:126.9310, icon:2, cat:'home',  name:'홍대 클린업 베이스',           desc:'장갑·집게·마대 상시 비치' },
+    { lat:37.5620, lng:126.9230, icon:2, cat:'home',  name:'망원동 클린업 거점',           desc:'매주 일요일 오전 9시 집결' },
+    /* 재활용 — 분리수거 포인트 */
+    { lat:37.5580, lng:126.9150, icon:3, cat:'recycle', name:'마포 재활용 분리수거 센터',   desc:'페트·캔·종이 분리수거' },
+    { lat:37.5555, lng:126.9320, icon:3, cat:'recycle', name:'상수동 자원 회수 집하장',    desc:'수거한 쓰레기 반납 · 무게 측정 가능' }
   ];
 
   leafletMarkers = [];
@@ -642,6 +647,8 @@ function initLeafletMap() {
       .bindPopup('<strong>' + s.name + '</strong><br>' + s.desc);
     leafletMarkers.push(s);
   });
+  // 초기 상태: 휴지통(trash) 마커만 표시
+  setSideBar(0);
 }
 
 /* ── 커뮤니티 ── */
