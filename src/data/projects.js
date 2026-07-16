@@ -198,7 +198,7 @@ export const PROJECT_META = {
     techStack: ['JavaScript', 'Shopify Liquid', 'WebGL/AR', 'QR Code API'],
     screenshotAlt: '3D/AR 쇼룸 뷰어 화면',
     screenshotCaption: '3D 뷰어 데모',
-    githubUrl: 'https://github.com/sihnrila/3D-AR-Viewer',
+    githubUrl: 'https://github.com/sihnrila/3d-viewer-sdk',
     demoUrl: undefined,
     hasRealDemo: false,
     needsReview: false,

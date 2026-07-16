@@ -213,7 +213,7 @@ export const MANUAL_REPOS = [
     id: 'manual-3D-AR-Viewer',
     name: '3D-AR-Viewer',
     description: 'Shopify 3D/AR 상품 뷰어 Theme App Extension (Free/Pro · QR · iOS/Android AR)',
-    url: 'https://github.com/sihnrila/3D-AR-Viewer',
+    url: 'https://github.com/sihnrila/3d-viewer-sdk',
     homepage: '',
     fork: false,
     language: 'JavaScript',
