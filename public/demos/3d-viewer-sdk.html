@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D/AR Viewer SDK — Shopify Theme App Extension</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0c14;
+    --surface: #13131f;
+    --surface2: #1a1a2b;
+    --border: rgba(255,255,255,0.08);
+    --accent: #FF2BB9;
+    --accent2: #a044eb;
+    --text: #e8e8f0;
+    --muted: #7878a0;
+    --live: #00e57a;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+  }
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .header-badge {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-outline {
+    font-size: 13px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    background: transparent;
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .btn-primary {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 6px;
+    padding: 6px 16px;
+    cursor: pointer;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .layout {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    gap: 32px;
+  }
+
+  /* ── LEFT CONTENT ── */
+  .content { flex: 1; min-width: 0; }
+
+  .page-heading {
+    margin-bottom: 28px;
+  }
+  .page-heading .eyebrow {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .page-heading h1 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.4px;
+    margin-bottom: 10px;
+  }
+  .page-heading p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── FILTER TABS ── */
+  .filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .tab-btn {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn.active {
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-color: transparent;
+  }
+  .tab-btn:hover:not(.active) {
+    color: var(--text);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  /* ── PRODUCT GRID ── */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    border-color: rgba(255,43,185,0.3);
+    transform: translateY(-2px);
+  }
+
+  .card-thumb {
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-thumb model-viewer {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    --poster-color: transparent;
+  }
+  .card-thumb .thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    opacity: 0.3;
+  }
+
+  .badge-live {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #000;
+    background: var(--live);
+    border-radius: 4px;
+    padding: 2px 7px;
+    letter-spacing: 0.5px;
+  }
+  .badge-new {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--accent2);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+  .badge-ar {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(255,43,185,0.12);
+    border: 1px solid rgba(255,43,185,0.3);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+
+  .card-body {
+    padding: 14px;
+  }
+  .card-body .cat-tag {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+  .card-body .product-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    letter-spacing: -0.2px;
+  }
+  .card-body .product-price {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .card-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .btn-3d {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 6px;
+    padding: 7px 0;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.2s;
+  }
+  .btn-3d:hover { opacity: 0.85; }
+  .btn-inquiry {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 0;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .btn-inquiry:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  /* Wide card (spans 3 cols) */
+  .product-card.wide {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+  }
+  .product-card.wide .card-thumb {
+    border-radius: 0;
+    height: 220px;
+  }
+  .product-card.wide .card-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .product-card.wide .card-meta { flex: 1; }
+  .product-card.wide .product-name { font-size: 18px; margin-bottom: 6px; }
+  .product-card.wide .product-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .product-card.wide .card-actions { grid-template-columns: auto auto 1fr; max-width: 320px; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .sidebar-section h3 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 16px;
+  }
+
+  .feature-list { list-style: none; }
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .feature-list li:last-child { border-bottom: none; }
+  .feature-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .fi-pink  { background: rgba(255,43,185,0.15); }
+  .fi-purple { background: rgba(160,68,235,0.15); }
+  .fi-green { background: rgba(0,229,122,0.12); }
+  .fi-blue  { background: rgba(56,160,255,0.12); }
+  .feature-list .feat-label { font-weight: 500; }
+  .feature-list .feat-desc { color: var(--muted); font-size: 12px; }
+
+  .plan-card {
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+  }
+  .plan-card.pro {
+    border-color: rgba(255,43,185,0.3);
+    background: linear-gradient(135deg, rgba(255,43,185,0.07), rgba(160,68,235,0.07));
+  }
+  .plan-card .plan-name {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .plan-card.pro .plan-name { color: var(--accent); }
+  .plan-card .plan-price {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .plan-card .plan-features {
+    list-style: none;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .plan-card .plan-features li::before { content: '✓  '; color: var(--live); }
+  .plan-card.pro .plan-features li::before { color: var(--accent); }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--muted); }
+  .stat-value { font-weight: 600; }
+  .stat-value.up { color: var(--live); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 600px;
+    max-width: 95vw;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-header h2 { font-size: 16px; font-weight: 600; }
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+  }
+  .modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .modal-viewer {
+    background: var(--surface2);
+    aspect-ratio: 1;
+  }
+  .modal-viewer model-viewer {
+    width: 100%;
+    height: 100%;
+    --poster-color: transparent;
+  }
+  .modal-info { padding: 24px; }
+  .modal-info .cat-tag {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+  .modal-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .modal-info .price { font-size: 22px; color: var(--accent); font-weight: 700; margin-bottom: 16px; }
+  .modal-info .desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-info .spec-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 6px 0;
+    color: var(--muted);
+  }
+  .modal-info .spec-row span:last-child { color: var(--text); font-weight: 500; }
+  .modal-actions {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+  }
+  .modal-actions .btn-3d { flex: 1; padding: 10px; font-size: 14px; }
+  .modal-actions .btn-inquiry { flex: 1; padding: 10px; font-size: 14px; }
+
+  .ar-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+  .ar-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--live);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ── QR BADGE ── */
+  .qr-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+  }
+  .qr-box {
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+  .qr-text { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .qr-text strong { color: var(--text); display: block; font-size: 12px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 32px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 40px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">⬡</div>
+    3D/AR Viewer SDK
+    <span class="header-badge">Shopify Theme App Extension</span>
+  </div>
+  <div class="header-right">
+    <button class="btn-outline">Docs</button>
+    <button class="btn-primary">Install on Shopify ↗</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="layout">
+  <div class="content">
+
+    <!-- HEADING -->
+    <div class="page-heading">
+      <div class="eyebrow">Live Demo · Showroom</div>
+      <h1>상품 상세에 3D/AR을 붙여<br>전환율을 올리는 쇼룸</h1>
+      <p>model-viewer 기반 인터랙티브 3D 뷰어 · iOS/Android AR · QR 링크 — Shopify 테마에 코드 한 줄로 설치</p>
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs">
+      <button class="tab-btn active" onclick="filterProducts('all', this)">전체</button>
+      <button class="tab-btn" onclick="filterProducts('오브제', this)">오브제</button>
+      <button class="tab-btn" onclick="filterProducts('조명', this)">조명</button>
+      <button class="tab-btn" onclick="filterProducts('가구', this)">가구</button>
+    </div>
+
+    <!-- PRODUCT GRID -->
+    <div class="product-grid" id="productGrid">
+
+      <!-- FEATURED: model-viewer 실제 로드 -->
+      <div class="product-card wide" data-cat="조명" onclick="openModal('featured')">
+        <div class="card-thumb">
+          <model-viewer
+            src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+            alt="테이블 램프 C 3D 모델"
+            auto-rotate
+            camera-controls
+            ar
+            shadow-intensity="1"
+            environment-image="neutral"
+            style="background: #1a1a2b;"
+          ></model-viewer>
+          <span class="badge-live">LIVE</span>
+          <span class="badge-ar">AR 지원</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <div class="cat-tag">조명</div>
+            <div class="product-name">테이블 램프 C — 플래그십</div>
+            <div class="product-price">₩159,000</div>
+            <div class="product-desc">
+              실제 model-viewer가 로드된 카드입니다. 드래그로 3D 모델을 회전하거나 AR 아이콘을 탭해 실제 공간에 배치해보세요.
+              Shopify 상품 상세에 이 뷰어를 코드 한 줄로 삽입할 수 있습니다.
+            </div>
+            <div class="ar-hint">
+              <div class="ar-dot"></div>
+              AR 지원 · iOS Safari 또는 Android Chrome에서 실제 공간 배치 가능
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-3d" onclick="event.stopPropagation(); openModal('featured')">⬡ 3D 보기</button>
+            <button class="btn-inquiry" onclick="event.stopPropagation()">문의</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 1 -->
+      <div class="product-card" data-cat="조명" onclick="openModal('lamp-a')">
+        <div class="card-thumb">
+          <div class="thumb-placeholder">💡</div>
+          <span class="badge-live">LIVE</span>
+        </div>
+        <div class="card-body">
+          <div class="cat-tag">조명</div>
+          <div class="product-name">브라스 펜던트 A</div>
+          <div class="product-price">₩129,000</div>
+          <div class="card-actions">
+            <button class="btn-3d" onclick="event.stopPropagation(); openModal('lamp-a')">⬡ 3D 보기</button>
+            <button class="btn-inquiry" onclick="event.stopPropagation()">문의</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="product-card" data-cat="조명" onclick="openModal('shade-b')">
+        <div class="card-thumb">
+          <div class="thumb-placeholder">🔆</div>
+          <span class="badge-live">LIVE</span>
+          <span class="badge-new">NEW</span>
+        </div>
+        <div class="card-body">
+          <div class="cat-tag">조명</div>
+          <div class="product-name">페이퍼 쉐이드 B</div>
+          <div class="product-price">₩89,000</div>
+          <div class="card-actions">
+            <button class="btn-3d" onclick="event.stopPropagation(); openModal('shade-b')">⬡ 3D 보기</button>
+            <button class="btn-inquiry" onclick="event.stopPropagation()">문의</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="product-card" data-cat="조명" onclick="openModal('wall-d')">
+        <div class="card-thumb">
+          <div class="thumb-placeholder">🕯️</div>
+          <span class="badge-live">LIVE</span>
+        </div>
+        <div class="card-body">
+          <div class="cat-tag">조명</div>
+          <div class="product-name">벽걸이 라이트 D</div>
+          <div class="product-price">₩99,000</div>
+          <div class="card-actions">
+            <button class="btn-3d" onclick="event.stopPropagation(); openModal('wall-d')">⬡ 3D 보기</button>
+            <button class="btn-inquiry" onclick="event.stopPropagation()">문의</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="product-card" data-cat="오브제" onclick="openModal('objet-e')">
+        <div class="card-thumb">
+          <div class="thumb-placeholder">🪆</div>
+          <span class="badge-live">LIVE</span>
+        </div>
+        <div class="card-body">
+          <div class="cat-tag">오브제</div>
+          <div class="product-name">세라믹 볼 오브제 E</div>
+          <div class="product-price">₩68,000</div>
+          <div class="card-actions">
+            <button class="btn-3d" onclick="event.stopPropagation(); openModal('objet-e')">⬡ 3D 보기</button>
+            <button class="btn-inquiry" onclick="event.stopPropagation()">문의</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="product-card" data-cat="가구" onclick="openModal('chair-f')">
+        <div class="card-thumb">
+          <div class="thumb-placeholder">🪑</div>
+          <span class="badge-live">LIVE</span>
+          <span class="badge-ar">AR 지원</span>
+        </div>
+        <div class="card-body">
+          <div class="cat-tag">가구</div>
+          <div class="product-name">거실 팬터시스 F</div>
+          <div class="product-price">₩890,000</div>
+          <div class="card-actions">
+            <button class="btn-3d" onclick="event.stopPropagation(); openModal('chair-f')">⬡ 3D 보기</button>
+            <button class="btn-inquiry" onclick="event.stopPropagation()">문의</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- FEATURES -->
+    <div class="sidebar-section">
+      <h3>핵심 제공 가치</h3>
+      <ul class="feature-list">
+        <li>
+          <div class="feature-icon fi-pink">⬡</div>
+          <div>
+            <div class="feat-label">인터랙티브 3D 뷰어</div>
+            <div class="feat-desc">드래그 회전 · 핀치 줌 · 자동 회전</div>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon fi-purple">AR</div>
+          <div>
+            <div class="feat-label">iOS / Android AR</div>
+            <div class="feat-desc">Safari USDZ · Chrome Scene Viewer</div>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon fi-green">QR</div>
+          <div>
+            <div class="feat-label">QR 코드 자동 생성</div>
+            <div class="feat-desc">상품 페이지 QR → 모바일 AR 바로 연결</div>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon fi-blue">🔌</div>
+          <div>
+            <div class="feat-label">코드 한 줄 설치</div>
+            <div class="feat-desc">Shopify Theme App Extension — 테마 수정 불필요</div>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon fi-pink">📦</div>
+          <div>
+            <div class="feat-label">GLB / GLTF / USDZ 지원</div>
+            <div class="feat-desc">Blender 내보내기 바로 사용 가능</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- PLANS -->
+    <div class="sidebar-section">
+      <h3>플랜</h3>
+      <div class="plan-card">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">$0 / mo</div>
+        <ul class="plan-features">
+          <li>상품 3개까지</li>
+          <li>3D 뷰어 기본</li>
+          <li>워터마크 포함</li>
+        </ul>
+      </div>
+      <div class="plan-card pro">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$29 / mo</div>
+        <ul class="plan-features">
+          <li>상품 무제한</li>
+          <li>AR + QR 코드</li>
+          <li>애널리틱스 대시보드</li>
+          <li>워터마크 제거</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="sidebar-section">
+      <h3>전환율 지표</h3>
+      <div class="stat-row">
+        <span class="stat-label">평균 체류시간</span>
+        <span class="stat-value up">+127%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">장바구니 추가율</span>
+        <span class="stat-value up">+43%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">반품률</span>
+        <span class="stat-value up">−22%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">AR 세션 완료율</span>
+        <span class="stat-value">68%</span>
+      </div>
+    </div>
+
+    <!-- QR -->
+    <div class="sidebar-section">
+      <h3>모바일 AR 체험</h3>
+      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px;">
+        QR 코드를 스캔하면 모바일에서 상품을 실제 공간에 배치해볼 수 있습니다.
+      </p>
+      <div class="qr-badge">
+        <div class="qr-box">⬡</div>
+        <div class="qr-text">
+          <strong>AR로 보기</strong>
+          iOS Safari / Android Chrome<br>자동 감지
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  3D/AR Viewer SDK — Shopify Theme App Extension &nbsp;·&nbsp;
+  <a href="https://github.com/sihnrila/3d-viewer-sdk">GitHub</a> &nbsp;·&nbsp;
+  Built with <a href="https://modelviewer.dev">model-viewer</a>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h2 id="modalTitle">3D 뷰어</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-viewer">
+        <model-viewer
+          id="modalViewer"
+          src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+          alt="3D 모델"
+          auto-rotate
+          camera-controls
+          ar
+          shadow-intensity="1"
+          environment-image="neutral"
+          style="background:#1a1a2b; width:100%; height:300px;"
+        ></model-viewer>
+      </div>
+      <div class="modal-info">
+        <div class="cat-tag" id="modalCat">조명</div>
+        <h3 id="modalName">제품명</h3>
+        <div class="price" id="modalPrice">₩0</div>
+        <div class="desc" id="modalDesc">설명</div>
+        <div class="spec-row"><span>소재</span><span id="modalMat">-</span></div>
+        <div class="spec-row"><span>크기</span><span id="modalSize">-</span></div>
+        <div class="spec-row"><span>AR 지원</span><span id="modalAr">iOS + Android</span></div>
+        <div class="spec-row"><span>파일 포맷</span><span>GLB / USDZ</span></div>
+        <div class="ar-hint" style="margin-top:12px;">
+          <div class="ar-dot"></div>
+          모바일에서 AR 아이콘 탭 → 실제 공간 배치
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-3d">⬡ AR로 보기</button>
+      <button class="btn-inquiry">문의하기</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var PRODUCTS = {
+    'featured': { cat:'조명', name:'테이블 램프 C — 플래그십', price:'₩159,000', desc:'실내 조명의 새로운 기준. 황동 베이스에 오팔 글라스 쉐이드를 결합한 플래그십 테이블 램프. model-viewer를 통해 드래그로 360° 회전하거나 iOS/Android에서 AR로 실제 공간에 배치해보세요.', mat:'황동 + 오팔 글라스', size:'Ø20 × H42 cm', ar:'iOS + Android' },
+    'lamp-a':   { cat:'조명', name:'브라스 펜던트 A', price:'₩129,000', desc:'미니멀한 브라스 소재의 펜던트 조명. 식탁 또는 주방 아일랜드 위 1~3개 배치를 AR로 미리 확인해보세요.', mat:'황동 (브라스)', size:'Ø18 × H30 cm', ar:'iOS + Android' },
+    'shade-b':  { cat:'조명', name:'페이퍼 쉐이드 B', price:'₩89,000', desc:'와지 종이 소재로 제작된 페이퍼 쉐이드. 빛이 투과될 때 은은한 결이 살아나는 감성 조명.', mat:'와지 / 철재 프레임', size:'Ø35 × H25 cm', ar:'iOS' },
+    'wall-d':   { cat:'조명', name:'벽걸이 라이트 D', price:'₩99,000', desc:'공간을 절약하는 벽걸이형 라이트. 침실이나 복도 벽면에 AR로 미리 위치를 확인하세요.', mat:'알루미늄 + 실리콘', size:'W12 × H28 cm', ar:'iOS + Android' },
+    'objet-e':  { cat:'오브제', name:'세라믹 볼 오브제 E', price:'₩68,000', desc:'한국 도예 장인이 직접 빚은 세라믹 오브제. 거실 선반이나 다이닝 테이블 위 배치를 AR로 시뮬레이션해보세요.', mat:'도자기 (유약 마감)', size:'Ø14 × H12 cm', ar:'iOS' },
+    'chair-f':  { cat:'가구', name:'거실 팬터시스 F', price:'₩890,000', desc:'덴마크 감성의 패브릭 암체어. 집 거실에 실제로 놓아보는 AR 체험으로 색상과 크기를 먼저 확인하세요.', mat:'오크 원목 + 패브릭', size:'W78 × D76 × H82 cm', ar:'iOS + Android' },
+  };
+
+  function filterProducts(cat, btn) {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.product-card').forEach(function(card) {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function openModal(id) {
+    var p = PRODUCTS[id];
+    if (!p) return;
+    document.getElementById('modalTitle').textContent = p.name;
+    document.getElementById('modalCat').textContent = p.cat;
+    document.getElementById('modalName').textContent = p.name;
+    document.getElementById('modalPrice').textContent = p.price;
+    document.getElementById('modalDesc').textContent = p.desc;
+    document.getElementById('modalMat').textContent = p.mat;
+    document.getElementById('modalSize').textContent = p.size;
+    document.getElementById('modalAr').textContent = p.ar;
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('open');
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>

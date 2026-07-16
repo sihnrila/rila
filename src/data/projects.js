@@ -199,8 +199,8 @@ export const PROJECT_META = {
     screenshotAlt: '3D/AR 쇼룸 뷰어 화면',
     screenshotCaption: '3D 뷰어 데모',
     githubUrl: 'https://github.com/sihnrila/3d-viewer-sdk',
-    demoUrl: undefined,
-    hasRealDemo: false,
+    demoUrl: 'https://rila-5dl.pages.dev/demos/3d-viewer-sdk.html',
+    hasRealDemo: true,
     needsReview: false,
   },
 

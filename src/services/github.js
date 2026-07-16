@@ -33,6 +33,8 @@ export const REPO_DEMO_URL_OVERRIDES = {
   'jigoorang-adim': 'https://sihnrila.github.io/jigoorang-adim/',
   PickUpDemo: 'https://sihnrila.github.io/PickUpDemo/',
 
+  '3D-AR-Viewer': 'https://rila-5dl.pages.dev/demos/3d-viewer-sdk.html',
+
 }
 
 export const HIDDEN_REPOS = new Set(['PickUpDemo'])
