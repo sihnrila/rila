@@ -122,7 +122,7 @@ const Home = () => {
           <div className="hero-content">
             <h1 className="hero-title" aria-label="신리라 포트폴리오">
               <span className="line line-1" aria-hidden="true">RILA</span>
-              <span className="line line-2" aria-hidden="true">SIN</span>
+              <span className="line line-2" aria-hidden="true">SHIN</span>
               <span className="line line-3" aria-hidden="true">PORTFOLIO</span>
             </h1>
             <p className="hero-tagline">EPUB Viewer · SDK · CMS · WebView</p>
