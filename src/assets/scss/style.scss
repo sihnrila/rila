@@ -3795,3 +3795,28 @@ button:focus-visible {
   .resume-company-body li { grid-template-columns: 1fr; gap: 0.55rem; }
   .resume-case-detail > div { grid-template-columns: 1fr; gap: 0.5rem; }
 }
+
+// ─── Project depth: architecture, decisions and interview prompts ────────
+.repo-architecture { margin-top: 2rem; border-top: 1px solid #222; }
+.repo-architecture-step { position: relative; display: grid; grid-template-columns: 52px 1fr; gap: 1.25rem; padding: 1.5rem 0; border-bottom: 1px solid #ddd; }
+.repo-architecture-number { color: #648f2d; font-size: 0.75rem; font-weight: 800; }
+.repo-architecture-step h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+.repo-architecture-step p { margin: 0; color: #666; line-height: 1.7; }
+.repo-architecture-step > i { position: absolute; bottom: -0.55rem; left: 1rem; z-index: 1; padding: 0 0.35rem; background: #fff; color: #648f2d; font-size: 0.7rem; }
+
+.repo-decision-list { display: grid; gap: 1.25rem; }
+.repo-decision { padding: 1.75rem; border: 1px solid #ccc; }
+.repo-decision h3 { margin: 0 0 1.25rem; font-size: 1.15rem; letter-spacing: -0.025em; }
+.repo-decision dl { margin: 0; }
+.repo-decision dl > div { display: grid; grid-template-columns: 90px 1fr; gap: 1rem; padding: 0.8rem 0; border-top: 1px solid #e5e5e5; }
+.repo-decision dt { font-size: 0.78rem; font-weight: 800; }
+.repo-decision dd { margin: 0; color: #5d5d5d; line-height: 1.7; }
+
+.repo-interview-list { margin: 0; padding: 0; list-style: none; counter-reset: interview; border-top: 1px solid #222; }
+.repo-interview-list li { counter-increment: interview; display: grid; grid-template-columns: 42px 1fr; padding: 1.1rem 0; border-bottom: 1px solid #ddd; line-height: 1.65; }
+.repo-interview-list li::before { content: 'Q' counter(interview); color: #648f2d; font-size: 0.75rem; font-weight: 800; }
+
+@media screen and (max-width: 600px) {
+  .repo-decision { padding: 1.25rem; }
+  .repo-decision dl > div { grid-template-columns: 1fr; gap: 0.35rem; }
+}
