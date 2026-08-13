@@ -20,14 +20,6 @@ export const PROJECT_META = {
       '다양한 브라우저와 디바이스 환경 대응',
       'QA 및 시큐어코딩 감리 대응',
     ],
-    evidence: {
-      items: [
-        { value: '5개', label: '실행 환경', detail: 'Chrome·Firefox·Safari·iOS Safari·Android Chrome 체크리스트' },
-        { value: '5종', label: '화면 크기', detail: '320·375·768·1024·1280px 이상 반응형 기준' },
-        { value: '14개', label: '기능 시나리오', detail: '공통 8개·PC 전용 3개·모바일 전용 3개 항목' },
-      ],
-      note: '수치는 viewer 저장소의 TEST_CHECKLIST.md에 정의된 검증 범위 기준이며, 체크리스트 전체 통과율을 의미하지 않습니다.',
-    },
     challenges: [
       {
         problem: 'TTS 재생 중 중복 호출로 인한 재생 겹침 현상 발생',
@@ -36,20 +28,6 @@ export const PROJECT_META = {
         result: '중복 재생 문제 해결',
       },
     ],
-    architecture: {
-      description: '제가 담당한 범위는 네이티브 앱과 EPUB 콘텐츠 사이에서 명령·상태·접근성 동작을 일관되게 연결하는 웹뷰어 계층입니다.',
-      nodes: [
-        { title: 'iOS·Android 앱', detail: '뷰어 실행 환경을 제공하고 SDK 메시지로 이동·설정·TTS 명령을 전달합니다.' },
-        { title: 'JavaScript SDK·메시지 브리지', detail: '앱 명령을 검증하고 웹뷰어 이벤트와 오류코드를 외부 계약 형태로 변환합니다.' },
-        { title: 'Viewer·Parser·Unit Controller', detail: 'EPUB 파싱, 단위 콘텐츠 구성, 페이지와 위치 상태를 관리합니다.' },
-        { title: '검색·하이라이트·TTS·접근성', detail: '콘텐츠 기능을 공통 상태와 이벤트 순서에 맞춰 실행하고 완료 상태를 다시 앱에 전달합니다.' },
-      ],
-    },
-    decisions: [
-      { topic: 'TTS 요청 순서 제어', choice: '직렬 큐와 명시적 완료 이벤트', alternatives: '호출마다 즉시 실행하거나 단순 debounce 적용', reason: '문장 재생은 순서가 의미를 가지며 이전 요청의 실제 종료를 확인해야 다음 요청을 안전하게 시작할 수 있었습니다.', tradeoff: '큐 취소·초기화와 오류 복구 상태를 별도로 관리해야 했습니다.' },
-      { topic: '앱·웹 결합 방식', choice: 'SDK 메시지 계약과 뷰어 내부 모듈 분리', alternatives: '앱에서 웹뷰어 내부 함수를 직접 호출', reason: 'iOS·Android 구현 차이를 브리지에서 흡수하고 웹뷰어 기능을 외부 서비스에서도 재사용하기 위해 계약 경계를 유지했습니다.', tradeoff: '메시지 버전과 오류코드를 문서화하고 호환성을 관리해야 했습니다.' },
-    ],
-    interviewQuestions: ['TTS 중복 재생의 재현 조건과 직렬 큐가 필요한 이유', 'iOS WebView·VoiceOver 포커스 문제를 상태 전환 관점에서 분석한 과정', 'SDK와 뷰어 내부 모듈의 책임을 나눈 기준', '접근성 결함을 일회성 수정이 아닌 QA 항목으로 고정한 방법'],
     techStack: ['JavaScript', 'iOS WebView', 'Android WebView', 'EPUB'],
     screenshotAlt: 'EPUB 웹뷰어 메인 화면',
     screenshotCaption: '뷰어 메인',
@@ -83,20 +61,6 @@ export const PROJECT_META = {
         result: '웹과 앱에서 뷰어 상태를 일관되게 유지할 수 있도록 개선했습니다.',
       },
     ],
-    architecture: {
-      description: '서비스별 앱과 여러 콘텐츠 포맷이 하나의 공통 제어 인터페이스를 통해 뷰어 기능을 사용하도록 구성했습니다.',
-      nodes: [
-        { title: 'B2B·B2C 서비스와 모바일 앱', detail: '사용자 인증·도서 정보와 실행 명령을 전달합니다.' },
-        { title: 'WebView·공통 메시지 계층', detail: '웹과 앱의 진입점과 상태 전달 방식을 통일합니다.' },
-        { title: '공통 Viewer Controller', detail: '이동·재생·설정·로그 같은 공통 동작을 콘텐츠별 렌더러에 위임합니다.' },
-        { title: 'EPUB·PDF·만화 렌더러', detail: '포맷별 렌더링과 DRM·위치 처리 차이를 내부에서 흡수합니다.' },
-      ],
-    },
-    decisions: [
-      { topic: '콘텐츠 포맷 확장', choice: '포맷별 렌더러 분리와 공통 제어 인터페이스', alternatives: '하나의 뷰어 모듈 안에서 포맷별 조건문 처리', reason: 'EPUB 페이지 분할, PDF 캔버스, 만화 이미지 스크롤처럼 생명주기가 달라 변경 영향을 격리해야 했습니다.', tradeoff: '공통 인터페이스가 포맷 고유 기능을 모두 표현하지 못할 때 확장 규칙이 필요했습니다.' },
-      { topic: '웹·앱 상태 동기화', choice: '메시지 이벤트와 서버 상태를 기준으로 동기화', alternatives: '각 실행 환경의 로컬 상태만 유지', reason: '인앱과 웹에서 이어보기를 제공하려면 서로 다른 실행 환경이 같은 위치와 설정 기준을 공유해야 했습니다.', tradeoff: '네트워크 지연·오프라인·충돌 시 최신 상태를 결정하는 정책이 필요했습니다.' },
-    ],
-    interviewQuestions: ['포맷별 렌더러와 공통 Controller의 경계를 정한 기준', 'WebView 메시지 유실이나 실행 순서 문제를 처리한 방식', 'Redis가 실제로 담당한 상태와 프론트엔드의 관여 범위', '상용 서비스 장애를 재현하고 배포까지 연결한 사례'],
     techStack: ['JavaScript', 'PDF.js', 'DRM', 'Redis', 'Node.js', 'Socket.IO'],
     screenshotAlt: '교보문고 전자책 웹뷰어 화면',
     screenshotCaption: '뷰어 UI',
@@ -191,14 +155,6 @@ export const PROJECT_META = {
       '보상·재화·랜드마크 운영 정책 설계',
       '게임사 및 외부 업체와 데이터·API 규격 협의',
     ],
-    evidence: {
-      items: [
-        { value: '15개', label: '운영 페이지 모듈', detail: '대시보드·회원·콘텐츠·게임·보상·통계·마케팅 등 페이지 파일 기준' },
-        { value: '7개', label: 'E2E spec 파일', detail: '인증·콘텐츠·회원·마케팅·시스템·크롤러·관리자 QA' },
-        { value: '28개', label: '반응형 QA 계약', detail: '동일한 14개 주요 흐름을 데스크톱 1440px과 모바일 390px에서 정의' },
-      ],
-      note: '수치는 topik-cms 저장소의 페이지·Playwright 테스트 코드 기준입니다. 저장된 최신 실행 결과에는 실패 2건이 있어 전체 통과 성과로 표현하지 않았습니다.',
-    },
     challenges: [
       {
         problem: '보스전 실패 후 같은 문제를 다시 출제할지, 다른 문제를 제공할지와 도전 횟수·진행률 처리 기준이 명확하지 않았습니다.',
@@ -207,20 +163,6 @@ export const PROJECT_META = {
         result: '게임 개발사와 운영 담당자가 동일한 기준으로 기능과 데이터를 구현할 수 있도록 정책 기준을 명확히 했습니다.',
       },
     ],
-    architecture: {
-      description: '운영자가 콘텐츠와 정책을 관리하고 게임·웹·외부 학습 서비스가 동일한 API 계약을 사용하도록 연결했습니다.',
-      nodes: [
-        { title: '운영 CMS', detail: '게임 콘텐츠·미션·보상·사용자 데이터를 조회하고 변경합니다.' },
-        { title: 'TOPIK PLAY API', detail: '인증, 게임 데이터, 이벤트와 진행 상태의 서버 계약을 제공합니다.' },
-        { title: 'Unity 게임·서비스 웹', detail: '게임 플레이 결과와 사용자 동작을 API 규격에 맞춰 전송합니다.' },
-        { title: '토픽잇 등 외부 서비스', detail: '1회용 토큰을 통해 사용자 계정을 연결하고 연동 결과를 반환합니다.' },
-      ],
-    },
-    decisions: [
-      { topic: '계정 연동 시작점', choice: '게임 내부에서만 연동을 시작하고 1회용 link_token 사용', alternatives: '외부 웹에서 uuid를 직접 받아 연동하거나 반복 사용 가능한 토큰 사용', reason: '연동하려는 게임 사용자의 의도를 확인하고 uuid 노출·재사용 위험을 줄이기 위해 시작점과 토큰 수명을 제한했습니다.', tradeoff: '오프라인 상태에서는 연동을 시작할 수 없으며 만료·재시도 UX가 필요했습니다.' },
-      { topic: '외주 구현 범위 판정', choice: '초기 API·기획과 APK 실제 동작을 대조', alternatives: '화면 노출 여부나 업체 설명만으로 판단', reason: '코드 존재, 실제 호출, 서버 응답 사용은 서로 다른 상태이므로 미구현과 신규 요청을 증거 기준으로 분리해야 했습니다.', tradeoff: 'APK와 네트워크 동작을 버전별로 다시 검증하는 비용이 발생합니다.' },
-    ],
-    interviewQuestions: ['uuid·connect_id·link_token의 책임과 위협 모델', '오프라인 기록 업로드의 중복·재시도 정책', '미션 정의를 서버에서 관리해야 하는 이유', '외부 개발사의 미구현을 계약과 실행 증거로 분리한 과정'],
     techStack: ['React', 'Node.js', 'REST API', 'JSON'],
     screenshotAlt: 'TOPIK PLAY 교육 게임 운영 CMS 화면',
     screenshotCaption: 'CMS 관리자 화면',
