@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react({
     jsxRuntime: 'automatic'
   })],
-  base: '/',
+  base: './',
   css: {
     preprocessorOptions: {
       scss: {
