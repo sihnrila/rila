@@ -767,7 +767,7 @@ const Home = () => {
 
         {/* Footer */}
         <footer>
-          <a href="#" onClick={(e) => { e.preventDefault(); scrollToTop() }}>
+          <a href="#" aria-label="맨 위로 이동" onClick={(e) => { e.preventDefault(); scrollToTop() }}>
             <i className="fas fa-angle-up"></i>
           </a>
           <br />
