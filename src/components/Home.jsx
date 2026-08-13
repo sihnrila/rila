@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchGitHubRepos, getLanguageColor, REPO_STATIC_SCREENSHOTS, PROFESSIONAL_REPOS, HIDDEN_REPOS } from '../services/github'
+import { fetchGitHubRepos, REPO_STATIC_SCREENSHOTS, PROFESSIONAL_REPOS, HIDDEN_REPOS } from '../services/github'
 import { fetchTistoryPosts, getTistoryBlogUrl } from '../services/tistory'
 import DesignModals from './DesignModals'
 import profile01 from '../assets/img/profile01.jpeg'
-import img02 from '../assets/img/img02.jpeg'
 import { PROJECT_META } from '../data/projects'
+import { CAREER_TIMELINE } from '../data/career'
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('work')
@@ -125,7 +125,9 @@ const Home = () => {
               <span className="line line-2" aria-hidden="true">SIN</span>
               <span className="line line-3" aria-hidden="true">PORTFOLIO</span>
             </h1>
-            <p className="hero-tagline">EPUB Viewer · SDK · CMS · WebView</p>
+            <p className="hero-kicker">Frontend Developer · 5 years</p>
+            <p className="hero-positioning">복잡한 요구사항을 서비스 흐름과 데이터 구조로 구체화하고,<br />외부 시스템 연동부터 운영·QA까지 연결합니다.</p>
+            <p className="hero-tagline">EPUB Viewer · SDK · WebView · CMS · API Integration</p>
             <div className="hero-cta">
               <a href="#work" className="cta-btn cta-primary" onClick={(e) => { e.preventDefault(); scrollToSection('work') }}>
                 프로젝트 보기
@@ -178,24 +180,24 @@ const Home = () => {
                     <span className="desc-number">02</span>
                     <div className="desc-text">
                       <h3 className="desc-title">Experience</h3>
-                      <p>EPUB 웹뷰어, 교육 게임 플랫폼, 운영 CMS 개발<br />
-                      SDK 설계·WebView 연동·접근성 구현 경험</p>
+                      <p>5년간 EPUB 웹뷰어, 교육 게임 플랫폼과 운영 CMS를 개발했습니다.<br />
+                      SDK·WebView·외부 API 사이의 계약과 상태 흐름을 설계합니다.</p>
                     </div>
                   </div>
                   <div className="desc-item">
                     <span className="desc-number">03</span>
                     <div className="desc-text">
                       <h3 className="desc-title">Approach</h3>
-                      <p>화면 구현을 넘어 서비스 흐름과 데이터 구조를 함께 이해하고<br />
-                      백엔드·API·CMS·인프라 영역까지 확장해 기능을 구현합니다.</p>
+                      <p>요구사항이 불명확할 때 화면·데이터·API 기준으로 구체화하고,<br />
+                      구현부터 QA·운영까지 결과를 확인합니다.</p>
                     </div>
                   </div>
                   <div className="desc-item">
                     <span className="desc-number">04</span>
                     <div className="desc-text">
-                      <h3 className="desc-title">AI Workflow</h3>
-                      <p>생성형 AI를 데이터 생성, 검수, 문서화와<br />
-                      반복 업무 자동화 과정에 실무 활용 중</p>
+                      <h3 className="desc-title">Responsibility</h3>
+                      <p>기획·백엔드·앱·외부 개발사와 기술 기준을 맞추고,<br />
+                      결함을 재현 가능한 근거와 회귀 검증으로 관리합니다.</p>
                     </div>
                   </div>
                 </div>
@@ -233,6 +235,37 @@ const Home = () => {
                   <p className="cap-desc">생성형 AI를 활용한 데이터 생성, 검수, 문서화 및 반복 개발 업무 자동화</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="career-section" id="career" aria-labelledby="career-title">
+          <div className="career-container">
+            <div className="career-heading">
+              <p className="section-eyebrow">EXPERIENCE</p>
+              <h2 id="career-title">회사와 프로젝트가<br />이어지는 경력</h2>
+              <p>프로젝트 수보다 맡은 문제, 결정한 구조와 결과를 중심으로 정리했습니다.</p>
+            </div>
+            <div className="career-list">
+              {CAREER_TIMELINE.map((career) => (
+                <article className="career-item" key={career.company}>
+                  <div className="career-meta">
+                    <time>{career.period}</time>
+                    <h3>{career.company}</h3>
+                    <p className="career-role">{career.role}</p>
+                    <p className="career-summary">{career.summary}</p>
+                  </div>
+                  <div className="career-projects">
+                    {career.projects.map((project) => (
+                      <Link className="career-project" to={`/repos/${project.repo}`} key={project.repo}>
+                        <span className="career-project-name">{project.name}</span>
+                        <span className="career-project-evidence">{project.evidence}</span>
+                        <span className="career-project-link">문제 해결 과정 보기 <i className="fas fa-arrow-right" aria-hidden="true"></i></span>
+                      </Link>
+                    ))}
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -750,4 +783,3 @@ const Home = () => {
 }
 
 export default Home
-
