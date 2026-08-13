@@ -44,6 +44,7 @@ const RepoDetail = () => {
   const hasArchitecture = meta.architecture?.nodes?.length > 0
   const hasDecisions = meta.decisions?.length > 0
   const hasInterviewQuestions = meta.interviewQuestions?.length > 0
+  const hasEvidence = meta.evidence?.items?.length > 0
   const showDemoBtn = meta.hasRealDemo && meta.demoUrl
   const showGitHubBtn = !!meta.githubUrl
 
@@ -112,6 +113,20 @@ const RepoDetail = () => {
                   <li key={i}>{item}</li>
                 ))}
               </ul>
+            </section>
+          )}
+
+          {hasEvidence && (
+            <section className="repo-section" aria-labelledby="rd-evidence">
+              <h2 id="rd-evidence" className="repo-section-title">코드로 확인된 범위</h2>
+              <div className="repo-evidence-grid">
+                {meta.evidence.items.map((item) => (
+                  <div className="repo-evidence-item" key={item.label}>
+                    <strong>{item.value}</strong><span>{item.label}</span><p>{item.detail}</p>
+                  </div>
+                ))}
+              </div>
+              {meta.evidence.note && <p className="repo-evidence-note">{meta.evidence.note}</p>}
             </section>
           )}
 
