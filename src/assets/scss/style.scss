@@ -3816,7 +3816,15 @@ button:focus-visible {
 .repo-interview-list li { counter-increment: interview; display: grid; grid-template-columns: 42px 1fr; padding: 1.1rem 0; border-bottom: 1px solid #ddd; line-height: 1.65; }
 .repo-interview-list li::before { content: 'Q' counter(interview); color: #648f2d; font-size: 0.75rem; font-weight: 800; }
 
+.repo-evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #222; border-left: 1px solid #ddd; }
+.repo-evidence-item { min-height: 170px; padding: 1.5rem; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+.repo-evidence-item strong { display: block; margin-bottom: 0.35rem; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1; letter-spacing: -0.06em; }
+.repo-evidence-item span { display: block; font-size: 0.82rem; font-weight: 800; }
+.repo-evidence-item p { margin: 1rem 0 0; color: #777; font-size: 0.78rem; line-height: 1.65; }
+.repo-evidence-note { margin: 1rem 0 0; color: #777; font-size: 0.75rem; line-height: 1.65; }
+
 @media screen and (max-width: 600px) {
   .repo-decision { padding: 1.25rem; }
   .repo-decision dl > div { grid-template-columns: 1fr; gap: 0.35rem; }
+  .repo-evidence-grid { grid-template-columns: 1fr; }
 }
