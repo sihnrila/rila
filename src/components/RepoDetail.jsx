@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { REPO_STATIC_SCREENSHOTS } from '../services/github'
 import { PROJECT_META } from '../data/projects'
@@ -41,6 +41,9 @@ const RepoDetail = () => {
   const hasChallenge = meta.challenges?.some(c => c.problem)
   const hasResponsibilities = meta.responsibilities?.length > 0
   const hasTechStack = meta.techStack?.length > 0
+  const hasArchitecture = meta.architecture?.nodes?.length > 0
+  const hasDecisions = meta.decisions?.length > 0
+  const hasInterviewQuestions = meta.interviewQuestions?.length > 0
   const showDemoBtn = meta.hasRealDemo && meta.demoUrl
   const showGitHubBtn = !!meta.githubUrl
 
@@ -135,6 +138,50 @@ const RepoDetail = () => {
                   )}
                 </div>
               ))}
+            </section>
+          )}
+
+          {hasArchitecture && (
+            <section className="repo-section" aria-labelledby="rd-architecture">
+              <h2 id="rd-architecture" className="repo-section-title">담당 아키텍처</h2>
+              {meta.architecture.description && <p className="repo-section-text">{meta.architecture.description}</p>}
+              <div className="repo-architecture" role="list" aria-label="프로젝트 구성 요소와 흐름">
+                {meta.architecture.nodes.map((node, index) => (
+                  <div className="repo-architecture-step" role="listitem" key={node.title}>
+                    <span className="repo-architecture-number">{String(index + 1).padStart(2, '0')}</span>
+                    <div><h3>{node.title}</h3><p>{node.detail}</p></div>
+                    {index < meta.architecture.nodes.length - 1 && <i className="fas fa-arrow-down" aria-hidden="true"></i>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {hasDecisions && (
+            <section className="repo-section" aria-labelledby="rd-decisions">
+              <h2 id="rd-decisions" className="repo-section-title">기술 선택과 대안</h2>
+              <div className="repo-decision-list">
+                {meta.decisions.map((decision) => (
+                  <article className="repo-decision" key={decision.topic}>
+                    <h3>{decision.topic}</h3>
+                    <dl>
+                      <div><dt>선택</dt><dd>{decision.choice}</dd></div>
+                      <div><dt>대안</dt><dd>{decision.alternatives}</dd></div>
+                      <div><dt>판단 근거</dt><dd>{decision.reason}</dd></div>
+                      {decision.tradeoff && <div><dt>감수한 점</dt><dd>{decision.tradeoff}</dd></div>}
+                    </dl>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {hasInterviewQuestions && (
+            <section className="repo-section" aria-labelledby="rd-interview">
+              <h2 id="rd-interview" className="repo-section-title">면접에서 설명할 수 있는 것</h2>
+              <ol className="repo-interview-list">
+                {meta.interviewQuestions.map((item) => <li key={item}>{item}</li>)}
+              </ol>
             </section>
           )}
 
