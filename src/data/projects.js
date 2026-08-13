@@ -20,6 +20,14 @@ export const PROJECT_META = {
       '다양한 브라우저와 디바이스 환경 대응',
       'QA 및 시큐어코딩 감리 대응',
     ],
+    evidence: {
+      items: [
+        { value: '5개', label: '실행 환경', detail: 'Chrome·Firefox·Safari·iOS Safari·Android Chrome 체크리스트' },
+        { value: '5종', label: '화면 크기', detail: '320·375·768·1024·1280px 이상 반응형 기준' },
+        { value: '14개', label: '기능 시나리오', detail: '공통 8개·PC 전용 3개·모바일 전용 3개 항목' },
+      ],
+      note: '수치는 viewer 저장소의 TEST_CHECKLIST.md에 정의된 검증 범위 기준이며, 체크리스트 전체 통과율을 의미하지 않습니다.',
+    },
     challenges: [
       {
         problem: 'TTS 재생 중 중복 호출로 인한 재생 겹침 현상 발생',
@@ -183,6 +191,14 @@ export const PROJECT_META = {
       '보상·재화·랜드마크 운영 정책 설계',
       '게임사 및 외부 업체와 데이터·API 규격 협의',
     ],
+    evidence: {
+      items: [
+        { value: '15개', label: '운영 페이지 모듈', detail: '대시보드·회원·콘텐츠·게임·보상·통계·마케팅 등 페이지 파일 기준' },
+        { value: '7개', label: 'E2E spec 파일', detail: '인증·콘텐츠·회원·마케팅·시스템·크롤러·관리자 QA' },
+        { value: '28개', label: '반응형 QA 계약', detail: '동일한 14개 주요 흐름을 데스크톱 1440px과 모바일 390px에서 정의' },
+      ],
+      note: '수치는 topik-cms 저장소의 페이지·Playwright 테스트 코드 기준입니다. 저장된 최신 실행 결과에는 실패 2건이 있어 전체 통과 성과로 표현하지 않았습니다.',
+    },
     challenges: [
       {
         problem: '보스전 실패 후 같은 문제를 다시 출제할지, 다른 문제를 제공할지와 도전 횟수·진행률 처리 기준이 명확하지 않았습니다.',
