@@ -3048,7 +3048,7 @@ button:focus-visible {
 
   // 1280px 이하: 타이틀 약간 축소
   @media screen and (max-width: 1280px) {
-    .hero-title { font-size: clamp(3.5rem, 13vw, 10rem); }
+    .hero-title { font-size: clamp(3.5rem, 13.5vw, 11rem); }
   }
 
   // 태블릿 ~ 소형 노트북
